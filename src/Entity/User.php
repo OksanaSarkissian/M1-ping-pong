@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Entity\Droit;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -34,6 +35,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $password;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Droit $droit = null;
 
     public function getId(): ?int
     {
@@ -99,5 +104,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): ?string
     {
         // return $this->password;
+    }
+
+    public function getDroit(): ?Droit
+    {
+        return $this->droit;
+    }
+
+    public function setDroit(?Droit $droit): self
+    {
+        $this->droit = $droit;
+
+        return $this;
     }
 }
