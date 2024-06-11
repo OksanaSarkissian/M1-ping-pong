@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getRoles(): ?string
+    public function getRoles(): array
     {
         // return $this->password;
     }
@@ -87,6 +87,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function getUsername(): ?string
+    {
+        // return $this->password;
+    }
+
+    public function getUserIdentifier(): string
     {
         // return $this->password;
     }
