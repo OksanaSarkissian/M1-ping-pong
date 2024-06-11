@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="{{ asset('build/app.css') }}">
 		<title>
 			{% block title %}Welcome!
 			{% endblock %}
@@ -17,7 +18,7 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body>
+	<body class="container">
 		{% block body %}{% endblock %}
 	</body>
 </html>

@@ -1,0 +1,95 @@
+:root {
+    --main-color: #EFF1ED;
+    --secondary-color:#3B3A3A;
+    --accent-color:#FF9809;
+    --accent-color-2:#086CAD;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles pour le conteneur principal */
+.container {
+    display: flex;
+    justify-content: center;
+    /* Centrer horizontalement */
+    align-items: center;
+    /* Centrer verticalement */
+    height: 100vh;
+    /* Prend toute la hauteur de l'écran */
+    background-color: var(--accent-color);
+    /* Fond orange autour du formulaire */
+}
+
+/* Styles pour le formulaire de connexion */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    /* Fond blanc */
+    padding: 20px;
+    height: 50vh;
+    width: 30vw;
+    border-radius: 20px;
+    /* Ombre légère */
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width:50%;
+}
+
+/* Style pour les éléments du formulaire (par exemple, les champs input) */
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 3px solid var(--accent-color-2);
+    border-radius: 9px;
+    box-sizing: border-box;
+}
+
+/* Style pour les éléments du formulaire (label) */
+.form-container label {
+    width: 100%;
+    margin-bottom: 10px;
+    color:var(--accent-color-2)
+}
+
+/* Style pour le bouton de soumission */
+.form-container button {
+    width: 50%;
+    padding: 10px;
+    background-color: var(--accent-color-2);
+    /* Couleur de fond */
+    color: var(--main-color);
+    /* Couleur du texte */
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    justify-self: center;
+    align-self: center;
+}
+
+/* Style pour le lien de mot de passe oublié */
+.form-container a {
+    color: #007bff;
+    /* Couleur du lien */
+    text-decoration: none;
+    /* Enlever le soulignement */
+    margin-top: 10px;
+    display: inline-block;
+}
+
+/* Style pour les messages d'erreur */
+.error-message {
+    color: red;
+    margin-top: 5px;
+}
