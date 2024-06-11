@@ -1,0 +1,21 @@
+version: '3.1' 
+services: 
+ postgresql: 
+ image: postgres:latest 
+ restart: always 
+ environment: 
+ POSTGRES_DB: ping_pong 
+ POSTGRES_USER: ping_pong_master 
+ POSTGRES_PASSWORD: test 
+ volumes: 
+ - data:/var/lib/postgresql/data 
+ ports: 
+ - "5432:5432" 
+ networks: 
+ - app-network 
+volumes: 
+ data: 
+networks: 
+ app-network: 
+ driver: bridge 
+ command: ["postgres", "-c", "log_statement=all"] 
