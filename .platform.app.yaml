@@ -52,6 +52,9 @@ hooks:
         set -x -e
 
         symfony-deploy
+        if [ "PLATFORM_ENVIRONMENT_TYPE" != "Development" ]; then
+            php bin/console doctrine:migrations:migrate
+        fi 
 
 crons:
     security-check:
