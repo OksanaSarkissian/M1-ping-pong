@@ -34,6 +34,7 @@
     /* Fond blanc */
     padding: 20px;
     height: 50vh;
+    max-height: 300px;
     width: 30vw;
     min-width: 370px;
     border-radius: 20px;
