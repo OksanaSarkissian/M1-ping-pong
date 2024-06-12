@@ -20,7 +20,7 @@ class UserType extends AbstractType
             ->add('password')
             ->add('Droit', EntityType::class, [
                 'class' => Droit::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
         ;
     }

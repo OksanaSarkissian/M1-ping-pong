@@ -21,6 +21,14 @@ class AppFixtures extends Fixture
         $droit->setLibelle('administrateur');
         $manager->persist($droit);
 
+        $ouvrier = new Droit();
+        $ouvrier->setLibelle('ouvrier');
+        $manager->persist($ouvrier);
+
+        $com = new Droit();
+        $com->setLibelle('commercial');
+        $manager->persist($com);
+
         $amsterdam = new User();
         $amsterdam->setNom('Amsterdam');
         $amsterdam->setPrenom('2019');
