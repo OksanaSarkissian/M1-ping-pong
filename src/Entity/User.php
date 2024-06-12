@@ -4,41 +4,31 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use App\Entity\Droit;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
+class User
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
+    #[ORM\Column(length: 255)]
+    private ?string $identifiant = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $mdp = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Droit $droit = null;
+    private ?Droit $Droit = null;
 
     public function getId(): ?int
     {
@@ -50,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(string $nom): static
     {
         $this->nom = $nom;
 
@@ -62,58 +52,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setPrenom(string $prenom): static
     {
         $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getIdentifiant(): ?string
     {
-        return $this->password;
+        return $this->identifiant;
     }
 
-    public function setPassword(string $password): self
+    public function setIdentifiant(string $identifiant): static
     {
-        $this->password = $password;
+        $this->identifiant = $identifiant;
 
         return $this;
     }
 
-    public function getRoles(): array
+    public function getMdp(): ?string
     {
-        // return $this->password;
+        return $this->mdp;
     }
 
-    public function getSalt(): ?string
+    public function setMdp(string $mdp): static
     {
-        // return $this->password;
-    }
+        $this->mdp = $mdp;
 
-    public function getUsername(): ?string
-    {
-        // return $this->password;
-    }
-
-    public function getUserIdentifier(): string
-    {
-        // return $this->password;
-    }
-
-    public function eraseCredentials(): ?string
-    {
-        // return $this->password;
+        return $this;
     }
 
     public function getDroit(): ?Droit
     {
-        return $this->droit;
+        return $this->Droit;
     }
 
-    public function setDroit(?Droit $droit): self
+    public function setDroit(?Droit $Droit): static
     {
-        $this->droit = $droit;
+        $this->Droit = $Droit;
 
         return $this;
     }

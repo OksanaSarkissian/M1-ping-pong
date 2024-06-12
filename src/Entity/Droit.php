@@ -21,8 +21,10 @@ class Droit
     /**
      * @var Collection<int, User>
      */
-    #[ORM\OneToMany(mappedBy: 'droit', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'Droit', targetEntity: User::class)]
     private Collection $users;
+
+   
 
     public function __construct()
     {
@@ -54,7 +56,7 @@ class Droit
         return $this->users;
     }
 
-    public function addUser(User $user): self
+    public function addUser(User $user): static
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
@@ -64,7 +66,7 @@ class Droit
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
@@ -75,4 +77,6 @@ class Droit
 
         return $this;
     }
+
+    
 }
