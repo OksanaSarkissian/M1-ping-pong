@@ -52,11 +52,6 @@ hooks:
 
         symfony-deploy
 
-        if [ "PLATFORM_ENVIRONMENT_TYPE" != "Development" ]; then
-            php bin/console doctrine:migrations:migrate
-            symfony console doctrine:fixtures:load 
-        fi 
-
 crons:
     security-check:
         # Check that no security issues have been found for PHP packages deployed in production
