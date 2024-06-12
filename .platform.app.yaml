@@ -6,7 +6,7 @@ dependencies:
         composer/composer: "^2"
 relationships:
     postgresql:
-    
+
 runtime:
     extensions:
         - apcu
@@ -16,6 +16,7 @@ runtime:
         - mbstring
         - sodium
         - xsl
+        - pdo_pgsql
         
 
 variables:
@@ -50,6 +51,11 @@ hooks:
         set -x -e
 
         symfony-deploy
+
+        if [ "PLATFORM_ENVIRONMENT_TYPE" != "Development" ]; then
+            symfony console app:dev:anonymize
+            symfony console doctrine:fixtures:load 
+        fi 
 
 crons:
     security-check:
