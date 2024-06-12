@@ -1,5 +1,7 @@
 name: app
-
+database:
+    type: postgresql:16
+    disk: 1024
 type: php:8.1
 
 dependencies:
@@ -15,6 +17,7 @@ runtime:
         - mbstring
         - sodium
         - xsl
+        - pdo_pgsql
         
 
 variables:
