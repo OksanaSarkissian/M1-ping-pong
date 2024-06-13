@@ -16,7 +16,7 @@
 					{{ app.user.userIdentifier }},
 					<a href="{{ path('app_logout') }}">Logout</a>
 				</div>
-			{% endif %}
+			{% else %}
 
 			<label for="inputNom">Identifiant</label>
 			<input type="text" value="{{ last_username }}" name="nom" id="inputNom" class="form-control" autocomplete="username" placeholder="j.doe" required autofocus>
@@ -42,4 +42,5 @@
 			</button>
 		</div>
 	</form>
+			{% endif %}
 {% endblock %}

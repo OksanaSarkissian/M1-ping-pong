@@ -1,39 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}User index
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+	<a href="{{ path('app_user_new') }}">Ajouter un utilisateur</a>
+	<a href="{{ path('app_droit_index') }}">Voir les droits</a>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Identifiant</th>
-                <th>Droit</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.identifiant }}</td>
-                <td>{{ user.Droit.libelle }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	{% for user in users %}
+		<div class="d-flex flew-column">
+			<span>{{ user.nom }}
+				{{ user.prenom }}</span>
+			<span>{{ user.identifiant }}</span>
+			<span>Qualifications</span>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+			<span>Droit:{{ user.Droit.libelle }}</span>
+		</div>
+		<div>
+			<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+			<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+		</div>
+        <hr>
+	{% else %}
+		<tr>
+			<td colspan="6">no records found</td>
+		</tr>
+	{% endfor %}
 {% endblock %}

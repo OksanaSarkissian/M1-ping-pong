@@ -10,3 +10,4 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+require('font-awesome/css/font-awesome.css');

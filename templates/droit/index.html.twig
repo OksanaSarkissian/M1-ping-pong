@@ -1,35 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Droit index{% endblock %}
+{% block title %}Droit index
+{% endblock %}
 
 {% block body %}
-    <h1>Droit index</h1>
+	<a href="{{ path('app_droit_new') }}">Ajouter un droit</a>
+	<a href="{{ path('app_user_index') }}">Voir les utilisateurs</a>
+	{% for droit in droits %}
+		<div class="d-flex flew-column">
+			<span>{{ droit.libelle }}</span>
+			<span>Qualifications</span>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for droit in droits %}
-            <tr>
-                <td>{{ droit.id }}</td>
-                <td>{{ droit.libelle }}</td>
-                <td>
-                    <a href="{{ path('app_droit_show', {'id': droit.id}) }}">show</a>
-                    <a href="{{ path('app_droit_edit', {'id': droit.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+		</div>
+		<div>
+			<a href="{{ path('app_droit_show', {'id': droit.id}) }}">show</a>
+			<a href="{{ path('app_droit_edit', {'id': droit.id}) }}">edit</a>
+		</div>
+	{% else %}
+		<tr>
+			<td colspan="3">no records found</td>
+		</tr>
+	{% endfor %}
 
-    <a href="{{ path('app_droit_new') }}">Create new</a>
 {% endblock %}

@@ -1,3 +1,4 @@
+
 :root {
     --main-color: #EFF1ED;
     --secondary-color:#3B3A3A;
@@ -35,7 +36,6 @@
     /* Fond blanc */
     padding: 20px;
     height: 50vh;
-    max-height: 300px;
     width: 30vw;
     min-width: 370px;
     border-radius: 20px;
@@ -50,7 +50,7 @@
 }
 
 /* Style pour les éléments du formulaire (par exemple, les champs input) */
-.form-container input {
+.form-container input,.form-container select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

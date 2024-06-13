@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var list<string> The user roles
      */
     private array $roles = [];
+
+    /**
+     * @var Collection<int, Poste>
+     */
+    #[ORM\ManyToMany(targetEntity: Poste::class, mappedBy: 'id_user')]
+    private Collection $postes;
+
+    /**
+     * @var Collection<int, Gamme>
+     */
+    #[ORM\OneToMany(mappedBy: 'responsable', targetEntity: Gamme::class)]
+    private Collection $gammes;
+
+    public function __construct()
+    {
+        $this->postes = new ArrayCollection();
+        $this->gammes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -132,5 +152,62 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Poste>
+     */
+    public function getPostes(): Collection
+    {
+        return $this->postes;
+    }
+
+    public function addPoste(Poste $poste): static
+    {
+        if (!$this->postes->contains($poste)) {
+            $this->postes->add($poste);
+            $poste->addIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePoste(Poste $poste): static
+    {
+        if ($this->postes->removeElement($poste)) {
+            $poste->removeIdUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gamme>
+     */
+    public function getGammes(): Collection
+    {
+        return $this->gammes;
+    }
+
+    public function addGamme(Gamme $gamme): static
+    {
+        if (!$this->gammes->contains($gamme)) {
+            $this->gammes->add($gamme);
+            $gamme->setResponsable($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGamme(Gamme $gamme): static
+    {
+        if ($this->gammes->removeElement($gamme)) {
+            // set the owning side to null (unless already changed)
+            if ($gamme->getResponsable() === $this) {
+                $gamme->setResponsable(null);
+            }
+        }
+
+        return $this;
     }
 }
