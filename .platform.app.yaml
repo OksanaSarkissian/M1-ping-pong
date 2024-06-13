@@ -4,6 +4,8 @@ type: php:8.1
 dependencies:
     php:
         composer/composer: "^2"
+relationships:
+    postgresql:
 
 runtime:
     extensions:
@@ -13,7 +15,7 @@ runtime:
         - iconv
         - mbstring
         - sodium
-        - xs
+        - xsl
         
 
 variables:
