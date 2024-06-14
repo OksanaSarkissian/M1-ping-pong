@@ -1,9 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./custom.scss";
+
 :root {
     --main-color: #EFF1ED;
     --secondary-color:#3B3A3A;
     --accent-color:#FF9809;
     --accent-color-2:#086CAD;
+    --danger:#C71F1F;
 }
 
 /* Styles pour le conteneur principal */
@@ -96,3 +99,10 @@
     color: red;
     margin-top: 5px;
 }
+
+$custom-colors: (
+  "custom-color": #900
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
