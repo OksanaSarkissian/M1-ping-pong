@@ -3,29 +3,32 @@
 {% block title %}Operation index{% endblock %}
 
 {% block body %}
-    <h1>Operation index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>Description</th>
-                <th>Temps</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+	<div>
+		<a href="{{ path('app_operation_new') }}">Ajouter une operation</a>
+		<select>
+			{% for operation in operations %}
+				<option>
+					<a href="{{ path('app_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a>
+				</option>
+
+			{% else %}
+				<option>no records found</option>
+			{% endfor %}
+		</select>
+	</div>
+{% endblock %}
+
         {% for operation in operations %}
             <tr>
-                <td>{{ operation.id }}</td>
-                <td>{{ operation.libelle }}</td>
-                <td>{{ operation.description }}</td>
-                <td>{{ operation.temps ? operation.temps|date('H:i:s') : '' }}</td>
-                <td>
+                <span>{{ operation.id }}</span>
+                <span>{{ operation.libelle }}</span>
+                <span>{{ operation.description }}</span>
+                <span>{{ operation.temps ? operation.temps|date('H:i:s') : '' }}</span>
+                <div>
                     <a href="{{ path('app_operation_show', {'id': operation.id}) }}">show</a>
                     <a href="{{ path('app_operation_edit', {'id': operation.id}) }}">edit</a>
-                </td>
+                </div>
             </tr>
         {% else %}
             <tr>
@@ -35,5 +38,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_operation_new') }}">Create new</a>
 {% endblock %}

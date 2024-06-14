@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'login-base.html.twig' %}
 
 {% block title %}Log in!
 {% endblock %}
@@ -18,29 +18,29 @@
 				</div>
 			{% else %}
 
-			<label for="inputNom">Identifiant</label>
-			<input type="text" value="{{ last_username }}" name="nom" id="inputNom" class="form-control" autocomplete="username" placeholder="j.doe" required autofocus>
-			<label for="inputPassword">Mot de passe</label>
-			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="*******" required>
+				<label for="inputNom">Identifiant</label>
+				<input type="text" value="{{ last_username }}" name="nom" id="inputNom" class="form-control" autocomplete="username" placeholder="j.doe" required autofocus>
+				<label for="inputPassword">Mot de passe</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="*******" required>
 
-			<input
-			type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<input
+				type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-			{#
-						        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-						        See https://symfony.com/doc/current/security/remember_me.html
-						
-						        <div class="checkbox mb-3">
-						            <label>
-						                <input type="checkbox" name="_remember_me"> Remember me
-						            </label>
-						        </div>
-						    #}
+				{#
+															        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+															        See https://symfony.com/doc/current/security/remember_me.html
+															
+															        <div class="checkbox mb-3">
+															            <label>
+															                <input type="checkbox" name="_remember_me"> Remember me
+															            </label>
+															        </div>
+															    #}
 
-			<button class="btn btn-lg btn-primary" type="submit">
-				Se connecter
-			</button>
-		</div>
-	</form>
-			{% endif %}
+				<button class="btn btn-lg btn-primary" type="submit">
+					Se connecter
+				</button>
+			</div>
+		</form>
+	{% endif %}
 {% endblock %}
