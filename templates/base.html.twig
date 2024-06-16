@@ -19,8 +19,52 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class="container">
-		<div>test</div>
-		{% block body %}{% endblock %}
-	</body>
-</html>
+	<body>
+		<div class="container-fluid h-100">
+			<div class="row">
+				<div class="col-sm-auto bg-light sticky-top">
+					<div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+						<a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+							<i class="bi-bootstrap fs-1"></i>
+						</a>
+						<ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
+							<li class="nav-item">
+								<a href="{{ path('app_piece_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+									<i class="fa-solid fa-gear"></i>
+									<label for="piece">Pièce</label>
+								</a>
+							</li>
+							<li>
+								<a href="{{ path('app_gamme_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+									<i class="fa-solid fa-list-check"></i>
+									<label for="Fabrication">Fabrication</label>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+									<i class="fa-regular fa-file-invoice-dollar"></i>
+									<label for="Facturations">Facturations</label>
+								</a>
+							</li>
+							<li>
+								<a href="#" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+									<i class="fa-solid fa-download"></i>
+									<label for="exports">Exports</label>
+								</a>
+							</li>
+							<li>
+								<a href="{{ path('app_user_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+									<i class="fa-solid fa-users-gear"></i>
+									<i class="fa-solid fa-user-gear"></i>
+									<label for="users">Utilisateurs</label>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm p-3 min-vh-100"> {% block body %}{% endblock %}
+					</div>
+				</div>
+			</body>
+		</body>
+	</html>
