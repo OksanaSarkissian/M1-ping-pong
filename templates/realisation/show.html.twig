@@ -24,7 +24,9 @@
 
     <a href="{{ path('app_realisation_index') }}">back to list</a>
 
-    <a href="{{ path('app_realisation_edit', {'id': realisation.id}) }}">edit</a>
+    <a href="{{ path('app_realisation_edit', {'id': realisation.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
 
     {{ include('realisation/_delete_form.html.twig') }}
 {% endblock %}

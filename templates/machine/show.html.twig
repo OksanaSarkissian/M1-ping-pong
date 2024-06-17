@@ -20,7 +20,9 @@
 
     <a href="{{ path('app_machine_index') }}">back to list</a>
 
-    <a href="{{ path('app_machine_edit', {'id': machine.id}) }}">edit</a>
+    <a href="{{ path('app_machine_edit', {'id': machine.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
 
     {{ include('machine/_delete_form.html.twig') }}
 {% endblock %}

@@ -6,28 +6,23 @@
     <h1>Realisation index</h1>
 
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Temps_reel</th>
-                <th>actions</th>
-            </tr>
-        </thead>
         <tbody>
         {% for realisation in realisations %}
-            <tr>
-                <td>{{ realisation.id }}</td>
-                <td>{{ realisation.date ? realisation.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_realisation_show', {'id': realisation.id}) }}">show</a>
-                    <a href="{{ path('app_realisation_edit', {'id': realisation.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div>
+                <span>{{ realisation.date ? realisation.date|date('Y-m-d H:i:s') : '' }}</span>
+                <span>{{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</span>
+                <span>
+                    <a href="{{ path('app_realisation_show', {'id': realisation.id}) }}"><button class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+						</button></a>
+                    <a href="{{ path('app_realisation_edit', {'id': realisation.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
+                </span>
+            </div>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <span colspan="4">no records found</span>
             </tr>
         {% endfor %}
         </tbody>

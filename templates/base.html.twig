@@ -22,40 +22,37 @@
 	<body>
 		<div class="container-fluid h-100">
 			<div class="row">
-				<div class="col-sm-auto bg-light sticky-top">
+				<div class="col-sm-auto sticky-top text-bg-secondary">
 					<div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-						<a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-							<i class="bi-bootstrap fs-1"></i>
-						</a>
-						<ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-							<li class="nav-item">
-								<a href="{{ path('app_piece_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-									<i class="fa-solid fa-gear"></i>
-									<label for="piece">Pièce</label>
+						<ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center text-bg-secondary">
+							<li class="d-flex flex-sm-column align-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3" title="Voir la liste des pièces" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+								<a href="{{ path('app_piece_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" >
+									<i class="fa-solid fa-gears  fa-3x"></i>
+									<label for="piece">Pièces</label>
 								</a>
 							</li>
-							<li>
-								<a href="{{ path('app_gamme_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-									<i class="fa-solid fa-list-check"></i>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="Voir les gammes et lancer une production" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+									<i class="fa-solid fa-list-check fa-3x"></i>
 									<label for="Fabrication">Fabrication</label>
 								</a>
 							</li>
-							<li>
-								<a href="#" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-									<i class="fa-regular fa-file-invoice-dollar"></i>
+							<li class="d-flex flex-sm-column align-content-center justify-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column align-content-center justify-content-center" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+									<i class="fa-solid fa-file-invoice-dollar  fa-3x"></i>
 									<label for="Facturations">Facturations</label>
 								</a>
 							</li>
-							<li>
-								<a href="#" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-									<i class="fa-solid fa-download"></i>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+									<i class="fa-solid fa-download  fa-3x"></i>
 									<label for="exports">Exports</label>
 								</a>
 							</li>
-							<li>
-								<a href="{{ path('app_user_index') }}" class="nav-link py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-									<i class="fa-solid fa-users-gear"></i>
-									<i class="fa-solid fa-user-gear"></i>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="{{ path('app_user_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+									<i class="fa-solid fa-users-gear  fa-3x"></i>
+									{# <i class="fa-solid fa-user-gear  fa-3x"></i> #}
 									<label for="users">Utilisateurs</label>
 								</a>
 							</li>

@@ -16,7 +16,9 @@
 
     <a href="{{ path('app_gamme_index') }}">back to list</a>
 
-    <a href="{{ path('app_gamme_edit', {'id': gamme.id}) }}">edit</a>
+    <a href="{{ path('app_gamme_edit', {'id': gamme.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
 
     {{ include('gamme/_delete_form.html.twig') }}
 {% endblock %}

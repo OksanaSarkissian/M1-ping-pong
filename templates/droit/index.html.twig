@@ -13,8 +13,12 @@
 
 		</div>
 		<div>
-			<a href="{{ path('app_droit_show', {'id': droit.id}) }}">show</a>
-			<a href="{{ path('app_droit_edit', {'id': droit.id}) }}">edit</a>
+			<a href="{{ path('app_droit_show', {'id': droit.id}) }}"><button class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+						</button></a>
+			<a href="{{ path('app_droit_edit', {'id': droit.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
 		</div>
 	{% else %}
 		<tr>

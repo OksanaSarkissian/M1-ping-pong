@@ -17,7 +17,6 @@
 			{% endfor %}
 		</select>
 	</div>
-{% endblock %}
 
         {% for operation in operations %}
             <tr>
@@ -26,8 +25,12 @@
                 <span>{{ operation.description }}</span>
                 <span>{{ operation.temps ? operation.temps|date('H:i:s') : '' }}</span>
                 <div>
-                    <a href="{{ path('app_operation_show', {'id': operation.id}) }}">show</a>
-                    <a href="{{ path('app_operation_edit', {'id': operation.id}) }}">edit</a>
+                    <a href="{{ path('app_operation_show', {'id': operation.id}) }}"><button class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+						</button></a>
+                    <a href="{{ path('app_operation_edit', {'id': operation.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button></a>
                 </div>
             </tr>
         {% else %}
