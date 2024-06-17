@@ -6,29 +6,45 @@
 {% block body %}
 	<a href="{{ path('app_piece_new') }}">Ajouter une pièce</a>
 
-	{% for piece in pieces %}
-		<div>
-			<span>{{ piece.libellePiece }}</span>
-			<span>Composition:</span>
-			<span>Référence:{{ piece.referencePiece }}</span>
-			<span>Type:</span>
-			<span>Responsable:</span>
-			<span>Stock:{{ piece.stock }}</span>
-			<span>Prix unitaire:{{ piece.prixU }}€</span>
-			<div>
-				<a href="{{ path('app_piece_show', {'id': piece.id}) }}"><button class="btn text-bg-accent-2 text-primary">
-							<i class="fa-solid fa-eye"></i>
-						</button></a>
-				<a href="{{ path('app_piece_edit', {'id': piece.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
-							<i class="fa-solid fa-pen"></i>
-						</button></a>
-				{{ include('piece/_delete_form.html.twig') }}
+	<div class="list">
+		{% for piece in pieces %}
+			<div class="piece d-flex flex-row align-items-baseline">
+				<div class="d-flex flex-column space-between w-100">
+					<div class="d-flex flex-column space-between w-100">
+						<span>{{ piece.libellePiece }}</span>
+						<span>Composition:</span>
+					</div>
+					<div class="d-flex">
+						<span>Référence:{{ piece.referencePiece }}</span>
+						<span>Type:</span>
+						<span>Responsable:</span>
+					</div>
+				</div>
+				<div>
+					<div class="d-flex space">
+						<a href="{{ path('app_piece_show', {'id': piece.id}) }}">
+							<button class="btn text-bg-accent-2 text-primary">
+								<i class="fa-solid fa-eye"></i>
+							</button>
+						</a>
+						<a href="{{ path('app_piece_edit', {'id': piece.id}) }}">
+							<button class="btn text-bg-accent-2 text-primary mx-3">
+								<i class="fa-solid fa-pen"></i>
+							</button>
+						</a>
+						{{ include('piece/_delete_form.html.twig') }}
+					</div>
+					<div class="d-flex">
+						<span>Stock:{{ piece.stock }}</span>
+						<span>Prix unitaire:{{ piece.prixU }}€</span>
+					</div>
+				</div>
 			</div>
-		</div>
-	{% else %}
-		<tr>
-			<td colspan="6">no records found</td>
-		</tr>
-	{% endfor %}
-
+			<hr>
+		{% else %}
+			<tr>
+				<td colspan="6">no records found</td>
+			</tr>
+		{% endfor %}
+	</div>
 {% endblock %}

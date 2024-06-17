@@ -17,11 +17,11 @@ class GammeType extends AbstractType
         $builder
             ->add('responsable', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libellepiece',
             ])
         ;
     }

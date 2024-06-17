@@ -9,7 +9,7 @@
 		<select>
 			{% for gamme in gammes %}
 				<option>
-					<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">{{ gamme.id }}</a>
+					<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">{{ gamme.Piece.libellepiece }}</a>
 				</option>
 
 			{% else %}
