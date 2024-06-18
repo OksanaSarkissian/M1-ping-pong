@@ -9,16 +9,20 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Libelle</th>
+				<th>Machines</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for poste in postes %}
 				<tr>
-					<td>{{ poste.id }}</td>
 					<td>{{ poste.libelle }}</td>
+					<td>
+						{% for machine in poste.machines %}
+							{{ machine.libelle }},
+						{% endfor %}
+					</td>
 					<td>
 						<a href="{{ path('app_poste_show', {'id': poste.id}) }}">
 							<button class="btn text-bg-accent-2 text-primary">

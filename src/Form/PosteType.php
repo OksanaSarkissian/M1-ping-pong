@@ -18,12 +18,12 @@ class PosteType extends AbstractType
             ->add('libelle')
             ->add('id_user', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
             ->add('machines', EntityType::class, [
                 'class' => Machine::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
                 'multiple' => true,
             ])
         ;

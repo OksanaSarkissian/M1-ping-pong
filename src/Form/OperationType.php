@@ -22,11 +22,11 @@ class OperationType extends AbstractType
             ])
             ->add('poste_id', EntityType::class, [
                 'class' => Poste::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             ->add('machine_id', EntityType::class, [
                 'class' => Machine::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
         ;
     }

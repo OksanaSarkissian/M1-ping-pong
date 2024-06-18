@@ -24,15 +24,15 @@ class RealisationType extends AbstractType
             ])
             ->add('poste_id_reel', EntityType::class, [
                 'class' => Poste::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             ->add('machine_id_reel', EntityType::class, [
                 'class' => Machine::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libellepiece',
             ])
         ;
     }

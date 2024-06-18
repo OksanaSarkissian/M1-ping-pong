@@ -17,7 +17,7 @@ class MachineType extends AbstractType
             ->add('libelle')
             ->add('Poste', EntityType::class, [
                 'class' => Poste::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
                 'multiple' => true,
             ])
         ;

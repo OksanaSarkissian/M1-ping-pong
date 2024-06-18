@@ -22,7 +22,7 @@ class PieceType extends AbstractType
                 'class' => Gamme::class,
                 'choice_label' => 'id',
             ])
-            ->add('pieces_id', EntityType::class, [
+            ->add('composition', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'id',
                 'multiple' => true,

@@ -40,6 +40,12 @@ class Piece
     /**
      * @var Collection<int, self>
      */
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'pieces_id')]
+    private Collection $composition;
+
+    /**
+     * @var Collection<int, self>
+     */
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
     private Collection $pieces_id;
 
