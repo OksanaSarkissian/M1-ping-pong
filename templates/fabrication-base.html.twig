@@ -62,27 +62,27 @@
 				<div class="col-sm p-3 min-vh-100">
 					<div class="d-flex">
 						<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn text-bg-accent">
+							<button class="btn {{ active == 'gamme' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
 								<span>Gammes</span>
 							</button>
 						</a>
 						<a href="{{ path('app_operation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn text-bg-accent-2">
+							<button class="btn {{ active == 'operation' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
 								<span>Opérations</span>
 							</button>
 						</a>
 						<a href="{{ path('app_realisation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn text-bg-accent-2">
+							<button class="btn {{ active == 'realisation' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
 								<span>Réalisations</span>
 							</button>
 						</a>
 						<a href="{{ path('app_poste_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn text-bg-accent-2">
+							<button class="btn {{ active == 'poste' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
 								<span>Postes</span>
 							</button>
 						</a>
 						<a href="{{ path('app_machine_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn text-bg-accent-2">
+							<button class="btn {{ active == 'machine' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
 								<span>Machines</span>
 							</button>
 						</a>

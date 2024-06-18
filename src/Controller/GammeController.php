@@ -19,6 +19,7 @@ class GammeController extends AbstractController
     {
         return $this->render('gamme/index.html.twig', [
             'gammes' => $gammeRepository->findAll(),
+            'active' => 'gamme',
         ]);
     }
 

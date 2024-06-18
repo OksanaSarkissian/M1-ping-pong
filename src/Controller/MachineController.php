@@ -19,6 +19,7 @@ class MachineController extends AbstractController
     {
         return $this->render('machine/index.html.twig', [
             'machines' => $machineRepository->findAll(),
+            'active' => 'machine',
         ]);
     }
 

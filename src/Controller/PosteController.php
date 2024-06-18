@@ -19,6 +19,7 @@ class PosteController extends AbstractController
     {
         return $this->render('poste/index.html.twig', [
             'postes' => $posteRepository->findAll(),
+            'active' => 'poste',
         ]);
     }
 

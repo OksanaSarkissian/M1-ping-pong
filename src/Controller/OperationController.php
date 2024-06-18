@@ -19,6 +19,7 @@ class OperationController extends AbstractController
     {
         return $this->render('operation/index.html.twig', [
             'operations' => $operationRepository->findAll(),
+            'active' => 'operation',
         ]);
     }
 

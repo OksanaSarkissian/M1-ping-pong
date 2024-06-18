@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/piece')]
 class PieceController extends AbstractController
-{
+{   
     #[Route('/', name: 'app_piece_index', methods: ['GET'])]
     public function index(PieceRepository $pieceRepository): Response
     {

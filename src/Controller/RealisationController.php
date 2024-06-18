@@ -19,6 +19,7 @@ class RealisationController extends AbstractController
     {
         return $this->render('realisation/index.html.twig', [
             'realisations' => $realisationRepository->findAll(),
+            'active' => 'realisation',
         ]);
     }
 
