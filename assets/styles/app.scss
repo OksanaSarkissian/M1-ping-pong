@@ -20,6 +20,9 @@ li.nav-item{
     height: 80%;
     width: 85%;
 }
+button.btn:active, button.btn:focus{
+    background: var(--accent-color);
+}
 /* Styles pour le conteneur principal */
 .container-login {
   display: flex;

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="{{ asset('build/app.css') }}">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="container-fluid h-100">
+			<div class="row">
+				<div class="col-sm-auto sticky-top text-bg-secondary">
+					<div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+						<ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center text-bg-secondary">
+							<li class="d-flex flex-sm-column align-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3" title="Voir la liste des pièces" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+								<a href="{{ path('app_piece_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+									<i class="fa-solid fa-gears  fa-3x"></i>
+									<label for="piece">Pièces</label>
+								</a>
+							</li>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="Voir les gammes et lancer une production" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+									<i class="fa-solid fa-list-check fa-3x"></i>
+									<label for="Fabrication">Fabrication</label>
+								</a>
+							</li>
+							<li class="d-flex flex-sm-column align-content-center justify-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column align-content-center justify-content-center" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+									<i class="fa-solid fa-file-invoice-dollar  fa-3x"></i>
+									<label for="Facturations">Facturations</label>
+								</a>
+							</li>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+									<i class="fa-solid fa-download  fa-3x"></i>
+									<label for="exports">Exports</label>
+								</a>
+							</li>
+							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
+								<a href="{{ path('app_user_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+									<i class="fa-solid fa-users-gear  fa-3x"></i>
+									{# <i class="fa-solid fa-user-gear  fa-3x"></i> #}
+									<label for="users">Utilisateurs</label>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm p-3 min-vh-100">
+					<div class="d-flex">
+						<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+							<button class="btn text-bg-accent">
+								<span>Gammes</span>
+							</button>
+						</a>
+						<a href="{{ path('app_operation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+							<button class="btn text-bg-accent-2">
+								<span>Opérations</span>
+							</button>
+						</a>
+						<a href="{{ path('app_realisation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+							<button class="btn text-bg-accent-2">
+								<span>Réalisations</span>
+							</button>
+						</a>
+						<a href="{{ path('app_poste_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+							<button class="btn text-bg-accent-2">
+								<span>Postes</span>
+							</button>
+						</a>
+						<a href="{{ path('app_machine_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
+							<button class="btn text-bg-accent-2">
+								<span>Machines</span>
+							</button>
+						</a>
+					</div>
+					{% block body %}{% endblock %}
+				</div>
+			</div>
+		</body>
+	</body>
+</html>
