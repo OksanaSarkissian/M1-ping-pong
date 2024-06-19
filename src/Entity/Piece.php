@@ -40,14 +40,8 @@ class Piece
     /**
      * @var Collection<int, self>
      */
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'pieces_id')]
-    private Collection $composition;
-
-    /**
-     * @var Collection<int, self>
-     */
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
-    private Collection $pieces_id;
+    private Collection $composition;
 
     /**
      * @var Collection<int, self>
@@ -59,7 +53,6 @@ class Piece
     {
         $this->realisations = new ArrayCollection();
         $this->composition = new ArrayCollection();
-        $this->pieces_id = new ArrayCollection();
         $this->qtt_piece = new ArrayCollection();
     }
 
@@ -182,54 +175,4 @@ class Piece
         return $this;
     }
 
-    /**
-     * @return Collection<int, self>
-     */
-    public function getPiecesId(): Collection
-    {
-        return $this->pieces_id;
-    }
-
-    public function addPiecesId(self $piecesId): static
-    {
-        if (!$this->pieces_id->contains($piecesId)) {
-            $this->pieces_id->add($piecesId);
-            $piecesId->addComposition($this);
-        }
-
-        return $this;
-    }
-
-    public function removePiecesId(self $piecesId): static
-    {
-        if ($this->pieces_id->removeElement($piecesId)) {
-            $piecesId->removeComposition($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, self>
-     */
-    public function getQttPiece(): Collection
-    {
-        return $this->qtt_piece;
-    }
-
-    public function addQttPiece(self $qttPiece): static
-    {
-        if (!$this->qtt_piece->contains($qttPiece)) {
-            $this->qtt_piece->add($qttPiece);
-        }
-
-        return $this;
-    }
-
-    public function removeQttPiece(self $qttPiece): static
-    {
-        $this->qtt_piece->removeElement($qttPiece);
-
-        return $this;
-    }
 }

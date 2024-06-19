@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
         $amsterdam->setPrenom('2019');
         $encodedPassword = $this->passwordHasher->hashPassword($amsterdam, "true");
         $amsterdam->setPassword($encodedPassword);
-        $amsterdam->setDroit($droit);
+        $amsterdam->setRoles(['ROLE_USER']);
         $amsterdam->setIdentifiant('A.2019');
         $manager->persist($amsterdam);
         

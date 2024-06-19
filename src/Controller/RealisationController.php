@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/realisation')]
+#[Route('/atelier/realisation')]
 class RealisationController extends AbstractController
 {
     #[Route('/', name: 'app_realisation_index', methods: ['GET'])]

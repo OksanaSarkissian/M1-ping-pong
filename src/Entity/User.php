@@ -30,13 +30,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Droit $Droit = null;
-
       /**
      * @var list<string> The user roles
      */
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     /**
@@ -110,18 +107,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDroit(): ?Droit
-    {
-        return $this->Droit;
-    }
-
-    public function setDroit(?Droit $Droit): static
-    {
-        $this->Droit = $Droit;
-
-        return $this;
-    }
-
     /**
      * A visual identifier that represents this user.
      *
@@ -132,6 +117,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->identifiant;
     }
  
+    public function setRoles($roles): static
+    {
+        $this->roles = $roles;
+ 
+        return $this;
+    }
     /**
      * @see UserInterface
      *
