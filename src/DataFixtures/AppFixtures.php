@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Droit;
 use App\Entity\User;
 use App\Entity\Piece;
 use App\Entity\Poste;
@@ -23,19 +22,6 @@ class AppFixtures extends Fixture
  
     public function load(ObjectManager $manager): void
     {
-        // droits
-        $droit = new Droit();
-        $droit->setLibelle('administrateur');
-        $manager->persist($droit);
-
-        $ouvrier = new Droit();
-        $ouvrier->setLibelle('ouvrier');
-        $manager->persist($ouvrier);
-
-        $com = new Droit();
-        $com->setLibelle('commercial');
-        $manager->persist($com);
-
         // pièces
         $piece = new Piece();
         $piece->setLibellePiece("roue");
@@ -65,18 +51,27 @@ class AppFixtures extends Fixture
         $manager->persist($operation);
 
         // user
-        $amsterdam = new User();
-        $amsterdam->setNom('Amsterdam');
-        $amsterdam->setPrenom('2019');
-        $encodedPassword = $this->passwordHasher->hashPassword($amsterdam, "true");
-        $amsterdam->setPassword($encodedPassword);
-        $amsterdam->setRoles(['ROLE_USER']);
-        $amsterdam->setIdentifiant('A.2019');
-        $manager->persist($amsterdam);
+        $doe = new User();
+        $doe->setNom('doe');
+        $doe->setPrenom('john');
+        $encodedPassword = $this->passwordHasher->hashPassword($doe, "true");
+        $doe->setPassword($encodedPassword);
+        $doe->setRoles(['ROLE_USER']);
+        $doe->setIdentifiant('D.john');
+        $manager->persist($doe);
+
+        $jane = new User();
+        $jane->setNom('Doe');
+        $jane->setPrenom('jane');
+        $encodedPassword = $this->passwordHasher->hashPassword($jane, "true");
+        $jane->setPassword($encodedPassword);
+        $jane->setRoles(['ROLE_ADMIN']);
+        $jane->setIdentifiant('D.jane');
+        $manager->persist($jane);
         
         // gamme
         $gamme = new Gamme();
-        $gamme->setResponsable($amsterdam);
+        $gamme->setResponsable($doe);
         $gamme->setPiece($piece);
         $manager->persist($gamme);
 
