@@ -23,7 +23,7 @@ class MachineController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_machine_new', methods: ['GET', 'POST'])]
+    #[Route('/respo/new', name: 'app_machine_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $machine = new Machine();
@@ -51,7 +51,7 @@ class MachineController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_machine_edit', methods: ['GET', 'POST'])]
+    #[Route('/respo/{id}/edit', name: 'app_machine_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Machine $machine, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MachineType::class, $machine);
@@ -69,7 +69,7 @@ class MachineController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_machine_delete', methods: ['POST'])]
+    #[Route('/respo/{id}', name: 'app_machine_delete', methods: ['POST'])]
     public function delete(Request $request, Machine $machine, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$machine->getId(), $request->getPayload()->getString('_token'))) {

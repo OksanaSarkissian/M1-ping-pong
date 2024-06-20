@@ -23,7 +23,7 @@ class OperationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_operation_new', methods: ['GET', 'POST'])]
+    #[Route('/respo/new', name: 'app_operation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $operation = new Operation();
@@ -51,7 +51,7 @@ class OperationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_operation_edit', methods: ['GET', 'POST'])]
+    #[Route('/respo/{id}/edit', name: 'app_operation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(OperationType::class, $operation);
@@ -69,7 +69,7 @@ class OperationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_operation_delete', methods: ['POST'])]
+    #[Route('/respo/{id}', name: 'app_operation_delete', methods: ['POST'])]
     public function delete(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$operation->getId(), $request->getPayload()->getString('_token'))) {

@@ -23,7 +23,7 @@ class GammeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_gamme_new', methods: ['GET', 'POST'])]
+    #[Route('/respo/new', name: 'app_gamme_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $gamme = new Gamme();
@@ -51,7 +51,7 @@ class GammeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_gamme_edit', methods: ['GET', 'POST'])]
+    #[Route('/respo/{id}/edit', name: 'app_gamme_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Gamme $gamme, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(GammeType::class, $gamme);
@@ -69,7 +69,7 @@ class GammeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_gamme_delete', methods: ['POST'])]
+    #[Route('/respo/{id}', name: 'app_gamme_delete', methods: ['POST'])]
     public function delete(Request $request, Gamme $gamme, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$gamme->getId(), $request->getPayload()->getString('_token'))) {

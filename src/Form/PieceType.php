@@ -27,11 +27,6 @@ class PieceType extends AbstractType
                 'choice_label' => 'id',
                 'multiple' => true,
             ])
-            ->add('qtt_piece', EntityType::class, [
-                'class' => Piece::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

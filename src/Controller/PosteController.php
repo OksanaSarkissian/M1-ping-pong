@@ -23,7 +23,7 @@ class PosteController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_poste_new', methods: ['GET', 'POST'])]
+    #[Route('/respo/new', name: 'app_poste_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $poste = new Poste();
@@ -51,7 +51,7 @@ class PosteController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_poste_edit', methods: ['GET', 'POST'])]
+    #[Route('/respo/{id}/edit', name: 'app_poste_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Poste $poste, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(PosteType::class, $poste);
@@ -69,7 +69,7 @@ class PosteController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_poste_delete', methods: ['POST'])]
+    #[Route('/respo/{id}', name: 'app_poste_delete', methods: ['POST'])]
     public function delete(Request $request, Poste $poste, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$poste->getId(), $request->getPayload()->getString('_token'))) {

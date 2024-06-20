@@ -56,8 +56,17 @@ class AppFixtures extends Fixture
         $doe->setPrenom('john');
         $encodedPassword = $this->passwordHasher->hashPassword($doe, "true");
         $doe->setPassword($encodedPassword);
-        $doe->setRoles(['ROLE_USER']);
+        $doe->setRoles(['ROLE_ATELIER_RESPONSABLE']);
         $doe->setIdentifiant('D.john');
+        $manager->persist($doe);
+
+        $doe = new User();
+        $doe->setNom('b');
+        $doe->setPrenom('titi');
+        $encodedPassword = $this->passwordHasher->hashPassword($doe, "true");
+        $doe->setPassword($encodedPassword);
+        $doe->setRoles(['ROLE_ATELIER']);
+        $doe->setIdentifiant('B.titi');
         $manager->persist($doe);
 
         $jane = new User();

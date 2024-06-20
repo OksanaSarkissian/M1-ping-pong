@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Piece{% endblock %}
+{% block title %}New Piece
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Piece</h1>
+	<h1>Create new Piece</h1>
+	<div class="form-container">
 
-    {{ include('piece/_form.html.twig') }}
-
-    <a href="{{ path('app_piece_index') }}">back to list</a>
+		{{ include('piece/_form.html.twig') }}
+	</div>
+	<a href="{{ path('app_piece_index') }}">back to list</a>
 {% endblock %}

@@ -43,17 +43,11 @@ class Piece
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
     private Collection $composition;
 
-    /**
-     * @var Collection<int, self>
-     */
-    #[ORM\ManyToMany(targetEntity: self::class)]
-    private Collection $qtt_piece;
 
     public function __construct()
     {
         $this->realisations = new ArrayCollection();
         $this->composition = new ArrayCollection();
-        $this->qtt_piece = new ArrayCollection();
     }
 
     public function getId(): ?int
