@@ -15,5 +15,29 @@
 				<option>no records found</option>
 			{% endfor %}
 		</select>
+		{% for gamme in gammes %}
+			<div class="d-flex flex-row w-100">
+				<div class="flex-grow-1">
+					<span>{{ gamme.responsable.nom }}
+						{{ gamme.responsable.prenom }}</span>
+				</div>
+				<div class="d-flex">
+					<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">
+						<button class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+						</button>
+					</a>
+					<a href="{{ path('app_gamme_edit', {'id': gamme.id}) }}">
+						<button class="btn text-bg-accent-2 text-primary mx-3">
+							<i class="fa-solid fa-pen"></i>
+						</button>
+					</a>
+				</div>
+			</div>
+		{% else %}
+			<tr>
+				<td colspan="5">no records found</td>
+			</tr>
+		{% endfor %}
 	</div>
 {% endblock %}

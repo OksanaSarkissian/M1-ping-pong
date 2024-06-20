@@ -24,7 +24,7 @@ class PieceType extends AbstractType
             ])
             ->add('composition', EntityType::class, [
                 'class' => Piece::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libellepiece',
                 'multiple' => true,
             ])
         ;
