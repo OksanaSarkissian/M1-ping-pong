@@ -34,11 +34,13 @@
 							<i class="fa-solid fa-eye"></i>
 						</button>
 					</a>
-					<a href="{{ path('app_gamme_edit', {'id': gamme.id}) }}">
-						<button class="btn text-bg-accent-2 text-primary mx-3">
-							<i class="fa-solid fa-pen"></i>
-						</button>
-					</a>
+					{% if gamme.responsable.id is same as(connectedUser) %}
+						<a href="{{ path('app_gamme_edit', {'id': gamme.id}) }}">
+							<button class="btn text-bg-accent-2 text-primary mx-3">
+								<i class="fa-solid fa-pen"></i>
+							</button>
+						</a>
+					{% endif %}
 				</div>
 			</div>
 		{% else %}

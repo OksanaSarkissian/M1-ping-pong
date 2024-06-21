@@ -10,16 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Route('/atelier/gamme')]
 class GammeController extends AbstractController
 {
+
     #[Route('/', name: 'app_gamme_index', methods: ['GET'])]
-    public function index(GammeRepository $gammeRepository): Response
+    public function index(GammeRepository $gammeRepository, UserInterface $user): Response
     {
+        $id = $this->getUser()->getId();
         return $this->render('gamme/index.html.twig', [
             'gammes' => $gammeRepository->findAll(),
             'active' => 'gamme',
+            'connectedUser' => $id
         ]);
     }
 
@@ -46,8 +50,10 @@ class GammeController extends AbstractController
     #[Route('/{id}', name: 'app_gamme_show', methods: ['GET'])]
     public function show(Gamme $gamme): Response
     {
+        $id = $this->getUser()->getId();
         return $this->render('gamme/show.html.twig', [
             'gamme' => $gamme,
+            'connectedUser' => $id
         ]);
     }
 
@@ -72,7 +78,7 @@ class GammeController extends AbstractController
     #[Route('/respo/{id}', name: 'app_gamme_delete', methods: ['POST'])]
     public function delete(Request $request, Gamme $gamme, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$gamme->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $gamme->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($gamme);
             $entityManager->flush();
         }
