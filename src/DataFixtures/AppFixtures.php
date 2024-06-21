@@ -25,8 +25,8 @@ class AppFixtures extends Fixture
         // pièces
         $piece = new Piece();
         $piece->setLibellePiece("roue");
-        $piece->setReferencePiece(123456);
-        $piece->setPrixU(8.00);
+        $piece->setRefPiece(123456);
+        $piece->setPrixUnitaire(8.00);
         $piece->setStock(4);
         $manager->persist($piece);
 
@@ -81,6 +81,7 @@ class AppFixtures extends Fixture
         // gamme
         $gamme = new Gamme();
         $gamme->setResponsable($doe);
+        $gamme->setLibelle($piece->getLibellePiece());
         $gamme->setPiece($piece);
         $manager->persist($gamme);
 

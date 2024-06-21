@@ -18,8 +18,15 @@
 		{% for gamme in gammes %}
 			<div class="d-flex flex-row w-100">
 				<div class="flex-grow-1">
-					<span>{{ gamme.responsable.nom }}
-						{{ gamme.responsable.prenom }}</span>
+					<div>
+						<span>Gamme:
+							{{gamme.libelle}}</span>
+					</div>
+					<div>
+						<span>Responsable:
+							{{ gamme.responsable.nom }}
+							{{ gamme.responsable.prenom }}</span>
+					</div>
 				</div>
 				<div class="d-flex">
 					<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">

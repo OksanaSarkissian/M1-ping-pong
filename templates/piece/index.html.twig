@@ -13,12 +13,12 @@
 					<div class="d-flex flex-column space-between w-100">
 						<span>{{ piece.libellePiece }}</span>
 						<span>Composition:</span>
-						{% for compo in piece.composition %}
+						{# {% for compo in piece.composition %}
 						{{ compo }},
-						{% endfor %}
+						{% endfor %} #}
 					</div>
 					<div class="d-flex">
-						<span>Référence:{{ piece.referencePiece }}</span>
+						<span>Référence:{{ piece.refPiece }}</span>
 						<span>Type:</span>
 						<span>Responsable:</span>
 					</div>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="d-flex">
 						<span>Stock:{{ piece.stock }}</span>
-						<span>Prix unitaire:{{ piece.prixU }}€</span>
+						<span>Prix unitaire:{{ piece.prixUnitaire }}€</span>
 					</div>
 				</div>
 			</div>

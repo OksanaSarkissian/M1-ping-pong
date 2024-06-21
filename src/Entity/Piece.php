@@ -6,9 +6,6 @@ use App\Repository\PieceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\InverseJoinColumn;
-use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: PieceRepository::class)]
 class Piece
@@ -18,42 +15,40 @@ class Piece
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $reference_piece = null;
+    #[ORM\Column(length: 30)]
+    private ?string $ref_piece = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $libelle_piece = null;
 
-    #[ORM\Column]
-    private ?float $prix_u = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $type = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $prix_unitaire = null;
 
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\OneToOne(inversedBy: 'piece', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Gamme $gamme_id = null;
-
     /**
-     * @var Collection<int, Realisation>
+     * @var Collection<int, self>
      */
-    #[ORM\OneToMany(mappedBy: 'piece', targetEntity: Realisation::class)]
-    private Collection $realisations;
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'pieces')]
+    private Collection $composition;
 
     /**
      * @var Collection<int, self>
      */
-    #[JoinTable(name: 'piece_piece')]
-    #[JoinColumn(name: 'piece_source', referencedColumnName: 'id')]
-    #[InverseJoinColumn(name: 'piece_target', referencedColumnName: 'id', unique: true)]
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
-    private Collection $composition;
+    private Collection $pieces;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Gamme $gamme = null;
 
     public function __construct()
     {
-        $this->realisations = new ArrayCollection();
         $this->composition = new ArrayCollection();
+        $this->pieces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,14 +56,14 @@ class Piece
         return $this->id;
     }
 
-    public function getReferencePiece(): ?string
+    public function getRefPiece(): ?string
     {
-        return $this->reference_piece;
+        return $this->ref_piece;
     }
 
-    public function setReferencePiece(string $reference_piece): static
+    public function setRefPiece(string $ref_piece): static
     {
-        $this->reference_piece = $reference_piece;
+        $this->ref_piece = $ref_piece;
 
         return $this;
     }
@@ -85,14 +80,26 @@ class Piece
         return $this;
     }
 
-    public function getPrixU(): ?float
+    public function getType(): ?string
     {
-        return $this->prix_u;
+        return $this->type;
     }
 
-    public function setPrixU(float $prix_u): static
+    public function setType(string $type): static
     {
-        $this->prix_u = $prix_u;
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getPrixUnitaire(): ?float
+    {
+        return $this->prix_unitaire;
+    }
+
+    public function setPrixUnitaire(?float $prix_unitaire): static
+    {
+        $this->prix_unitaire = $prix_unitaire;
 
         return $this;
     }
@@ -105,48 +112,6 @@ class Piece
     public function setStock(int $stock): static
     {
         $this->stock = $stock;
-
-        return $this;
-    }
-
-    public function getGammeId(): ?Gamme
-    {
-        return $this->gamme_id;
-    }
-
-    public function setGammeId(Gamme $gamme_id): static
-    {
-        $this->gamme_id = $gamme_id;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Realisation>
-     */
-    public function getRealisations(): Collection
-    {
-        return $this->realisations;
-    }
-
-    public function addRealisation(Realisation $realisation): static
-    {
-        if (!$this->realisations->contains($realisation)) {
-            $this->realisations->add($realisation);
-            $realisation->setPiece($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRealisation(Realisation $realisation): static
-    {
-        if ($this->realisations->removeElement($realisation)) {
-            // set the owning side to null (unless already changed)
-            if ($realisation->getPiece() === $this) {
-                $realisation->setPiece(null);
-            }
-        }
 
         return $this;
     }
@@ -175,4 +140,42 @@ class Piece
         return $this;
     }
 
+    /**
+     * @return Collection<int, self>
+     */
+    public function getPieces(): Collection
+    {
+        return $this->pieces;
+    }
+
+    public function addPiece(self $piece): static
+    {
+        if (!$this->pieces->contains($piece)) {
+            $this->pieces->add($piece);
+            $piece->addComposition($this);
+        }
+
+        return $this;
+    }
+
+    public function removePiece(self $piece): static
+    {
+        if ($this->pieces->removeElement($piece)) {
+            $piece->removeComposition($this);
+        }
+
+        return $this;
+    }
+
+    public function getGamme(): ?Gamme
+    {
+        return $this->gamme;
+    }
+
+    public function setGamme(?Gamme $gamme): static
+    {
+        $this->gamme = $gamme;
+
+        return $this;
+    }
 }

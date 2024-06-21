@@ -15,19 +15,19 @@ class PieceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('reference_piece')
+            ->add('ref_piece')
             ->add('libelle_piece')
-            ->add('prix_u')
+            ->add('prix_unitaire')
             ->add('stock')
-            ->add('gamme_id', EntityType::class, [
+            ->add('gamme', EntityType::class, [
                 'class' => Gamme::class,
                 'choice_label' => 'id',
             ])
-            ->add('composition', EntityType::class, [
-                'class' => Piece::class,
-                'choice_label' => 'composition',
-                'multiple' => true,
-            ])
+            // ->add('composition', EntityType::class, [
+            //     'class' => Piece::class,
+            //     'choice_label' => 'composition',
+            //     'multiple' => true,
+            // ])
         ;
     }
 

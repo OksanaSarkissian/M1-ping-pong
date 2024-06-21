@@ -17,8 +17,11 @@ class Gamme
     #[ORM\JoinColumn(nullable: false)]
     private ?User $responsable = null;
 
-    #[ORM\OneToOne(mappedBy: 'gamme_id', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'gamme', cascade: ['persist', 'remove'])]
     private ?Piece $piece = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $libelle = null;
 
     public function getId(): ?int
     {
@@ -45,11 +48,23 @@ class Gamme
     public function setPiece(Piece $piece): static
     {
         // set the owning side of the relation if necessary
-        if ($piece->getGammeId() !== $this) {
-            $piece->setGammeId($this);
+        if ($piece->getGamme() !== $this) {
+            $piece->setGamme($this);
         }
 
         $this->piece = $piece;
+
+        return $this;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): static
+    {
+        $this->libelle = $libelle;
 
         return $this;
     }

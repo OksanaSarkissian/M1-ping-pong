@@ -130,7 +130,7 @@ class PieceControllerTest extends WebTestCase
         $fixture = new Piece();
         $fixture->setReference_piece('Value');
         $fixture->setLibelle_piece('Value');
-        $fixture->setPrix_u('Value');
+        $fixture->setPrix_unitaire('Value');
         $fixture->setStock('Value');
         $fixture->setGamme_id('Value');
         $fixture->setPieces_id('Value');
