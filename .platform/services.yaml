@@ -8,5 +8,22 @@ postgresql:
     type: postgresql:16
     # The disk attribute is the size of the persistent disk (in MB) allocated to the service.
     disk: 256
+    configuration:
+        databases:
+            - main
+            - legacy
+        endpoints:
+            admin:
+                privileges:
+                    main: admin
+                    legacy: admin
+            reporter:
+                default_database: main
+                privileges:
+                    main: ro
+            importer:
+                default_database: legacy
+                privileges:
+                    legacy: rw
 
 
