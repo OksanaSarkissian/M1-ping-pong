@@ -50,6 +50,8 @@ hooks:
 
         symfony-deploy
 
+        Symfony console doctrine:fixtures:load
+
 crons:
     security-check:
         # Check that no security issues have been found for PHP packages deployed in production
