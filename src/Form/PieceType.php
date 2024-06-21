@@ -6,6 +6,7 @@ use App\Entity\Gamme;
 use App\Entity\Piece;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +25,7 @@ class PieceType extends AbstractType
             ])
             ->add('composition', EntityType::class, [
                 'class' => Piece::class,
-                'choice_label' => 'libellepiece',
+                'choice_label' => 'composition',
                 'multiple' => true,
             ])
         ;

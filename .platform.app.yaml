@@ -47,7 +47,6 @@ hooks:
         NODE_VERSION=18 symfony-build
 
     deploy: |
-        set -x -e
 
         symfony-deploy
 

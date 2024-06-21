@@ -6,6 +6,9 @@ use App\Repository\PieceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: PieceRepository::class)]
 class Piece
@@ -40,6 +43,9 @@ class Piece
     /**
      * @var Collection<int, self>
      */
+    #[JoinTable(name: 'piece_piece')]
+    #[JoinColumn(name: 'piece_source', referencedColumnName: 'id')]
+    #[InverseJoinColumn(name: 'piece_target', referencedColumnName: 'id', unique: true)]
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
     private Collection $composition;
 
