@@ -11,19 +11,10 @@ postgresql:
     configuration:
         databases:
             - main
-            - legacy
         endpoints:
-            admin:
-                privileges:
-                    main: admin
-                    legacy: admin
-            reporter:
+            postgresql:
                 default_database: main
                 privileges:
-                    main: ro
-            importer:
-                default_database: legacy
-                privileges:
-                    legacy: rw
+                    main: admin
 
 
