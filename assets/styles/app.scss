@@ -1,9 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./custom.scss";
-*{
-    padding:0;
-    margin:0;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 :root {
   --main-color: #eff1ed;
@@ -12,16 +12,17 @@
   --accent-color-2: #086cad;
   --danger: #c71f1f;
 }
-a{
-    all:unset;
+a {
+  all: unset;
 }
-li.nav-item{
-    cursor:pointer;
-    height: 80%;
-    width: 85%;
+li.nav-item {
+  cursor: pointer;
+  height: 80%;
+  width: 85%;
 }
-button.btn:active, button.btn:focus{
-    background: var(--accent-color);
+button.btn:active,
+button.btn:focus {
+  background: var(--accent-color);
 }
 /* Styles pour le conteneur principal */
 .container-login {
@@ -49,14 +50,24 @@ button.btn:active, button.btn:focus{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-color);
   /* Fond blanc */
   padding: 20px;
-  height: 50vh;
-  width: 30vw;
   min-width: 370px;
   border-radius: 20px;
+  width: max-content;
+  margin: 0 auto;
   /* Ombre légère */
+  
+  &.login {
+    background-color: var(--main-color);
+    height: 50vh;
+    width: 30vw;
+  }
+
+  [type=submit] {
+    margin-left: auto;
+    display: block;
+  }
 }
 .center {
   display: flex;
@@ -72,7 +83,7 @@ button.btn:active, button.btn:focus{
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 3px solid var(--accent-color-2);
+  border: 3px solid var(--secondary-color);
   border-radius: 9px;
   box-sizing: border-box;
 }
@@ -81,16 +92,16 @@ button.btn:active, button.btn:focus{
 .form-container label {
   width: 100%;
   margin-bottom: 10px;
-  color: var(--accent-color-2);
+  color: var(--secondary-color);
 }
 
 /* Style pour le bouton de soumission */
 .form-container button {
-  width: 50%;
+  // width: 50%;
   padding: 10px;
-  background-color: var(--accent-color-2);
+  background-color: var(--accent-color);
   /* Couleur de fond */
-  color: var(--main-color);
+  color: var(--secondary-color);
   /* Couleur du texte */
   border: none;
   border-radius: 9px;

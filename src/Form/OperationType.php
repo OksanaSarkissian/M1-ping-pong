@@ -6,6 +6,7 @@ use App\Entity\Machine;
 use App\Entity\Operation;
 use App\Entity\Poste;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,6 +29,7 @@ class OperationType extends AbstractType
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
             ])
+            ->add('save', SubmitType::class, ['label' => "Créer l'opération"])
         ;
     }
 

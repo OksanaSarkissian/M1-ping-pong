@@ -1,32 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Realisation{% endblock %}
+{% block title %}
+  Realisation
+{% endblock %}
 
 {% block body %}
-    <h1>Realisation</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ realisation.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ realisation.date ? realisation.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Temps_reel</th>
-                <td>{{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_realisation_index') }}">back to list</a>
-
-    <a href="{{ path('app_realisation_edit', {'id': realisation.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
-							<i class="fa-solid fa-pen"></i>
-						</button></a>
-
+  <div class="d-flex column-gap-2">
+    <a href="{{ path('app_realisation_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+    <a href="{{ path('app_realisation_edit', { id: realisation.id }) }}" class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-pen"></i></a>
     {{ include('realisation/_delete_form.html.twig') }}
+  </div>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ realisation.id }}</td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td>{{ realisation.date ? realisation.date|date('Y-m-d H:i:s') : '' }}</td>
+      </tr>
+      <tr>
+        <th>Temps_reel</th>
+        <td>{{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</td>
+      </tr>
+    </tbody>
+  </table>
 {% endblock %}

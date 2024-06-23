@@ -6,6 +6,7 @@ use App\Entity\Machine;
 use App\Entity\Poste;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,7 @@ class PosteType extends AbstractType
                 'choice_label' => 'libelle',
                 'multiple' => true,
             ])
+            ->add('save', SubmitType::class, ['label' => "Créer le poste"])
         ;
     }
 

@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<form method="post" class="form-container">
+	<form method="post" class="form-container login">
 		<div class="center">
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

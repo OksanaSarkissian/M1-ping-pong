@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class GammeType extends AbstractType
 {
@@ -17,12 +18,13 @@ class GammeType extends AbstractType
         $builder
             ->add('responsable', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'nom',
+                'choice_label' => 'FullName',
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'libellepiece',
             ])
+            ->add('save', SubmitType::class, ['label' => "Créer la gamme"])
         ;
     }
 

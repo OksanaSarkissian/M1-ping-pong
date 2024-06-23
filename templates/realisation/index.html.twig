@@ -4,8 +4,8 @@
 
 {% block body %}
     <h1>Realisation index</h1>
-
-    <table class="table">
+<a href="{{ path('app_realisation_new') }}" class="btn bg-accent-2 text-primary">Create new</a>
+    <table class="table w-100">
         <tbody>
         {% for realisation in realisations %}
             <div>
@@ -22,11 +22,11 @@
             </div>
         {% else %}
             <tr>
-                <span colspan="4">no records found</span>
+                <span colspan="4" class="d-block mt-3">no records found</span>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_realisation_new') }}">Create new</a>
+    
 {% endblock %}

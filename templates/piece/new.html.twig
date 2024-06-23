@@ -4,10 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Create new Piece</h1>
+	<a href="{{ path('app_piece_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
 	<div class="form-container">
-
 		{{ include('piece/_form.html.twig') }}
 	</div>
-	<a href="{{ path('app_piece_index') }}">back to list</a>
 {% endblock %}

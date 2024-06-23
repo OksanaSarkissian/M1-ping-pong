@@ -22,77 +22,14 @@
 	<body>
 		<div class="container-fluid h-100">
 			<div class="row">
-				<div class="col-sm-auto sticky-top text-bg-secondary">
-					<div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
-						<ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center text-bg-secondary">
-						{% if is_granted('ROLE_ATELIER') or is_granted('ROLE_ADMIN') %}
-							<li class="d-flex flex-sm-column align-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3" title="Voir la liste des pièces" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-								<a href="{{ path('app_piece_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-									<i class="fa-solid fa-gears  fa-3x"></i>
-									<label for="piece">Pièces</label>
-								</a>
-							</li>
-							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
-								<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="Voir les gammes et lancer une production" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-									<i class="fa-solid fa-list-check fa-3x"></i>
-									<label for="Fabrication">Fabrication</label>
-								</a>
-							</li>
-							{% endif %}
-							{% if is_granted('ROLE_COMMERCIAL') or is_granted('ROLE_ADMIN') %}
-							<li class="d-flex flex-sm-column align-content-center justify-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
-								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column align-content-center justify-content-center" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-									<i class="fa-solid fa-file-invoice-dollar  fa-3x"></i>
-									<label for="Facturations">Facturations</label>
-								</a>
-							</li>
-							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
-								<a href="#" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-									<i class="fa-solid fa-download  fa-3x"></i>
-									<label for="exports">Exports</label>
-								</a>
-							</li>
-							{% endif %}
-							{% if is_granted('ROLE_ADMIN') %}
-							<li class="nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3">
-								<a href="{{ path('app_user_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
-									<i class="fa-solid fa-users-gear  fa-3x"></i>
-									{# <i class="fa-solid fa-user-gear  fa-3x"></i> #}
-									<label for="users">Utilisateurs</label>
-								</a>
-							</li>
-							{% endif %}
-						</ul>
-						<a class="w-100 text-bg-secondary text-center" href="{{ path('app_logout') }}">Logout</a>
-					</div>
-				</div>
+				{% include("./ui/sidebar.html.twig") %}
 				<div class="col-sm p-3 min-vh-100">
-					<div class="d-flex">
-						<a href="{{ path('app_gamme_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn {{ active == 'gamme' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
-								<span>Gammes</span>
-							</button>
-						</a>
-						<a href="{{ path('app_operation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn {{ active == 'operation' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
-								<span>Opérations</span>
-							</button>
-						</a>
-						<a href="{{ path('app_realisation_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn {{ active == 'realisation' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
-								<span>Réalisations</span>
-							</button>
-						</a>
-						<a href="{{ path('app_poste_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn {{ active == 'poste' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
-								<span>Postes</span>
-							</button>
-						</a>
-						<a href="{{ path('app_machine_index') }}" class="nav-link text-secondary py-3 px-2 d-flex flex-column">
-							<button class="btn {{ active == 'machine' ? 'text-bg-accent' : 'text-bg-accent-2'}}">
-								<span>Machines</span>
-							</button>
-						</a>
+					<div class="d-flex column-gap-2 pb-3">
+						<a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'gamme' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary'}}">Gammes</a>
+						<a href="{{ path('app_operation_index') }}" class="btn {{ active == 'operation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary'}}">Opérations</a>
+						<a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'realisation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary'}}">Réalisations</a>
+						<a href="{{ path('app_poste_index') }}" class="btn {{ active == 'poste' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary'}}">Postes</a>
+						<a href="{{ path('app_machine_index') }}" class="btn {{ active == 'machine' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary'}}">Machines</a>
 					</div>
 					{% block body %}{% endblock %}
 				</div>

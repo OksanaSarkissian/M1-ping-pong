@@ -4,42 +4,40 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_piece_new') }}">Ajouter une pièce</a>
+	<a href="{{ path('app_piece_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter une pièce</a>
 
 	<div class="list">
 		{% for piece in pieces %}
-			<div class="piece d-flex flex-row align-items-baseline">
-				<div class="d-flex flex-column space-between w-100">
+			<div class="piece d-flex flex-row align-items-baseline flex-wrap justify-content-between">
+				<div class="d-flex flex-column space-between">
 					<div class="d-flex flex-column space-between w-100">
-						<span>{{ piece.libellePiece }}</span>
+						<span class="fs-4 fw-bolder">{{ piece.libellePiece }}</span>
 						<span>Composition:</span>
 						{# {% for compo in piece.composition %}
-						{{ compo }},
+							{{ compo }},
 						{% endfor %} #}
 					</div>
-					<div class="d-flex">
+
+				</div>
+				<div class="d-flex column-gap-1">
+					<a href="{{ path('app_piece_show', {'id': piece.id}) }}" class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+					</a>
+					<a href="{{ path('app_piece_edit', {'id': piece.id}) }}" class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-pen"></i>
+					</a>
+					{{ include('piece/_delete_form.html.twig') }}
+				</div>
+				<div class="w-100 d-flex justify-content-between mt-4">
+					<div class="d-flex column-gap-4">
 						<span>Référence:{{ piece.refPiece }}</span>
 						<span>Type:</span>
 						<span>Responsable:</span>
 					</div>
-				</div>
-				<div>
-					<div class="d-flex space">
-						<a href="{{ path('app_piece_show', {'id': piece.id}) }}">
-							<button class="btn text-bg-accent-2 text-primary">
-								<i class="fa-solid fa-eye"></i>
-							</button>
-						</a>
-						<a href="{{ path('app_piece_edit', {'id': piece.id}) }}">
-							<button class="btn text-bg-accent-2 text-primary mx-3">
-								<i class="fa-solid fa-pen"></i>
-							</button>
-						</a>
-						{{ include('piece/_delete_form.html.twig') }}
-					</div>
-					<div class="d-flex">
-						<span>Stock:{{ piece.stock }}</span>
-						<span>Prix unitaire:{{ piece.prixUnitaire }}€</span>
+
+					<div class="d-flex column-gap-4">
+						<span>Stock: {{ piece.stock }}</span>
+						<span>Prix unitaire: {{ piece.prixUnitaire }}€</span>
 					</div>
 				</div>
 			</div>

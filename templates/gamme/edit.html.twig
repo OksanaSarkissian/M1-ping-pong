@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Gamme
+{% block title %}Edit Gamme 
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_gamme_index') }}">back to list</a>
+	
 	<div class="form-container">
-		<h1>Edit Gamme</h1>
+		<a href="{{ path('app_gamme_index') }}" class="btn bg-accent-2 text-primary">Retourner à la liste</a>
 
 		{{ include('gamme/_form.html.twig', {'button_label': 'Update'}) }}
 

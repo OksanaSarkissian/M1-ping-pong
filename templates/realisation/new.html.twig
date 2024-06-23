@@ -3,9 +3,12 @@
 {% block title %}New Realisation{% endblock %}
 
 {% block body %}
-    <h1>Create new Realisation</h1>
+    <a href="{{ path('app_realisation_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+
+<div class="form-container">
 
     {{ include('realisation/_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('app_realisation_index') }}">back to list</a>
+    
 {% endblock %}

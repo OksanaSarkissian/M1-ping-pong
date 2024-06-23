@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_user_new') }}">Ajouter un utilisateur</a>
+	<a href="{{ path('app_user_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter un utilisateur</a>
 
 	<div class="list">
 		{% for user in users %}

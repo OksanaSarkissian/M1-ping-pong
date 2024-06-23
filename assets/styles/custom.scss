@@ -9,7 +9,7 @@ $main-color: #eff1ed;
 $secondary-color: #3b3a3a;
 $accent-color: #ff9809;
 $accent-color-2: #086cad;
-$danger:#C71F1F;
+$danger: #c71f1f;
 
 // 3. Include remainder of required Bootstrap stylesheets (including any separate color mode stylesheets)
 @import "../../node_modules/bootstrap/scss/variables";
@@ -19,10 +19,10 @@ $danger:#C71F1F;
 // Create your own map
 $custom-colors: (
   "primary": $main-color,
-  "secondary":$secondary-color,
-  "accent":$accent-color,
-  "accent-2":$accent-color-2,
-  "danger":$danger
+  "secondary": $secondary-color,
+  "accent": $accent-color,
+  "accent-2": $accent-color-2,
+  "danger": $danger,
 );
 
 // Merge the maps

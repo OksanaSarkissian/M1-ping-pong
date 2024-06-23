@@ -4,17 +4,21 @@
 
 {% block body %}
 	<div>
-		<a href="{{ path('app_gamme_new') }}">Ajouter une gamme</a>
-		<select>
-			{% for gamme in gammes %}
-				<option>
-					<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">{{ gamme.piece.libellepiece }}</a>
-				</option>
+		<div class="d-flex column-gap-2 mb-4">
+			<a href="{{ path('app_gamme_new') }}" class="btn bg-accent-2 text-primary ">Ajouter une gamme</a>
+			<select class="form-select d-inline-block w-auto" aria-label="Choix de la gamme">
+				{% for gamme in gammes %}
+					<option>
+						<a href="{{ path('app_gamme_show', {'id': gamme.id}) }}">{{ gamme.piece.libellepiece }}</a>
+					</option>
 
-			{% else %}
-				<option>no records found</option>
-			{% endfor %}
-		</select>
+				{% else %}
+					<option>no records found</option>
+				{% endfor %}
+			</select>
+		</div>
+
+
 		{% for gamme in gammes %}
 			<div class="d-flex flex-row w-100">
 				<div class="flex-grow-1">
