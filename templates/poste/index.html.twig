@@ -21,7 +21,7 @@
 					<td>{{ poste.libelle }}</td>
 					<td>
 						{% for machine in poste.machines %}
-							{{ machine.libelle }},
+							<span>{{ machine.libelle }},</span>
 						{% endfor %}
 					</td>
 					<td>

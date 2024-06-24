@@ -27,6 +27,7 @@ class AppFixtures extends Fixture
         $piece->setLibellePiece("roue");
         $piece->setRefPiece(123456);
         $piece->setPrixUnitaire(8.00);
+        $piece->setType('Livrable');
         $piece->setStock(4);
         $manager->persist($piece);
 
@@ -45,8 +46,8 @@ class AppFixtures extends Fixture
         $operation = new Operation();
         $operation->setLibelle("operation 1");
         $operation->setDescription("lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit ametlorem ipsum dolor sit ametlorem ipsum dolor sit amet lorem ipsum dolor sit amet");
-        $operation->setMachineId($machine);
-        $operation->setPosteId($poste);    
+        $operation->setMachine($machine);
+        $operation->setPoste($poste);    
         $operation->setTemps(new \DateTime());
         $manager->persist($operation);
 

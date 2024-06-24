@@ -27,11 +27,11 @@ class Operation
 
     #[ORM\ManyToOne(inversedBy: 'operations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Poste $poste_id = null;
+    private ?Poste $poste = null;
 
     #[ORM\ManyToOne(inversedBy: 'operations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Machine $machine_id = null;
+    private ?Machine $machine = null;
 
     /**
      * @var Collection<int, Gamme>
@@ -85,26 +85,26 @@ class Operation
         return $this;
     }
 
-    public function getPosteId(): ?Poste
+    public function getPoste(): ?Poste
     {
-        return $this->poste_id;
+        return $this->poste;
     }
 
-    public function setPosteId(?Poste $poste_id): static
+    public function setPoste(?Poste $poste): static
     {
-        $this->poste_id = $poste_id;
+        $this->poste = $poste;
 
         return $this;
     }
 
-    public function getMachineId(): ?Machine
+    public function getMachine(): ?Machine
     {
-        return $this->machine_id;
+        return $this->machine;
     }
 
-    public function setMachineId(?Machine $machine_id): static
+    public function setMachine(?Machine $machine): static
     {
-        $this->machine_id = $machine_id;
+        $this->machine = $machine;
 
         return $this;
     }

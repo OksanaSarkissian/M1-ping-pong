@@ -1,47 +1,44 @@
 {% extends 'fabrication-base.html.twig' %}
 
-{% block title %}Operation index
+{% block title %}
+  Operation index
 {% endblock %}
 
 {% block body %}
+  <div class="d-flex column-gap-2">
+    <a href="{{ path('app_operation_new') }}" class="btn bg-accent-2 text-primary">Ajouter une operation</a>
+    <select class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
+      {% for operation in operations %}
+        <option>
+          <a href="{{ path('app_operation_show', { id: operation.id }) }}">{{ operation.libelle }}</a>
+        </option>
+      {% else %}
+        <option>no records found</option>
+      {% endfor %}
+    </select>
+  </div>
 
-	<div class="d-flex column-gap-2">
-		<a href="{{ path('app_operation_new') }}" class="btn bg-accent-2 text-primary">Ajouter une operation</a>
-		<select class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
-			{% for operation in operations %}
-				<option>
-					<a href="{{ path('app_operation_show', {'id': operation.id}) }}">{{ operation.libelle }}</a>
-				</option>
-
-			{% else %}
-				<option>no records found</option>
-			{% endfor %}
-		</select>
-	</div>
-
-	{% for operation in operations %}
-		<div class="d-flex flex-row w-100 mb-3">
-			<div class="flex-grow-1">
-				<div><span>{{ operation.libelle }}</span></div>
-				<div><span>{{ operation.description }}</span></div>
-				<div><span>temps: {{ operation.temps ? operation.temps|date('H:i:s') : '' }} </span><span>Poste: </span><span>Machine: </span></div>
-			</div>
-			<div class="d-flex">
-				<a href="{{ path('app_operation_show', {'id': operation.id}) }}">
-					<button class="btn text-bg-accent-2 text-primary">
-						<i class="fa-solid fa-eye"></i>
-					</button>
-				</a>
-				<a href="{{ path('app_operation_edit', {'id': operation.id}) }}">
-					<button class="btn text-bg-accent-2 text-primary mx-3">
-						<i class="fa-solid fa-pen"></i>
-					</button>
-				</a>
-
-			</div>
-		</div>
-{% else %}
-	<tr>
-		<td colspan="5">no records found</td>
-	</tr>
-{% endfor %}</tbody></table>{% endblock %}
+  {% for operation in operations %}
+    <div class="d-flex flex-row w-100 mb-3">
+      <div class="flex-grow-1">
+        <div>
+          <span>{{ operation.libelle }}</span>
+        </div>
+        <div>
+          <span>{{ operation.description }}</span>
+        </div>
+        <div>
+          <span>temps: {{ operation.temps ? operation.temps|date('H:i:s') : '' }}</span><span>Poste: {{ operation.Poste.libelle }}</span><span>Machine: {{ operation.Machine.libelle }}</span>
+        </div>
+      </div>
+      <div class="d-flex">
+        <a href="{{ path('app_operation_show', { id: operation.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
+        <a href="{{ path('app_operation_edit', { id: operation.id }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+      </div>
+    </div>
+  {% else %}
+    <tr>
+      <td colspan="5">no records found</td>
+    </tr>
+  {% endfor %}
+{% endblock %}

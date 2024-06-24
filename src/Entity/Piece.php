@@ -21,7 +21,7 @@ class Piece
     #[ORM\Column(length: 100)]
     private ?string $libelle_piece = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $type = null;
 
     #[ORM\Column(nullable: true)]

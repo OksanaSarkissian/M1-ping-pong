@@ -24,10 +24,14 @@ class OperationType extends AbstractType
             ->add('poste_id', EntityType::class, [
                 'class' => Poste::class,
                 'choice_label' => 'libelle',
+                'placeholder' => 'Choisissez un poste',
+                'required' => true,
             ])
             ->add('machine_id', EntityType::class, [
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
+                'placeholder' => 'Choisissez une machine',
+                'required' => true,
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
