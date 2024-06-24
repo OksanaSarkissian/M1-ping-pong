@@ -25,8 +25,7 @@ class UserRepository extends ServiceEntityRepository
             ->from(User::class, 'u')
             ->where("JSON_GET_TEXT(u.roles, 0) = :role")
             ->setParameter('role', "ROLE_ATELIER_RESPONSABLE");
-// dump($queryBuilder->getQuery());
-// exit();
+            
         $query = $queryBuilder;
         return $query;
     }

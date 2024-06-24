@@ -20,6 +20,7 @@ class Gamme
     private ?User $responsable = null;
 
     #[ORM\OneToOne(mappedBy: 'gamme', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Piece $piece = null;
 
     #[ORM\Column(length: 255)]

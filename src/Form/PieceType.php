@@ -24,7 +24,9 @@ class PieceType extends AbstractType
             ->add('stock')
             ->add('gamme', EntityType::class, [
                 'class' => Gamme::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
+                'placeholder' => 'Choisissez une gamme',
+                'required' => false,
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => [
@@ -32,7 +34,9 @@ class PieceType extends AbstractType
                     "Intermediaire" => 'Intermediaire',
                     "Matiere Premiere" => 'Matiere Premiere',
                     "Achete" => 'Achetée'
-                ]
+                ],
+                'placeholder' => 'Choisissez un type de pièce',
+                'required' => true,
             ])
 
             // ->add('composition', EntityType::class, [
@@ -40,7 +44,7 @@ class PieceType extends AbstractType
             //     'choice_label' => 'composition',
             //     'multiple' => true,
             // ])
-            ->add('save', SubmitType::class, ['label' => "Créer la pièce"])
+            ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
 

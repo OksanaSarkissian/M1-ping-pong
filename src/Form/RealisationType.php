@@ -35,7 +35,7 @@ class RealisationType extends AbstractType
                 'class' => Piece::class,
                 'choice_label' => 'libellepiece',
             ])
-            ->add('save', SubmitType::class, ['label' => "Créer la réalisation"])
+            ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
 

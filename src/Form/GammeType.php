@@ -18,17 +18,22 @@ class GammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('libelle')
             ->add('responsable', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'FullName',
                 'query_builder' => function (UserRepository $r) {
                     return $r->findByRole('ROLE_ATELIER_RESPONSABLE');
-                }
+                },
+                'placeholder' => 'Choisissez un responsable',
+                'required' => true,
 
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'libellepiece',
+                'placeholder' => 'Choisissez une piece',
+                'required' => false,
             ])
             ->add('Operation', EntityType::class, [
                 // Multiple selection allowed
@@ -38,7 +43,7 @@ class GammeType extends AbstractType
                 'choice_label' => 'libelle',
                 'mapped' => false
             ])
-            ->add('save', SubmitType::class, ['label' => "Créer la gamme"])
+            ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
 

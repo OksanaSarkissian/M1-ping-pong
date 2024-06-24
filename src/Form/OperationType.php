@@ -29,7 +29,7 @@ class OperationType extends AbstractType
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
             ])
-            ->add('save', SubmitType::class, ['label' => "Créer l'opération"])
+            ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
 

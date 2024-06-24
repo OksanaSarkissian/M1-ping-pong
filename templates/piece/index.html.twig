@@ -32,7 +32,11 @@
 					<div class="d-flex column-gap-4">
 						<span>Référence:{{ piece.refPiece }}</span>
 						<span>Type:</span>
-						<span>Responsable:</span>
+						{{ piece.type }}
+						{% if piece.type is same as('Livrable') %}
+						<span>Gamme:</span>
+						{{ piece.Gamme.libelle }}
+						{% endif %}
 					</div>
 
 					<div class="d-flex column-gap-4">

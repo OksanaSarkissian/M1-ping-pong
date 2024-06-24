@@ -12,7 +12,7 @@
       <select class="form-select d-inline-block w-auto" aria-label="Choix de la gamme">
         {% for gamme in gammes %}
           <option>
-            <a href="{{ path('app_gamme_show', { id: gamme.id }) }}">{{ gamme.piece.libellepiece }}</a>
+            <a href="{{ path('app_gamme_show', { id: gamme.id }) }}">{{ gamme.libelle }}</a>
           </option>
         {% else %}
           <option>no records found</option>
@@ -44,6 +44,7 @@
           {% endif %}
         </div>
       </div>
+      <hr>
     {% else %}
       <tr>
         <td colspan="5">no records found</td>

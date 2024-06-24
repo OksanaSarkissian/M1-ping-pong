@@ -81,8 +81,7 @@ class AppFixtures extends Fixture
         // gamme
         $gamme = new Gamme();
         $gamme->setResponsable($doe);
-        $gamme->setLibelle($piece->getLibellePiece());
-        $gamme->setPiece($piece);
+        $gamme->setLibelle("gamme 1");
         $manager->persist($gamme);
 
         $manager->flush();

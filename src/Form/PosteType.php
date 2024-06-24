@@ -27,7 +27,7 @@ class PosteType extends AbstractType
                 'choice_label' => 'libelle',
                 'multiple' => true,
             ])
-            ->add('save', SubmitType::class, ['label' => "Créer le poste"])
+            ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
 

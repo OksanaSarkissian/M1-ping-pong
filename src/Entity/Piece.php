@@ -43,6 +43,7 @@ class Piece
     private Collection $pieces;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Gamme $gamme = null;
 
     public function __construct()
