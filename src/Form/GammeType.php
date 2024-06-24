@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use App\Repository\UserRepository;
 
 class GammeType extends AbstractType
 {
@@ -20,6 +21,10 @@ class GammeType extends AbstractType
             ->add('responsable', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'FullName',
+                'query_builder' => function (UserRepository $r) {
+                    return $r->findByRole('ROLE_ATELIER_RESPONSABLE');
+                }
+
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
@@ -29,7 +34,7 @@ class GammeType extends AbstractType
                 // Multiple selection allowed
                 'multiple' => true,
                 // This field shows all the Operation
-                'class'    => Operation::class,
+                'class' => Operation::class,
                 'choice_label' => 'libelle',
                 'mapped' => false
             ])
