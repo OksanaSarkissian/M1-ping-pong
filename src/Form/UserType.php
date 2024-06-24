@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Droit;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
 {
@@ -18,9 +18,14 @@ class UserType extends AbstractType
             ->add('prenom')
             ->add('identifiant')
             ->add('password')
-            ->add('Droit', EntityType::class, [
-                'class' => Droit::class,
-                'choice_label' => 'libelle',
+            ->add('Roles', ChoiceType::class, [
+                'choices' => [
+                    "ROLE_ATELIER" => 'ROLE_ATELIER',
+                    "ROLE_COMMERCIAL" => 'ROLE_COMMERCIAL',
+                    "ROLE_ATELIER_RESPONSABLE" => 'ROLE_ATELIER_RESPONSABLE',
+                    "ROLE_ADMIN" => 'ROLE_ADMIN'
+                ],
+                'multiple' => true
             ])
         ;
     }

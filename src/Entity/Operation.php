@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OperationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,6 +32,17 @@ class Operation
     #[ORM\ManyToOne(inversedBy: 'operations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Machine $machine_id = null;
+
+    /**
+     * @var Collection<int, Gamme>
+     */
+    #[ORM\ManyToMany(targetEntity: Gamme::class, mappedBy: 'operations')]
+    private Collection $gammes;
+
+    public function __construct()
+    {
+        $this->gammes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -92,6 +105,33 @@ class Operation
     public function setMachineId(?Machine $machine_id): static
     {
         $this->machine_id = $machine_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Gamme>
+     */
+    public function getGammes(): Collection
+    {
+        return $this->gammes;
+    }
+
+    public function addGamme(Gamme $gamme): static
+    {
+        if (!$this->gammes->contains($gamme)) {
+            $this->gammes->add($gamme);
+            $gamme->addOperation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGamme(Gamme $gamme): static
+    {
+        if ($this->gammes->removeElement($gamme)) {
+            $gamme->removeOperation($this);
+        }
 
         return $this;
     }

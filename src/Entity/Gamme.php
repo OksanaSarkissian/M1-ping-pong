@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GammeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GammeRepository::class)]
@@ -22,6 +24,17 @@ class Gamme
 
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
+
+    /**
+     * @var Collection<int, Operation>
+     */
+    #[ORM\ManyToMany(targetEntity: Operation::class, inversedBy: 'gammes')]
+    private Collection $operations;
+
+    public function __construct()
+    {
+        $this->operations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -65,6 +78,30 @@ class Gamme
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Operation>
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): static
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations->add($operation);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Operation $operation): static
+    {
+        $this->operations->removeElement($operation);
 
         return $this;
     }
