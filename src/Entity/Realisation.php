@@ -22,11 +22,11 @@ class Realisation
 
     #[ORM\ManyToOne(inversedBy: 'realisations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Poste $poste_id_reel = null;
+    private ?Poste $poste_reel = null;
 
     #[ORM\ManyToOne(inversedBy: 'realisations')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Machine $machine_id_reel = null;
+    private ?Machine $machine_reel = null;
 
     #[ORM\ManyToOne(inversedBy: 'realisations')]
     #[ORM\JoinColumn(nullable: false)]
@@ -61,26 +61,26 @@ class Realisation
         return $this;
     }
 
-    public function getPosteIdReel(): ?Poste
+    public function getPosteReel(): ?Poste
     {
-        return $this->poste_id_reel;
+        return $this->poste_reel;
     }
 
-    public function setPosteIdReel(?Poste $poste_id_reel): static
+    public function setPosteReel(?Poste $poste_reel): static
     {
-        $this->poste_id_reel = $poste_id_reel;
+        $this->poste_reel = $poste_reel;
 
         return $this;
     }
 
-    public function getMachineIdReel(): ?Machine
+    public function getMachineReel(): ?Machine
     {
-        return $this->machine_id_reel;
+        return $this->machine_reel;
     }
 
-    public function setMachineIdReel(?Machine $machine_id_reel): static
+    public function setMachineReel(?Machine $machine_reel): static
     {
-        $this->machine_id_reel = $machine_id_reel;
+        $this->machine_reel = $machine_reel;
 
         return $this;
     }

@@ -26,6 +26,7 @@
         "symfony/password-hasher": "6.4.*",
         "symfony/runtime": "6.4.*",
         "symfony/security-bundle": "6.4.*",
+        "symfony/serializer": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
         "symfony/ux-icons": "^2.18",
         "symfony/validator": "6.4.*",

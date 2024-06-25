@@ -33,7 +33,7 @@ class Machine
     /**
      * @var Collection<int, Realisation>
      */
-    #[ORM\OneToMany(mappedBy: 'machine_id_reel', targetEntity: Realisation::class)]
+    #[ORM\OneToMany(mappedBy: 'machine_reel', targetEntity: Realisation::class)]
     private Collection $realisations;
 
     public function __construct()
@@ -126,7 +126,7 @@ class Machine
     {
         if (!$this->realisations->contains($realisation)) {
             $this->realisations->add($realisation);
-            $realisation->setMachineIdReel($this);
+            $realisation->setMachineReel($this);
         }
 
         return $this;
@@ -135,9 +135,9 @@ class Machine
     public function removeRealisation(Realisation $realisation): static
     {
         if ($this->realisations->removeElement($realisation)) {
-            // set the owning side to null (unless already changed)
-            if ($realisation->getMachineIdReel() === $this) {
-                $realisation->setMachineIdReel(null);
+            // set the owning se to null (unless already changed)
+            if ($realisation->getMachineReel() === $this) {
+                $realisation->setMachineReel(null);
             }
         }
 

@@ -39,7 +39,7 @@ class Poste
     /**
      * @var Collection<int, Realisation>
      */
-    #[ORM\OneToMany(mappedBy: 'poste_id_reel', targetEntity: Realisation::class)]
+    #[ORM\OneToMany(mappedBy: 'poste_reel', targetEntity: Realisation::class)]
     private Collection $realisations;
 
     public function __construct()
@@ -160,7 +160,7 @@ class Poste
     {
         if (!$this->realisations->contains($realisation)) {
             $this->realisations->add($realisation);
-            $realisation->setPosteIdReel($this);
+            $realisation->setPosteReel($this);
         }
 
         return $this;
@@ -169,9 +169,9 @@ class Poste
     public function removeRealisation(Realisation $realisation): static
     {
         if ($this->realisations->removeElement($realisation)) {
-            // set the owning side to null (unless already changed)
-            if ($realisation->getPosteIdReel() === $this) {
-                $realisation->setPosteIdReel(null);
+            // set the owning se to null (unless already changed)
+            if ($realisation->getPosteReel() === $this) {
+                $realisation->setPosteReel(null);
             }
         }
 

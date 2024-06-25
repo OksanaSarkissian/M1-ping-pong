@@ -24,18 +24,20 @@ class RealisationType extends AbstractType
             ->add('temps_reel', null, [
                 'widget' => 'single_text',
             ])
-            ->add('poste_id_reel', EntityType::class, [
+            ->add('poste_reel', EntityType::class, [
                 'class' => Poste::class,
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez un poste',
             ])
-            ->add('machine_id_reel', EntityType::class, [
+            ->add('machine_reel', EntityType::class, [
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
+                'placeholder' => 'Choisissez une machine',
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'libellepiece',
+                'placeholder' => 'Choisissez une piece',
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;

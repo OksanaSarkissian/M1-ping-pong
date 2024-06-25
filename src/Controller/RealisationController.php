@@ -72,11 +72,18 @@ class RealisationController extends AbstractController
     #[Route('/{id}', name: 'app_realisation_delete', methods: ['POST'])]
     public function delete(Request $request, Realisation $realisation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$realisation->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $realisation->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($realisation);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/ajax/test', name: 'app_realisation_ajax', methods: ['GET'])]
+    public function getPosteAjax(RealisationRepository $realisationRepository, Request $req): Response
+    {
+        $data = $realisationRepository->findMachinesByPoste($req->query->get("poste"));
+        return $this->json(['machines' => $data]);
     }
 }

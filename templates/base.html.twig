@@ -32,8 +32,7 @@
       </div>
     </div>
 
-    <script type="text/javascript" defer>
-      console.log($('#piece_type')[0])
+    <script type="text/javascript">
       $('#piece_type').on('change', function () {
         if ($(this).val() == 'Livrable') {
           $('#piece_gamme').parent().show()
@@ -44,16 +43,39 @@
         }
       })
       
-      $('#realisation_machine_id_reel').parent().hide()
-      $('#realisation_poste_id_reel').on('change', function () {
+      $('#realisation_machine_reel').parent().hide();
+
+      $('#realisation_poste_reel').on('change', async function () {
+        if ($('#realisation_poste_reel').val()) {
+          let response = await fetch(`/atelier/realisation/ajax/test?poste=${$('#realisation_poste_reel').val()}`, {
+            headers: { 'X-Requested-with': 'XMLHttpRequest' },
+            method: 'GET'
+          })
+          console.log(response);
+          let reponseAjax = JSON.parse(await response.text())   
+
+          $('#realisation_machine_reel').empty();
+          
+          if(reponseAjax.machines.length) {
+            reponseAjax.machines.forEach((machine) => {
+              console.log(machine)
+              $('#realisation_machine_reel').append(`<option value="${machine.id}">${machine.libelle}</option>`)
+            });
+          } else {
+            $('#realisation_machine_reel').append(`<option>Aucune machine adaptée</option>`)
+          }
+         
+        }
+      
+        // update options
         if ($(this).val() !== '') {
-          $('#realisation_machine_id_reel').parent().show()
-          $('#realisation_machine_id_reel').attr('required', '')
-          $('#realisation_machine_id_reel').attr('data-error', 'This field is required.')
+          $('#realisation_machine_reel').parent().show()
+          $('#realisation_machine_reel').attr('required', '')
+          $('#realisation_machine_reel').attr('data-error', 'This field is required.')
         } else {
-          $('#realisation_machine_id_reel').parent().hide()
-          $('#realisation_machine_id_reel').removeAttr('data-error')
-          $('#realisation_machine_id_reel').removeAttr('required')
+          $('#realisation_machine_reel').parent().hide()
+          $('#realisation_machine_reel').removeAttr('data-error')
+          $('#realisation_machine_reel').removeAttr('required')
         }
       })
     </script>
