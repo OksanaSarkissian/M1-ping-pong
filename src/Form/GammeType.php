@@ -42,13 +42,12 @@ class GammeType extends AbstractType
                 'placeholder' => 'Choisissez une piece',
                 'required' => false,
             ])
-            ->add('Operation', EntityType::class, [
+            ->add('Operations', EntityType::class, [
                 // Multiple selection allowed
                 'multiple' => true,
                 // This field shows all the Operation
                 'class' => Operation::class,
-                'choice_label' => 'libelle',
-                'mapped' => false
+                'choice_label' => 'libelle'
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;

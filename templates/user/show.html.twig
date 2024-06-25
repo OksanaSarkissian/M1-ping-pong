@@ -3,34 +3,41 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Identifiant</th>
-                <td>{{ user.identifiant }}</td>
-            </tr>
-        </tbody>
-    </table>
-
     <a href="{{ path('app_user_index') }}">Retour à la liste</a>
-
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3">
+    <div class="user d-flex flex-row">
+				<div class="d-flex flex-column space-between w-100">
+					<div class="d-flex flex-column space-between w-100">
+						<span class="font-weight-bold">{{ user.nom }}
+							{{ user.prenom }}</span>
+						<span>{{ user.identifiant }}</span>
+						<span>Qualifications:</span>
+					</div>
+					<div>
+							<span>Roles:</span>
+						{% for role in user.roles %}
+							{{ role }},
+						{% endfor %}
+					</div>
+				</div>
+				<div class="d-flex">
+					<a href="{{ path('app_user_show', {'id': user.id}) }}">
+						<button class="btn text-bg-accent-2 text-primary">
+							<i class="fa-solid fa-eye"></i>
+						</button>
+					</a>
+					<a href="{{ path('app_user_edit', {'id': user.id}) }}">
+						<button class="btn text-bg-accent-2 text-primary mx-3">
 							<i class="fa-solid fa-pen"></i>
-						</button></a>
-
-    {{ include('user/_delete_form.html.twig') }}
+						</button>
+					</a>
+					{{ include('user/_delete_form.html.twig') }}
+				</div>
+			</div>
+			<hr>
+		{% else %}
+			<tr>
+				<td colspan="6">no records found</td>
+			</tr>
+		{% endfor %}
+	</div>
 {% endblock %}

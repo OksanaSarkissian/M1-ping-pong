@@ -33,13 +33,25 @@
     </div>
 
     <script type="text/javascript">
+          $('#piece_gamme').parent().hide()
+          $('#piece_composition').parent().hide()
       $('#piece_type').on('change', function () {
-        if ($(this).val() == 'Livrable') {
+        if ($(this).val() == 'Livrable') 
+        {
+          $('#piece_gamme').parent().show()
+          $('#piece_composition').parent().show()
+          $('#piece_gamme').attr('data-error', 'This field is required.')
+          $('#piece_composition').attr('data-error', 'This field is required.')
+        } else if ($(this).val() == 'Livrable') 
+        {
           $('#piece_gamme').parent().show()
           $('#piece_gamme').attr('data-error', 'This field is required.')
-        } else {
+        } else 
+        {
           $('#piece_gamme').parent().hide()
+          $('#piece_composition').parent().hide()
           $('#piece_gamme').removeAttr('data-error')
+          $('#piece_composition').removeAttr('data-error')
         }
       })
       {# operation #}

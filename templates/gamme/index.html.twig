@@ -45,6 +45,14 @@
               {% endif %}
             </span>
           </div>
+          <div>
+            <span>
+            operations:
+              {% for ope in gamme.operations %}
+                <li>{{ ope.libelle }}</li>
+              {% endfor %}
+            </span>
+          </div>
         </div>
         <div class="d-flex">
           <a href="{{ path('app_gamme_show', { id: gamme.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>

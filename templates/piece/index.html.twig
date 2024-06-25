@@ -13,10 +13,14 @@
         <div class="d-flex flex-column space-between">
           <div class="d-flex flex-column space-between w-100">
             <span class="fs-4 fw-bolder">{{ piece.libellePiece }}</span>
-            <span>Composition:</span>
-            {% for compo in piece.composition %}
-							{{ compo.getLibellePiece() }},
-						{% endfor %}
+            {% if piece.type is same as('Livrable') %}
+              <span>Composition:</span>
+              {% for compo in piece.composition %}
+                {{ compo.getLibellePiece() }},
+              {% else %}
+                Ajoutez la composition
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
         <div class="d-flex column-gap-1">

@@ -23,6 +23,16 @@ class PieceType extends AbstractType
             ->add('libelle_piece')
             ->add('prix_unitaire')
             ->add('stock')
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    "Livrable" => 'Livrable',
+                    "Intermediaire" => 'Intermediaire',
+                    "Matiere Premiere" => 'Matiere Premiere',
+                    "Achete" => 'Achetée'
+                ],
+                'placeholder' => 'Choisissez un type de pièce',
+                'required' => true,
+            ])
             ->add('gamme', EntityType::class, [
                 'class' => Gamme::class,
                 'query_builder' => function (EntityRepository $er) {
@@ -35,21 +45,13 @@ class PieceType extends AbstractType
                 'placeholder' => 'Choisissez une gamme',
                 'required' => false,
             ])
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    "Livrable" => 'Livrable',
-                    "Intermediaire" => 'Intermediaire',
-                    "Matiere Premiere" => 'Matiere Premiere',
-                    "Achete" => 'Achetée'
-                ],
-                'placeholder' => 'Choisissez un type de pièce',
-                'required' => true,
-            ])
 
             ->add('composition', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'libelle_piece',
                 'multiple' => true,
+                'required' => false,
+
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;

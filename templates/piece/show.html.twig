@@ -1,43 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Piece{% endblock %}
+{% block title %}
+  Piece
+{% endblock %}
 
 {% block body %}
-<div class="d-flex justify-content-between">
-    <h1>Piece</h1> <div class="d-flex column-gap-2">
-<a href="{{ path('app_piece_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
-
-    <a href="{{ path('app_piece_edit', {'id': piece.id}) }}"><button class="btn text-bg-accent-2 text-primary">
-							<i class="fa-solid fa-pen"></i>
-						</button></a>{{ include('piece/_delete_form.html.twig') }}
-</div>
+  <div class="d-flex justify-content-between">
+    <div class="d-flex">
+      <a href="{{ path('app_piece_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+      <h1>Piece</h1>
     </div>
+    <div class="d-flex column-gap-2">
+      <a href="{{ path('app_piece_edit', { id: piece.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-pen"></i></button></a>{{ include('piece/_delete_form.html.twig') }}
+    </div>
+  </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ piece.id }}</td>
-            </tr>
-            <tr>
-                <th>Reference_piece</th>
-                <td>{{ piece.refPiece }}</td>
-            </tr>
-            <tr>
-                <th>Libelle_piece</th>
-                <td>{{ piece.libellePiece }}</td>
-            </tr>
-            <tr>
-                <th>Prix_u</th>
-                <td>{{ piece.prixUnitaire }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ piece.stock }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ piece.id }}</td>
+      </tr>
+      <tr>
+        <th>Reference_piece</th>
+        <td>{{ piece.refPiece }}</td>
+      </tr>
+      <tr>
+        <th>Libelle_piece</th>
+        <td>{{ piece.libellePiece }}</td>
+      </tr>
+      <tr>
+        <th>Prix_u</th>
+        <td>{{ piece.prixUnitaire }}</td>
+      </tr>
+      <tr>
+        <th>Stock</th>
+        <td>{{ piece.stock }}</td>
+      </tr>
+    </tbody>
+  </table>
 {% endblock %}

@@ -1,23 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gamme
+{% block title %}
+  Gamme
 {% endblock %}
 
 {% block body %}
-	<div class="d-flex column-gap-2">
+  <div class="d-flex space-between column-gap-2 flex-grow-1">
     <a href="{{ path('app_gamme_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
     {% if gamme.responsable.id is same as(connectedUser) %}
-    <a href="{{ path('app_gamme_edit', { id: gamme.id }) }}" class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-pen"></i></a>
-    {{ include('gamme/_delete_form.html.twig') }}
+      <div class="d-flex">
+        <a href="{{ path('app_gamme_edit', { id: gamme.id }) }}" class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-pen"></i></a>
+        {{ include('gamme/_delete_form.html.twig') }}
+      </div>
     {% endif %}
   </div>
 
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ gamme.id }}</td>
-			</tr>
-		</tbody>
-	</table>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ gamme.id }}</td>
+      </tr>
+      <tr>
+        <th>Libelle</th>
+        <td>{{ gamme.libelle }}</td>
+      </tr>
+      <tr>
+        <th>Operations:</th>
+        <td>
+          {% for ope in gamme.operations %}
+            <li>{{ ope.libelle }}</li>
+            <div>{{ ope.description }}</div>
+          {% endfor %}
+        </td>
+      </tr>
+      <tr>
+        <th>Piece:</th>
+        <td>{{ gamme.piece.libellepiece }}</td>
+      </tr>
+    </tbody>
+  </table>
 {% endblock %}
