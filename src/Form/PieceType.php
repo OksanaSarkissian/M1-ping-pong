@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Doctrine\ORM\EntityRepository;
 
 class PieceType extends AbstractType
 {
@@ -24,6 +25,12 @@ class PieceType extends AbstractType
             ->add('stock')
             ->add('gamme', EntityType::class, [
                 'class' => Gamme::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->leftJoin('u.piece', 'piece')
+                        ->where('piece.gamme  is NULL')
+                        ->orderBy('piece.libelle_piece', 'ASC');
+                },
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez une gamme',
                 'required' => false,

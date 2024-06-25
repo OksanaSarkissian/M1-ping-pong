@@ -36,6 +36,15 @@
               {{ gamme.responsable.prenom }}
             </span>
           </div>
+          <div>
+            <span>
+              Piece:{% if gamme.Piece %}
+                {{ gamme.Piece.libellepiece }}
+              {% else %}
+                Ajoutez une piece
+              {% endif %}
+            </span>
+          </div>
         </div>
         <div class="d-flex">
           <a href="{{ path('app_gamme_show', { id: gamme.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
@@ -44,7 +53,7 @@
           {% endif %}
         </div>
       </div>
-      <hr>
+      <hr />
     {% else %}
       <tr>
         <td colspan="5">no records found</td>

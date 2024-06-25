@@ -6,6 +6,7 @@ use App\Repository\GammeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 #[ORM\Entity(repositoryClass: GammeRepository::class)]
 class Gamme
@@ -19,8 +20,7 @@ class Gamme
     #[ORM\JoinColumn(nullable: false)]
     private ?User $responsable = null;
 
-    #[ORM\OneToOne(mappedBy: 'gamme', cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(inversedBy: 'gamme', cascade: ['persist', 'remove'])]
     private ?Piece $piece = null;
 
     #[ORM\Column(length: 255)]
@@ -50,23 +50,6 @@ class Gamme
     public function setResponsable(?User $responsable): static
     {
         $this->responsable = $responsable;
-
-        return $this;
-    }
-
-    public function getPiece(): ?Piece
-    {
-        return $this->piece;
-    }
-
-    public function setPiece(Piece $piece): static
-    {
-        // set the owning side of the relation if necessary
-        if ($piece->getGamme() !== $this) {
-            $piece->setGamme($this);
-        }
-
-        $this->piece = $piece;
 
         return $this;
     }
@@ -103,6 +86,34 @@ class Gamme
     public function removeOperation(Operation $operation): static
     {
         $this->operations->removeElement($operation);
+
+        return $this;
+    }
+
+    public function getPiece(): ?Piece
+    {
+        return $this->piece;
+    }
+
+    public function setPieceFromPiece(?Piece $piece):static{
+        $this->piece = $piece;
+
+        return $this;
+    }
+
+    public function setPiece(?Piece $piece): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($piece === null && $this->piece !== null) {
+            $this->piece->setGammeFromGamme(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($piece !== null && $piece->getGamme() !== $this) {
+            $piece->setGammeFromGamme($this);
+        }
+
+        $this->piece = $piece;
 
         return $this;
     }

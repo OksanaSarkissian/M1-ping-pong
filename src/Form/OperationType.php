@@ -21,13 +21,13 @@ class OperationType extends AbstractType
             ->add('temps', null, [
                 'widget' => 'single_text',
             ])
-            ->add('poste_id', EntityType::class, [
+            ->add('poste', EntityType::class, [
                 'class' => Poste::class,
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez un poste',
                 'required' => true,
             ])
-            ->add('machine_id', EntityType::class, [
+            ->add('machine', EntityType::class, [
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez une machine',

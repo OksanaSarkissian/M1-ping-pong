@@ -42,8 +42,7 @@ class Piece
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'composition')]
     private Collection $pieces;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\OneToOne(inversedBy: 'piece', cascade: ['persist', 'remove'])]
     private ?Gamme $gamme = null;
 
     public function __construct()
@@ -173,10 +172,27 @@ class Piece
         return $this->gamme;
     }
 
-    public function setGamme(?Gamme $gamme): static
+    public function setGammeFromGamme(?Gamme $gamme): static
     {
         $this->gamme = $gamme;
 
         return $this;
     }
+    public function setGamme(?Gamme $gamme): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($gamme === null && $this->gamme !== null) {
+            $this->gamme->setPieceFromPiece(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($gamme !== null && $gamme->getPiece() !== $this) {
+            $gamme->setPieceFromPiece($this);
+        }
+
+        $this->gamme = $gamme;
+
+        return $this;
+    }
+
 }

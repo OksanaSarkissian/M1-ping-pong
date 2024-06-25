@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityRepository;
 
 class GammeType extends AbstractType
 {
@@ -31,6 +32,12 @@ class GammeType extends AbstractType
             ])
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                    ->leftJoin('u.gamme', 'gamme')
+                    ->where('gamme.piece  is NULL')
+                    ->orderBy('gamme.libelle', 'ASC');
+                },
                 'choice_label' => 'libellepiece',
                 'placeholder' => 'Choisissez une piece',
                 'required' => false,

@@ -19,6 +19,7 @@ class RealisationType extends AbstractType
         $builder
             ->add('date', null, [
                 'widget' => 'single_text',
+                'data' => new \DateTime()
             ])
             ->add('temps_reel', null, [
                 'widget' => 'single_text',
@@ -26,6 +27,7 @@ class RealisationType extends AbstractType
             ->add('poste_id_reel', EntityType::class, [
                 'class' => Poste::class,
                 'choice_label' => 'libelle',
+                'placeholder' => 'Choisissez un poste',
             ])
             ->add('machine_id_reel', EntityType::class, [
                 'class' => Machine::class,
