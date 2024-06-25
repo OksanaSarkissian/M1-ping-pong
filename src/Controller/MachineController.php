@@ -79,4 +79,13 @@ class MachineController extends AbstractController
 
         return $this->redirectToRoute('app_machine_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    
+
+    #[Route('/ajax/test', name: 'app_machine_ajax', methods: ['GET'])]
+    public function getPosteAjax(MachineRepository $machineRepository, Request $req): Response
+    {
+        $data = $machineRepository->findMachinesByPoste($req->query->get("poste"));
+        return $this->json(['machines' => $data]);
+    }
 }

@@ -42,12 +42,48 @@
           $('#piece_gamme').removeAttr('data-error')
         }
       })
+      {# operation #}
+      $('#operation_machine').parent().hide();
+
+      $('#operation_poste').on('change', async function () {
+        if ($('#operation_poste').val()) {
+          let response = await fetch(`/atelier/machine/ajax/test?poste=${$('#operation_poste').val()}`, {
+            headers: { 'X-Requested-with': 'XMLHttpRequest' },
+            method: 'GET'
+          })
+          console.log(response);
+          let reponseAjax = JSON.parse(await response.text())   
+
+          $('#operation_machine').empty();
+          
+          if(reponseAjax.machines.length) {
+            reponseAjax.machines.forEach((machine) => {
+              console.log(machine)
+              $('#operation_machine').append(`<option value="${machine.id}">${machine.libelle}</option>`)
+            });
+          } else {
+            $('#operation_machine').append(`<option>Aucune machine adaptée</option>`)
+          }
+         
+        }
       
+        // update options
+        if ($(this).val() !== '') {
+          $('#operation_machine').parent().show()
+          $('#operation_machine').attr('required', '')
+          $('#operation_machine').attr('data-error', 'This field is required.')
+        } else {
+          $('#operation_machine').parent().hide()
+          $('#operation_machine').removeAttr('data-error')
+          $('#operation_machine').removeAttr('required')
+        }
+      })
+      {# realisation #}
       $('#realisation_machine_reel').parent().hide();
 
       $('#realisation_poste_reel').on('change', async function () {
         if ($('#realisation_poste_reel').val()) {
-          let response = await fetch(`/atelier/realisation/ajax/test?poste=${$('#realisation_poste_reel').val()}`, {
+          let response = await fetch(`/atelier/machine/ajax/test?poste=${$('#realisation_poste_reel').val()}`, {
             headers: { 'X-Requested-with': 'XMLHttpRequest' },
             method: 'GET'
           })

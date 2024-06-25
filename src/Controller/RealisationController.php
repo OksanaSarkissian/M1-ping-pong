@@ -79,11 +79,4 @@ class RealisationController extends AbstractController
 
         return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
     }
-
-    #[Route('/ajax/test', name: 'app_realisation_ajax', methods: ['GET'])]
-    public function getPosteAjax(RealisationRepository $realisationRepository, Request $req): Response
-    {
-        $data = $realisationRepository->findMachinesByPoste($req->query->get("poste"));
-        return $this->json(['machines' => $data]);
-    }
 }
