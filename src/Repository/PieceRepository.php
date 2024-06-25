@@ -5,14 +5,20 @@ namespace App\Repository;
 use App\Entity\Piece;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Piece>
  */
 class PieceRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
+        $this->mr = $registry;
+        $this->entityManager = $this->mr->getManager();
+        $this->em = $em;
+        $this->rsm = new ResultSetMapping();
         parent::__construct($registry, Piece::class);
     }
 

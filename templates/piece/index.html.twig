@@ -14,9 +14,9 @@
           <div class="d-flex flex-column space-between w-100">
             <span class="fs-4 fw-bolder">{{ piece.libellePiece }}</span>
             <span>Composition:</span>
-            {# {% for compo in piece.composition %}
-							{{ compo }},
-						{% endfor %} #}
+            {% for compo in piece.composition %}
+							{{ compo.getLibellePiece() }},
+						{% endfor %}
           </div>
         </div>
         <div class="d-flex column-gap-1">

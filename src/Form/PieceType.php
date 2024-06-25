@@ -46,11 +46,11 @@ class PieceType extends AbstractType
                 'required' => true,
             ])
 
-            // ->add('composition', EntityType::class, [
-            //     'class' => Piece::class,
-            //     'choice_label' => 'composition',
-            //     'multiple' => true,
-            // ])
+            ->add('composition', EntityType::class, [
+                'class' => Piece::class,
+                'choice_label' => 'libelle_piece',
+                'multiple' => true,
+            ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }
