@@ -42,19 +42,12 @@ class Poste
     #[ORM\OneToMany(mappedBy: 'poste_reel', targetEntity: Realisation::class)]
     private Collection $realisations;
 
-    /**
-     * @var Collection<int, Machine>
-     */
-    #[ORM\ManyToMany(targetEntity: Machine::class, mappedBy: 'poste2')]
-    private Collection $machines2;
-
     public function __construct()
     {
         $this->id_user = new ArrayCollection();
         $this->machines = new ArrayCollection();
         $this->operations = new ArrayCollection();
         $this->realisations = new ArrayCollection();
-        $this->machines2 = new ArrayCollection();
     }
 
     public function getId(): ?int
