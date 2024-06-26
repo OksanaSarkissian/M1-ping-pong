@@ -5,8 +5,18 @@
 {% endblock %}
 
 {% block body %}
-  <a href="{{ path('app_piece_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter une pièce</a>
-
+  <div class="d-flex align-items-baseline justify-content-start w-50">
+    <a href="{{ path('app_piece_new') }}" class="btn bg-accent-2 text-primary mb-4 align-self-start">Ajouter une pièce</a>
+    <select class="form-select d-inline-block w-auto mx-3" aria-label="Choix de la piece">
+        {% for piece in pieces %}
+          <option>
+            <a href="{{ path('app_piece_show', { id: piece.id }) }}">{{ piece.libellepiece }}</a>
+          </option>
+        {% else %}
+          <option>no records found</option>
+        {% endfor %}
+      </select>
+  </div>
   <div class="list">
     {% for piece in pieces %}
       <div class="piece d-flex flex-row align-items-baseline flex-wrap justify-content-between">

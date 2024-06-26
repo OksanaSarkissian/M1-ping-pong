@@ -27,7 +27,7 @@ class Poste
     /**
      * @var Collection<int, Machine>
      */
-    #[ORM\ManyToMany(targetEntity: Machine::class, mappedBy: 'Poste')]
+    #[ORM\ManyToMany(targetEntity: Machine::class, inversedBy: 'Poste')]
     private Collection $machines;
 
     /**
@@ -130,7 +130,7 @@ class Poste
     {
         if (!$this->operations->contains($operation)) {
             $this->operations->add($operation);
-            $operation->setPosteId($this);
+            $operation->setPoste($this);
         }
 
         return $this;
@@ -139,9 +139,9 @@ class Poste
     public function removeOperation(Operation $operation): static
     {
         if ($this->operations->removeElement($operation)) {
-            // set the owning side to null (unless already changed)
-            if ($operation->getPosteId() === $this) {
-                $operation->setPosteId(null);
+            // set the owning se to null (unless already changed)
+            if ($operation->getPoste() === $this) {
+                $operation->setPoste(null);
             }
         }
 

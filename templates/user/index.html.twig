@@ -1,47 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index
+{% block title %}
+  User index
 {% endblock %}
 
 {% block body %}
-	<a href="{{ path('app_user_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter un utilisateur</a>
+  <a href="{{ path('app_user_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter un utilisateur</a>
 
-	<div class="list">
-		{% for user in users %}
-			<div class="user d-flex flex-row">
-				<div class="d-flex flex-column space-between w-100">
-					<div class="d-flex flex-column space-between w-100">
-						<span class="font-weight-bold">{{ user.nom }}
-							{{ user.prenom }}</span>
-						<span>{{ user.identifiant }}</span>
-						<span>Qualifications:</span>
-					</div>
-					<div>
-							<span>Roles:</span>
-						{% for role in user.roles %}
-							{{ role }},
-						{% endfor %}
-					</div>
-				</div>
-				<div class="d-flex">
-					<a href="{{ path('app_user_show', {'id': user.id}) }}">
-						<button class="btn text-bg-accent-2 text-primary">
-							<i class="fa-solid fa-eye"></i>
-						</button>
-					</a>
-					<a href="{{ path('app_user_edit', {'id': user.id}) }}">
-						<button class="btn text-bg-accent-2 text-primary mx-3">
-							<i class="fa-solid fa-pen"></i>
-						</button>
-					</a>
-					{{ include('user/_delete_form.html.twig') }}
-				</div>
-			</div>
-			<hr>
-		{% else %}
-			<tr>
-				<td colspan="6">no records found</td>
-			</tr>
-		{% endfor %}
-	</div>
+  <div class="list">
+    {% for user in users %}
+      <div class="user d-flex flex-row">
+        <div class="d-flex flex-column space-between w-100">
+          <div class="d-flex flex-column space-between w-100">
+            <span class="font-weight-bold">
+              {{ user.nom }}
+              {{ user.prenom }}
+            </span>
+            <span>{{ user.identifiant }}</span>
+            <span>
+              Qualifications: {% for poste in user.postes %}
+                <span>{{ poste.libelle }},</span>
+              {% else %}
+                <span>Ajouter un poste sur lequel l'ouvrier est qualifié</span>
+              {% endfor %}
+            </span>
+          </div>
+          <div>
+            <span>Roles:</span>
+            {% for role in user.roles %}
+              {{ role }},
+            {% endfor %}
+          </div>
+        </div>
+        <div class="d-flex">
+          <a href="{{ path('app_user_show', { id: user.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
+          <a href="{{ path('app_user_edit', { id: user.id }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+          {{ include('user/_delete_form.html.twig') }}
+        </div>
+      </div>
+      <hr />
+    {% else %}
+      <tr>
+        <td colspan="6">no records found</td>
+      </tr>
+    {% endfor %}
+  </div>
 {% endblock %}

@@ -20,11 +20,11 @@
     {% endblock %}
   </head>
   <body>
-    <div class="container-fluid h-100">
+    <div class="container-fluid h-100 w-100">
       <div class="row">
         {% include './ui/sidebar.html.twig' %}
-        <div class="col-sm p-3 min-vh-100">
-          <div class="d-flex column-gap-2 pb-3">
+        <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center">
+          <div class="d-flex column-gap-5 pb-3">
             <a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'gamme' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Gammes</a>
             <a href="{{ path('app_operation_index') }}" class="btn {{ active == 'operation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Opérations</a>
             <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'realisation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Réalisations</a>
@@ -32,6 +32,7 @@
             <a href="{{ path('app_machine_index') }}" class="btn {{ active == 'machine' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Machines</a>
           </div>
           {% block body %}
+
           {% endblock %}
         </div>
       </div>

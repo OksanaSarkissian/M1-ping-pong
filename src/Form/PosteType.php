@@ -26,6 +26,7 @@ class PosteType extends AbstractType
                 'class' => Machine::class,
                 'choice_label' => 'libelle',
                 'multiple' => true,
+                'required' => false,
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
