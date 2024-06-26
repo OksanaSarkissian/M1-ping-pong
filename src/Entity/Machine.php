@@ -72,6 +72,7 @@ class Machine
     {
         if (!$this->Poste->contains($poste)) {
             $this->Poste->add($poste);
+            $poste->addMachine($this);
         }
 
         return $this;
@@ -80,6 +81,7 @@ class Machine
     public function removePoste(Poste $poste): static
     {
         $this->Poste->removeElement($poste);
+        $poste->removeMachine($this);
 
         return $this;
     }
@@ -96,7 +98,7 @@ class Machine
     {
         if (!$this->operations->contains($operation)) {
             $this->operations->add($operation);
-            $operation->setMachineId($this);
+            $operation->setMachine($this);
         }
 
         return $this;
@@ -105,9 +107,9 @@ class Machine
     public function removeOperation(Operation $operation): static
     {
         if ($this->operations->removeElement($operation)) {
-            // set the owning side to null (unless already changed)
-            if ($operation->getMachineId() === $this) {
-                $operation->setMachineId(null);
+            // set the owning se to null (unless already changed)
+            if ($operation->getMachine() === $this) {
+                $operation->setMachine(null);
             }
         }
 

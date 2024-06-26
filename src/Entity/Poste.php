@@ -42,12 +42,19 @@ class Poste
     #[ORM\OneToMany(mappedBy: 'poste_reel', targetEntity: Realisation::class)]
     private Collection $realisations;
 
+    /**
+     * @var Collection<int, Machine>
+     */
+    #[ORM\ManyToMany(targetEntity: Machine::class, mappedBy: 'poste2')]
+    private Collection $machines2;
+
     public function __construct()
     {
         $this->id_user = new ArrayCollection();
         $this->machines = new ArrayCollection();
         $this->operations = new ArrayCollection();
         $this->realisations = new ArrayCollection();
+        $this->machines2 = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +180,33 @@ class Poste
             if ($realisation->getPosteReel() === $this) {
                 $realisation->setPosteReel(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Machine>
+     */
+    public function getMachines2(): Collection
+    {
+        return $this->machines2;
+    }
+
+    public function addMachines2(Machine $machines2): static
+    {
+        if (!$this->machines2->contains($machines2)) {
+            $this->machines2->add($machines2);
+            $machines2->addPoste2($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMachines2(Machine $machines2): static
+    {
+        if ($this->machines2->removeElement($machines2)) {
+            $machines2->removePoste2($this);
         }
 
         return $this;

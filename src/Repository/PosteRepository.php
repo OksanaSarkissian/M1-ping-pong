@@ -5,18 +5,38 @@ namespace App\Repository;
 use App\Entity\Poste;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Poste>
  */
 class PosteRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
         parent::__construct($registry, Poste::class);
+        $this->mr = $registry;
+        $this->entityManager = $this->mr->getManager();
+        $this->em = $em;
+        $this->rsm = new ResultSetMapping();
     }
 
-//    /**
+    public function findMachinesByPoste(): array
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('App\Entity\Poste', 'p');
+        // $rsm->addEntityResult('App\Entity\Machine', 'm');
+        $rsm->addFieldResult('p', 'id', 'id');
+        $rsm->addFieldResult('p', 'libelle', 'libelle');
+        $rsm->addJoinedEntityResult('App\Entity\Machine', 'm', 'p', 'machines');
+        $rsm->addFieldResult('m', 'id_machine', 'id');
+        $rsm->addFieldResult('m', 'libelle_machine', 'libelle');
+        // dump($rsm);
+        $query = $this->_em->createNativeQuery('SELECT p.*,m.id as id_machine,m.libelle as libelle_machine FROM poste p left join machine_poste mp on mp.poste_id=p.id left join machine m on mp.machine_id=m.id', $rsm);
+        return $query->getArrayResult();
+    }
+    //    /**
 //     * @return Poste[] Returns an array of Poste objects
 //     */
 //    public function findByExampleField($value): array
@@ -31,7 +51,7 @@ class PosteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Poste
+    //    public function findOneBySomeField($value): ?Poste
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

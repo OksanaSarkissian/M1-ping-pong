@@ -17,8 +17,9 @@ class PosteController extends AbstractController
     #[Route('/', name: 'app_poste_index', methods: ['GET'])]
     public function index(PosteRepository $posteRepository): Response
     {
+        // dump($posteRepository->findMachinesByPoste());
         return $this->render('poste/index.html.twig', [
-            'postes' => $posteRepository->findAll(),
+            'postes' => $posteRepository->findMachinesByPoste(),
             'active' => 'poste',
         ]);
     }
