@@ -7,6 +7,8 @@ use App\Form\OperationType;
 use App\Repository\OperationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Realisation;
+use App\Form\RealisationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -43,11 +45,22 @@ class OperationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_operation_show', methods: ['GET'])]
-    public function show(Operation $operation): Response
+    #[Route('/{id}', name: 'app_operation_show', methods: ['GET', 'POST'])]
+    public function show(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
+        $realisation = new Realisation();
+        $form = $this->createForm(RealisationType::class, $realisation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($realisation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('operation/show.html.twig', [
             'operation' => $operation,
+            'form' => $form
         ]);
     }
 
@@ -72,7 +85,7 @@ class OperationController extends AbstractController
     #[Route('/respo/{id}', name: 'app_operation_delete', methods: ['POST'])]
     public function delete(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$operation->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $operation->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($operation);
             $entityManager->flush();
         }

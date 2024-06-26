@@ -31,12 +31,17 @@
           {% for ope in gamme.operations %}
             <li>{{ ope.libelle }}</li>
             <div>{{ ope.description }}</div>
+            <a href="{{ path('app_operation_show', { id: ope.id }) }}"><button class="btn text-bg-accent text-secondary mx-3">Lancer la fabrication</button></a>
           {% endfor %}
         </td>
       </tr>
       <tr>
         <th>Piece:</th>
-        <td>{{ gamme.piece.libellepiece }}</td>
+        {% if gamme.piece %}
+          <td>{{ gamme.piece.libellepiece }}</td>
+        {% else %}
+          <td>Ajoutez une pièce</td>
+        {% endif %}
       </tr>
     </tbody>
   </table>
