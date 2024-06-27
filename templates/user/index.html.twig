@@ -18,7 +18,7 @@
             </span>
             <span>{{ user.identifiant }}</span>
             <span>
-              Qualifications: {% for poste in user.postes %}
+              Qualifications: {% for poste in user.qualifications %}
                 <span>{{ poste.libelle }},</span>
               {% else %}
                 <span>Ajouter un poste sur lequel l'ouvrier est qualifié</span>

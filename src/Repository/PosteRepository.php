@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Poste;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NativeQuery;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,14 +27,25 @@ class PosteRepository extends ServiceEntityRepository
     {
         $rsm = new ResultSetMapping();
         $rsm->addEntityResult('App\Entity\Poste', 'p');
-        // $rsm->addEntityResult('App\Entity\Machine', 'm');
         $rsm->addFieldResult('p', 'id', 'id');
         $rsm->addFieldResult('p', 'libelle', 'libelle');
         $rsm->addJoinedEntityResult('App\Entity\Machine', 'm', 'p', 'machines');
         $rsm->addFieldResult('m', 'id_machine', 'id');
         $rsm->addFieldResult('m', 'libelle_machine', 'libelle');
-        // dump($rsm);
+
         $query = $this->_em->createNativeQuery('SELECT p.*,m.id as id_machine,m.libelle as libelle_machine FROM poste p left join machine_poste mp on mp.poste_id=p.id left join machine m on mp.machine_id=m.id', $rsm);
+        return $query->getArrayResult();
+    }
+
+    public function findPostesByQualificationUser($user): array
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('App\Entity\Poste', 'p');
+        $rsm->addFieldResult('p', 'id', 'id');
+        $rsm->addFieldResult('p', 'libelle', 'libelle');
+        // dump($rsm);
+        $query = $this->_em->createNativeQuery('SELECT DISTINCT p.*, pu.user_id FROM poste_user pu join poste p on pu.user_id = :user AND pu.poste_id = p.id  ', $rsm);
+        $query->setParameter('user', $user);
         return $query->getArrayResult();
     }
     //    /**

@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Entity\Poste;
 
 class UserType extends AbstractType
 {
@@ -26,6 +27,11 @@ class UserType extends AbstractType
                     "ROLE_ADMIN" => 'ROLE_ADMIN'
                 ],
                 'multiple' => true
+            ])
+            ->add('qualifications', EntityType::class, [
+                'class' => Poste::class,
+                'choice_label' => 'libelle',
+                'multiple' => true,
             ])
         ;
     }

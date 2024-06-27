@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Machine;
+use App\Entity\User;
 use App\Entity\Piece;
 use App\Entity\Poste;
 use App\Entity\Realisation;
@@ -11,15 +12,29 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Security\Core\Security;
 
 class RealisationType extends AbstractType
 {
+    private $security;
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+        $user = $this->security->getUser();
+        // dump($user);
         $builder
             ->add('date', null, [
                 'widget' => 'single_text',
                 'data' => new \DateTime()
+            ])
+            ->add('user', HiddenType::class, [
+                'mapped' => false,
+                'data' => $user->getId()
             ])
             ->add('temps_reel', null, [
                 'widget' => 'single_text',

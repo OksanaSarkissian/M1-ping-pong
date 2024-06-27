@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="d-flex space-between column-gap-2 flex-grow-1">
+  <div class="d-flex space-between column-gap-2 ">
     <a href="{{ path('app_gamme_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
     {% if gamme.responsable.id is same as(connectedUser) %}
       <div class="d-flex">

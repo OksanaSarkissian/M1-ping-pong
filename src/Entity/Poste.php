@@ -21,7 +21,7 @@ class Poste
     /**
      * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'postes')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'qualifications')]
     private Collection $id_user;
 
     /**
@@ -178,30 +178,4 @@ class Poste
         return $this;
     }
 
-    /**
-     * @return Collection<int, Machine>
-     */
-    public function getMachines2(): Collection
-    {
-        return $this->machines2;
-    }
-
-    public function addMachines2(Machine $machines2): static
-    {
-        if (!$this->machines2->contains($machines2)) {
-            $this->machines2->add($machines2);
-            $machines2->addPoste2($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMachines2(Machine $machines2): static
-    {
-        if ($this->machines2->removeElement($machines2)) {
-            $machines2->removePoste2($this);
-        }
-
-        return $this;
-    }
 }

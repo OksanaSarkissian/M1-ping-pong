@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
+  <a href="{{ path('app_machine_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
   <div class="form-container">
     <h1>Create new Machine</h1>
 
     {{ include('machine/_form.html.twig') }}
   </div>
-  <a href="{{ path('app_machine_index') }}">Retour à la liste</a>
 {% endblock %}

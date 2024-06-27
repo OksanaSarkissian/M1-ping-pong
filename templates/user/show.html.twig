@@ -46,7 +46,7 @@
       <tr>
         <th>Qualifications</th>
         <td>
-          {% for poste in user.postes %}
+          {% for poste in user.qualifications %}
             <li>{{ poste.libelle }}</li>
           {% else %}
             <span>Ajouter un poste sur lequel l'ouvrier est qualifié</span>

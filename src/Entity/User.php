@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Poste>
      */
     #[ORM\ManyToMany(targetEntity: Poste::class, mappedBy: 'id_user')]
-    private Collection $postes;
+    private Collection $qualifications;
 
     /**
      * @var Collection<int, Gamme>
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->postes = new ArrayCollection();
+        $this->qualifications = new ArrayCollection();
         $this->gammes = new ArrayCollection();
     }
 
@@ -148,15 +148,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Poste>
      */
-    public function getPostes(): Collection
+    public function getQualifications(): Collection
     {
-        return $this->postes;
+        return $this->qualifications;
     }
 
     public function addPoste(Poste $poste): static
     {
-        if (!$this->postes->contains($poste)) {
-            $this->postes->add($poste);
+        if (!$this->qualifications->contains($poste)) {
+            $this->qualifications->add($poste);
             $poste->addIdUser($this);
         }
 
@@ -165,7 +165,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removePoste(Poste $poste): static
     {
-        if ($this->postes->removeElement($poste)) {
+        if ($this->qualifications->removeElement($poste)) {
             $poste->removeIdUser($this);
         }
 

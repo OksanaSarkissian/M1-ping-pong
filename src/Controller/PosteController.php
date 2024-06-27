@@ -10,16 +10,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/atelier/poste')]
 class PosteController extends AbstractController
 {
+    private $security;
+    public function __construct(Security $security) {
+        $this->security = $security;
+    }
     #[Route('/', name: 'app_poste_index', methods: ['GET'])]
     public function index(PosteRepository $posteRepository): Response
     {
         // dump($posteRepository->findMachinesByPoste());
         return $this->render('poste/index.html.twig', [
-            'postes' => $posteRepository->findMachinesByPoste(),
+            'qualifications' => $posteRepository->findMachinesByPoste(),
             'active' => 'poste',
         ]);
     }
@@ -79,5 +84,13 @@ class PosteController extends AbstractController
         }
 
         return $this->redirectToRoute('app_poste_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/ajax/test', name: 'app_poste_ajax', methods: ['GET'])]
+    public function getPosteAjax(PosteRepository $posteRepository, Request $req): Response
+    {
+        $user = $this->security->getUser();
+        $data = $posteRepository->findPostesByQualificationUser($user->getId());
+        return $this->json(['qualifications' => $data]);
     }
 }
