@@ -36,10 +36,9 @@ class PieceType extends AbstractType
             ->add('gamme', EntityType::class, [
                 'class' => Gamme::class,
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->leftJoin('u.piece', 'piece')
-                        ->where('piece.gamme  is NULL')
-                        ->orderBy('piece.libelle_piece', 'ASC');
+                    return $er->createQueryBuilder('gamme')
+                        ->where('gamme.piece  is NULL')
+                        ->orderBy('gamme.libelle', 'ASC');
                 },
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez une gamme',
