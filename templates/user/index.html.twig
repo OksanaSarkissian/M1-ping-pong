@@ -5,11 +5,22 @@
 {% endblock %}
 
 {% block body %}
-  <a href="{{ path('app_user_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter un utilisateur</a>
-
+  <div class="d-flex align-items-baseline justify-content-start w-50">
+    <a href="{{ path('app_user_new') }}" class="btn bg-accent-2 text-primary mb-4">Ajouter un utilisateur</a>
+    <select id="filterSelect" class="form-select d-inline-block w-auto mx-3" aria-label="Choix de la piece">
+    <option value="" selected>Cherchez un utilisateur</option>
+      {% for user in users %}
+        <option value="{{ user.id }}">
+          <a>{{ user.nom }}{{ user.prenom }}</a>
+        </option>
+      {% else %}
+        <option>no records found</option>
+      {% endfor %}
+    </select>
+  </div>
   <div class="list">
     {% for user in users %}
-      <div class="user d-flex flex-row">
+      <div class="user d-flex flex-row content border-bottom mb-3" id="{{ user.id }}">
         <div class="d-flex flex-column space-between w-100">
           <div class="d-flex flex-column space-between w-100">
             <span class="font-weight-bold">
@@ -18,7 +29,7 @@
             </span>
             <span>{{ user.identifiant }}</span>
             <span>
-              Qualifications: {% for poste in user.qualifications %}
+              Qualifications:{% for poste in user.qualifications %}
                 <span>{{ poste.libelle }},</span>
               {% else %}
                 <span>Ajouter un poste sur lequel l'ouvrier est qualifié</span>
@@ -38,7 +49,6 @@
           {{ include('user/_delete_form.html.twig') }}
         </div>
       </div>
-      <hr />
     {% else %}
       <tr>
         <td colspan="6">no records found</td>

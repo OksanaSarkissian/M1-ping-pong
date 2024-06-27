@@ -24,7 +24,7 @@
     <div class="container-fluid h-100 w-100">
       <div class="row">
         {% include './ui/sidebar.html.twig' %}
-        <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center">
+        <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100">
           <div class="d-flex column-gap-5 pb-3">
             <a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'gamme' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Gammes</a>
             <a href="{{ path('app_operation_index') }}" class="btn {{ active == 'operation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Opérations</a>
@@ -42,12 +42,15 @@
 $(document).ready(function() {
       $('#filterSelect').on('change', function() {
                 var selectedValue = $(this).val();
-                console.log("hehehhe",$('.content'));
+                //console.log("hehehhe",selectedValue);
                 $('.content').hide();
                 $('.content').removeClass('d-flex');
-                if (selectedValue) {
+                if (selectedValue !== "") {
                     $('#' + selectedValue).show();
                     $('#' + selectedValue).addClass('d-flex');
+                } else {
+                   $('.content').show();
+                $('.content').addClass('d-flex');
                 }
             });})</script>
   </body>

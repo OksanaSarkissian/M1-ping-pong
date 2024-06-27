@@ -46,7 +46,7 @@ class DroitControllerTest extends WebTestCase
 
         self::assertResponseStatusCodeSame(200);
 
-        $this->client->submitForm('Save', [
+        $this->client->submitForm('Enregistrer', [
             'droit[libelle]' => 'Testing',
         ]);
 

@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block body %}
-  <div class="d-flex flex-column align-items-baseline justify-content-start w-75">
-    <div class="d-flex column-gap-2 w-75 m-auto">
+  <div class="d-flex flex-column align-items-baseline justify-content-start w-75 flex-grow-1">
+    <div class="d-flex column-gap-2 w-75 m-auto mb-3">
       <a href="{{ path('app_operation_new') }}" class="btn bg-accent-2 text-primary">Ajouter une operation</a>
       <select id="filterSelect" class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
+        <option value="" selected>Cherchez une opération</option>
         {% for operation in operations %}
           <option value="{{ operation.id }}">
-            <a >{{ operation.libelle }}</a>
+            <a>{{ operation.libelle }}</a>
           </option>
         {% else %}
           <option>no records found</option>
@@ -20,7 +21,7 @@
     </div>
 
     {% for operation in operations %}
-      <div class="d-flex flex-row w-75 mb-3 m-auto content" id="{{ operation.id }}">
+      <div class="d-flex flex-row w-75 mb-3 m-auto content border-bottom mb-3" id="{{ operation.id }}">
         <div class="flex-grow-1">
           <div>
             <span>{{ operation.libelle }}</span>
@@ -37,7 +38,6 @@
           <a href="{{ path('app_operation_edit', { id: operation.id }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
         </div>
       </div>
-      <hr />
     {% else %}
       <tr>
         <td colspan="5">no records found</td>

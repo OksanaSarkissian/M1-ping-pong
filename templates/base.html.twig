@@ -163,6 +163,21 @@
           $('#realisation_machine_reel').removeAttr('required')
         }
       })
+
+      $(document).ready(function() {
+      $('#filterSelect').on('change', function() {
+                var selectedValue = $(this).val();
+                console.log("hehehhe",selectedValue);
+                $('.content').hide();
+                $('.content').removeClass('d-flex');
+                if (selectedValue !== "") {
+                    $('#' + selectedValue).show();
+                    $('#' + selectedValue).addClass('d-flex');
+                } else {
+                   $('.content').show();
+                $('.content').addClass('d-flex');
+                }
+            });})
     </script>
   </body>
 </html>

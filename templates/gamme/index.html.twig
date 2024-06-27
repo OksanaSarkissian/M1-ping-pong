@@ -4,12 +4,13 @@
 {% endblock %}
 
 {% block body %}
-  <div class="d-flex flex-column align-items-baseline justify-content-start w-75">
+  <div class="d-flex flex-column align-items-baseline justify-content-start w-75 flex-grow-1">
     <div class="d-flex column-gap-2 m-auto w-75 mb-4">
       {% if is_granted('ROLE_ATELIER_RESPONSABLE') or is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_gamme_new') }}" class="btn bg-accent-2 text-primary">Ajouter une gamme</a>
       {% endif %}
       <select id="filterSelect" class="form-select d-inline-block w-auto" aria-label="Choix de la gamme">
+    <option value="" selected>Cherchez une gamme</option>
         {% for gamme in gammes %}
           <option value="{{ gamme.id }}">
             <a >{{ gamme.libelle }}</a>
@@ -21,7 +22,7 @@
     </div>
 
     {% for gamme in gammes %}
-      <div class="d-flex flex-row w-75 m-auto content" id="{{ gamme.id }}">
+      <div class="d-flex flex-row w-75 m-auto content border-bottom mb-3" id="{{ gamme.id }}">
         <div class="flex-grow-1">
           <div>
             <span>
@@ -61,7 +62,6 @@
           {% endif %}
         </div>
       </div>
-      <hr />
     {% else %}
       <tr>
         <td colspan="5">no records found</td>

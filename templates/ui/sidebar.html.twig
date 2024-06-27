@@ -1,5 +1,5 @@
-<div class="col-sm-auto sticky-top text-bg-secondary">
-  <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
+<div class="col-sm-auto fixed-top text-bg-secondary sidebar">
+  <div class="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center">
     <ul class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center text-bg-secondary">
       {% if is_granted('ROLE_ATELIER') or is_granted('ROLE_ADMIN') %}
         <li class="d-flex flex-sm-column align-content-center nav-item text-bg-primary rounded-5 shadow p-1 px-2 m-1 my-3" role="button" title="Voir la liste des pièces" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
