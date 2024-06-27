@@ -9,6 +9,7 @@
         Welcome!
       {% endblock %}
     </title>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
     {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
     {% block stylesheets %}
@@ -37,5 +38,17 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+$(document).ready(function() {
+      $('#filterSelect').on('change', function() {
+                var selectedValue = $(this).val();
+                console.log("hehehhe",$('.content'));
+                $('.content').hide();
+                $('.content').removeClass('d-flex');
+                if (selectedValue) {
+                    $('#' + selectedValue).show();
+                    $('#' + selectedValue).addClass('d-flex');
+                }
+            });})</script>
   </body>
 </html>

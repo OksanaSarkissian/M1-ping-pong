@@ -9,10 +9,10 @@
       {% if is_granted('ROLE_ATELIER_RESPONSABLE') or is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_gamme_new') }}" class="btn bg-accent-2 text-primary">Ajouter une gamme</a>
       {% endif %}
-      <select class="form-select d-inline-block w-auto" aria-label="Choix de la gamme">
+      <select id="filterSelect" class="form-select d-inline-block w-auto" aria-label="Choix de la gamme">
         {% for gamme in gammes %}
-          <option>
-            <a href="{{ path('app_gamme_show', { id: gamme.id }) }}">{{ gamme.libelle }}</a>
+          <option value="{{ gamme.id }}">
+            <a >{{ gamme.libelle }}</a>
           </option>
         {% else %}
           <option>no records found</option>
@@ -21,7 +21,7 @@
     </div>
 
     {% for gamme in gammes %}
-      <div class="d-flex flex-row w-75 m-auto">
+      <div class="d-flex flex-row w-75 m-auto content" id="{{ gamme.id }}">
         <div class="flex-grow-1">
           <div>
             <span>

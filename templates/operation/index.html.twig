@@ -8,10 +8,10 @@
   <div class="d-flex flex-column align-items-baseline justify-content-start w-75">
     <div class="d-flex column-gap-2 w-75 m-auto">
       <a href="{{ path('app_operation_new') }}" class="btn bg-accent-2 text-primary">Ajouter une operation</a>
-      <select class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
+      <select id="filterSelect" class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
         {% for operation in operations %}
-          <option>
-            <a href="{{ path('app_operation_show', { id: operation.id }) }}">{{ operation.libelle }}</a>
+          <option value="{{ operation.id }}">
+            <a >{{ operation.libelle }}</a>
           </option>
         {% else %}
           <option>no records found</option>
@@ -20,7 +20,7 @@
     </div>
 
     {% for operation in operations %}
-      <div class="d-flex flex-row w-75 mb-3 m-auto">
+      <div class="d-flex flex-row w-75 mb-3 m-auto content" id="{{ operation.id }}">
         <div class="flex-grow-1">
           <div>
             <span>{{ operation.libelle }}</span>
