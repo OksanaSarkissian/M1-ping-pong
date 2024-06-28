@@ -17,11 +17,6 @@ class PosteType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('id_user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'nom',
-                'multiple' => true,
-            ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;
     }

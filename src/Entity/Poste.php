@@ -6,6 +6,7 @@ use App\Repository\PosteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 #[ORM\Entity(repositoryClass: PosteRepository::class)]
 class Poste
@@ -21,13 +22,15 @@ class Poste
     /**
      * @var Collection<int, User>
      */
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'qualifications')]
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'qualifications')]
+    #[JoinTable(name: 'user_post')]
     private Collection $id_user;
 
     /**
      * @var Collection<int, Machine>
      */
-    #[ORM\ManyToMany(targetEntity: Machine::class, inversedBy: 'Poste')]
+    #[ORM\ManyToMany(targetEntity: Machine::class, mappedBy: 'Poste')]
+    #[JoinTable(name: 'machine_poste')]
     private Collection $machines;
 
     /**

@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Poste>
      */
-    #[ORM\ManyToMany(targetEntity: Poste::class, mappedBy: 'id_user')]
+    #[ORM\ManyToMany(targetEntity: Poste::class, inversedBy: 'id_user')]
     private Collection $qualifications;
 
     /**
