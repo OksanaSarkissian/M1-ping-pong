@@ -6,18 +6,19 @@
 
 {% block body %}
   <div class="d-flex flex-column align-items-baseline justify-content-start w-75 flex-grow-1">
-    <div class="d-flex column-gap-2 w-75 mx-auto">
+    <div class="d-flex flex-column column-gap-2 w-75 mx-auto">
       {% for realisation in realisations %}
         <div class="d-flex flex-row w-75 mb-3 mx-auto border-bottom mb-3">
           <div class="d-flex flex-column space-between w-100 flex-grow-1">
             <span>Date de réalisation: {{ realisation.date ? realisation.date|date('Y-m-d H:i:s') : '' }}</span>
             <span>Temps réalisé: {{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</span>
+            <span>Operation: {{ realisation.operation.libelle }} </span>
+            <span>Ouvrier: {{ realisation.ouvrier.nom }} {{ realisation.ouvrier.prenom }}</span><span>Poste: {{ realisation.posteReel.libelle }}</span><span>Machine: {{ realisation.machinereel.libelle }} </span>
           </div>
           <div class="d-flex">
             <a href="{{ path('app_realisation_show', { id: realisation.id }) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
           </div>
         </div>
-        <hr />
       {% else %}
         <tr>
           <span colspan="4" class="d-block mt-3">Aucune réalisation effectué</span>

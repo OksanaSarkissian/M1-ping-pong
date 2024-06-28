@@ -11,7 +11,7 @@
     <option value="" selected>Cherchez un utilisateur</option>
       {% for user in users %}
         <option value="{{ user.id }}">
-          <a>{{ user.nom }}{{ user.prenom }}</a>
+          <a>{{ user.nom }} {{ user.prenom }}</a>
         </option>
       {% else %}
         <option>no records found</option>

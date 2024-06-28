@@ -34,10 +34,6 @@ class Realisation
     #[ORM\JoinColumn(nullable: false)]
     private ?Machine $machine_reel = null;
 
-    #[ORM\ManyToOne(inversedBy: 'realisations')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Piece $piece = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $ouvrier = null;
@@ -95,18 +91,6 @@ class Realisation
     public function setMachineReel(?Machine $machine_reel): static
     {
         $this->machine_reel = $machine_reel;
-
-        return $this;
-    }
-
-    public function getPiece(): ?Piece
-    {
-        return $this->piece;
-    }
-
-    public function setPiece(?Piece $piece): static
-    {
-        $this->piece = $piece;
 
         return $this;
     }

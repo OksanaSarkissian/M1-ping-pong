@@ -19,11 +19,13 @@ use Symfony\Component\Security\Core\Security;
 class RealisationType extends AbstractType
 {
     private $security;
-    public function __construct(Security $security) {
+    public function __construct(Security $security)
+    {
         $this->security = $security;
     }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // dump($options['operation']->getMachine());
 
         $user = $this->security->getUser();
         // dump($user);
@@ -35,30 +37,28 @@ class RealisationType extends AbstractType
             ->add('ouvrier', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'identifiant',
-                'data'=>$user,
+                'data' => $user,
             ])
             ->add('operation', EntityType::class, [
                 'class' => Operation::class,
                 'choice_label' => 'libelle',
-                'data'=>$options['operation'],
-            ])
-            ->add('temps_reel', null, [
-                'widget' => 'single_text',
+                'data' => $options['operation'],
+                ])
+                ->add('temps_reel', null, [
+                    'widget' => 'single_text',
+                    'data' => $options['operation']->getTemps(),
             ])
             ->add('poste_reel', EntityType::class, [
                 'class' => Poste::class,
                 'choice_label' => 'libelle',
                 'placeholder' => 'Choisissez un poste',
-            ])
-            ->add('machine_reel', EntityType::class, [
-                'class' => Machine::class,
-                'choice_label' => 'libelle',
-                'placeholder' => 'Choisissez une machine',
-            ])
-            ->add('piece', EntityType::class, [
-                'class' => Piece::class,
-                'choice_label' => 'libellepiece',
-                'placeholder' => 'Choisissez une piece',
+                'data' => $options['operation']->getPoste(),
+                ])
+                ->add('machine_reel', EntityType::class, [
+                    'class' => Machine::class,
+                    'choice_label' => 'libelle',
+                    'placeholder' => 'Choisissez une machine',
+                    'data' => $options['operation']->getMachine(),
             ])
             ->add('save', SubmitType::class, ['label' => "Etape suivante"])
         ;

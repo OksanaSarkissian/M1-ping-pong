@@ -80,7 +80,7 @@
          
         }
       
-        // update options
+       // update options
         if ($(this).val() !== '') {
           $('#operation_machine').parent().show()
           $('#operation_machine').attr('required', '')
@@ -92,6 +92,9 @@
         }
       })
       {# realisation #}
+      machineReelle = $('#realisation_machine_reel').val();
+      posteReel = $('#realisation_poste_reel').val();
+      {# console.log(machineReelle); #}
       $('#realisation_machine_reel').parent().hide();
       $('#realisation_poste_reel').parent().hide();
       
@@ -107,13 +110,12 @@
           $('#realisation_machine_reel').empty();
           
           if(reponseAjax.qualifications.length) {
-              $('#realisation_poste_reel').append(`<option selected>Sélectionnez un poste</option>`);
+              $('#realisation_poste_reel').append(`<option ${reponseAjax.qualifications.filter(e => e.id == posteReel) ? '' : 'selected'}>Sélectionnez un poste</option>`);
             reponseAjax.qualifications.forEach((poste) => {
-              //console.log(poste)
-              $('#realisation_poste_reel').append(`<option value="${poste.id}">${poste.libelle}</option>`)
+              $('#realisation_poste_reel').append(`<option value="${poste.id}" ${posteReel == poste.id ? 'selected' : ''}>${poste.libelle}</option>`)
             });
           } else {
-            $('#realisation_poste_reel').append(`<option>Aucune poste adaptée</option>`)
+            $('#realisation_poste_reel').append(`<option>Aucun poste autorisé</option>`)
           }
          
       
@@ -127,7 +129,42 @@
           $('#realisation_poste_reel').parent().hide()
           $('#realisation_poste_reel').removeAttr('data-error')
           $('#realisation_poste_reel').removeAttr('required')
-        }})
+        
+        }
+        
+        if ($('#realisation_poste_reel').val()) {
+          let response = await fetch(`/atelier/machine/ajax/test?poste=${$('#realisation_poste_reel').val()}`, {
+            headers: { 'X-Requested-with': 'XMLHttpRequest' },
+            method: 'GET'
+          })
+          //console.log(response);
+          let reponseAjax = JSON.parse(await response.text())   
+
+          $('#realisation_machine_reel').empty();
+          
+          if(reponseAjax.machines.length) {
+              $('#realisation_machine_reel').append(`<option selected>Sélectionnez une machine</option>`)
+            reponseAjax.machines.forEach((machine) => {
+              console.log(machineReelle)
+              $('#realisation_machine_reel').append(`<option value="${machine.id}" ${machineReelle === machine.id ? 'selected' : ''}>${machine.libelle}</option>`)
+            });
+          } else {
+            $('#realisation_machine_reel').append(`<option>Aucune machine adaptée</option>`)
+          }
+         
+        }
+      
+        // update options
+        if ($(this).val() !== '') {
+          $('#realisation_machine_reel').parent().show()
+          $('#realisation_machine_reel').attr('required', '')
+          $('#realisation_machine_reel').attr('data-error', 'This field is required.')
+        } else {
+          $('#realisation_machine_reel').parent().hide()
+          $('#realisation_machine_reel').removeAttr('data-error')
+          $('#realisation_machine_reel').removeAttr('required')
+        }
+        })
 
       $('#realisation_poste_reel').on('change', async function () {
         if ($('#realisation_poste_reel').val()) {
@@ -143,8 +180,8 @@
           if(reponseAjax.machines.length) {
               $('#realisation_machine_reel').append(`<option selected>Sélectionnez une machine</option>`)
             reponseAjax.machines.forEach((machine) => {
-              console.log(machine)
-              $('#realisation_machine_reel').append(`<option value="${machine.id}">${machine.libelle}</option>`)
+              console.log(machineReelle)
+              $('#realisation_machine_reel').append(`<option value="${machine.id}" ${machineReelle === machine.id ? 'selected' : ''}>${machine.libelle}</option>`)
             });
           } else {
             $('#realisation_machine_reel').append(`<option>Aucune machine adaptée</option>`)
