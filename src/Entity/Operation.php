@@ -39,9 +39,16 @@ class Operation
     #[ORM\ManyToMany(targetEntity: Gamme::class, mappedBy: 'operations')]
     private Collection $gammes;
 
+    /**
+     * @var Collection<int, Realisation>
+     */
+    #[ORM\OneToMany(mappedBy: 'operation', targetEntity: Realisation::class)]
+    private Collection $realisations;
+
     public function __construct()
     {
         $this->gammes = new ArrayCollection();
+        $this->realisations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -131,6 +138,36 @@ class Operation
     {
         if ($this->gammes->removeElement($gamme)) {
             $gamme->removeOperation($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Realisation>
+     */
+    public function getRealisations(): Collection
+    {
+        return $this->realisations;
+    }
+
+    public function addRealisation(Realisation $realisation): static
+    {
+        if (!$this->realisations->contains($realisation)) {
+            $this->realisations->add($realisation);
+            $realisation->setOperation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRealisation(Realisation $realisation): static
+    {
+        if ($this->realisations->removeElement($realisation)) {
+            // set the owning side to null (unless already changed)
+            if ($realisation->getOperation() === $this) {
+                $realisation->setOperation(null);
+            }
         }
 
         return $this;

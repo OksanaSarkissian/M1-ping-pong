@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\Piece;
 use App\Entity\Poste;
 use App\Entity\Realisation;
+use App\Entity\Operation;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,8 +19,7 @@ use Symfony\Component\Security\Core\Security;
 class RealisationType extends AbstractType
 {
     private $security;
-    public function __construct(Security $security)
-    {
+    public function __construct(Security $security) {
         $this->security = $security;
     }
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -32,9 +32,15 @@ class RealisationType extends AbstractType
                 'widget' => 'single_text',
                 'data' => new \DateTime()
             ])
-            ->add('user', HiddenType::class, [
-                'mapped' => false,
-                'data' => $user->getId()
+            ->add('ouvrier', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'identifiant',
+                'data'=>$user,
+            ])
+            ->add('operation', EntityType::class, [
+                'class' => Operation::class,
+                'choice_label' => 'libelle',
+                'data'=>$options['operation'],
             ])
             ->add('temps_reel', null, [
                 'widget' => 'single_text',
@@ -62,6 +68,7 @@ class RealisationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Realisation::class,
+            'operation' => null
         ]);
     }
 }

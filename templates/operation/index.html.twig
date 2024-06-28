@@ -6,7 +6,7 @@
 
 {% block body %}
   <div class="d-flex flex-column align-items-baseline justify-content-start w-75 flex-grow-1">
-    <div class="d-flex column-gap-2 w-75 m-auto mb-3">
+    <div class="d-flex column-gap-2 w-75 mx-auto mb-3">
       <a href="{{ path('app_operation_new') }}" class="btn bg-accent-2 text-primary">Ajouter une operation</a>
       <select id="filterSelect" class="form-select d-inline-block w-auto" aria-label="Choix de l'opération">
         <option value="" selected>Cherchez une opération</option>
@@ -21,7 +21,7 @@
     </div>
 
     {% for operation in operations %}
-      <div class="d-flex flex-row w-75 mb-3 m-auto content border-bottom mb-3" id="{{ operation.id }}">
+      <div class="d-flex flex-row w-75 mb-3 mx-auto content border-bottom mb-3" id="{{ operation.id }}">
         <div class="flex-grow-1">
           <div>
             <span>{{ operation.libelle }}</span>

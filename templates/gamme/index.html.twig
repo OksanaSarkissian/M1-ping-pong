@@ -5,7 +5,7 @@
 
 {% block body %}
   <div class="d-flex flex-column align-items-baseline justify-content-start w-75 flex-grow-1">
-    <div class="d-flex column-gap-2 m-auto w-75 mb-4">
+    <div class="d-flex column-gap-2 mx-auto w-75 mb-4">
       {% if is_granted('ROLE_ATELIER_RESPONSABLE') or is_granted('ROLE_ADMIN') %}
         <a href="{{ path('app_gamme_new') }}" class="btn bg-accent-2 text-primary">Ajouter une gamme</a>
       {% endif %}
@@ -22,7 +22,7 @@
     </div>
 
     {% for gamme in gammes %}
-      <div class="d-flex flex-row w-75 m-auto content border-bottom mb-3" id="{{ gamme.id }}">
+      <div class="d-flex flex-row w-75 mx-auto content border-bottom mb-3" id="{{ gamme.id }}">
         <div class="flex-grow-1">
           <div>
             <span>

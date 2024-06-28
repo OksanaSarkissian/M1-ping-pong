@@ -12,6 +12,7 @@ use App\Form\RealisationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/atelier/operation')]
 class OperationController extends AbstractController
@@ -46,12 +47,13 @@ class OperationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_operation_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, Operation $operation, EntityManagerInterface $entityManager): Response
+    public function show(Request $request, Operation $operation, EntityManagerInterface $entityManager,Security $security): Response
     {
-        $realisation = new Realisation();
-        $form = $this->createForm(RealisationType::class, $realisation);
+        $realisation = new Realisation($security);
+        $form = $this->createForm(RealisationType::class, $realisation, array('operation'=>$operation));
         $form->handleRequest($request);
 
+        // dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($realisation);
             $entityManager->flush();

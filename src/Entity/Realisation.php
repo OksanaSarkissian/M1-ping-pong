@@ -5,10 +5,16 @@ namespace App\Entity;
 use App\Repository\RealisationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Security;
 
 #[ORM\Entity(repositoryClass: RealisationRepository::class)]
 class Realisation
 {
+    private $security;
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -31,6 +37,14 @@ class Realisation
     #[ORM\ManyToOne(inversedBy: 'realisations')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Piece $piece = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $ouvrier = null;
+
+    #[ORM\ManyToOne(inversedBy: 'realisations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Operation $operation = null;
 
     public function getId(): ?int
     {
@@ -93,6 +107,30 @@ class Realisation
     public function setPiece(?Piece $piece): static
     {
         $this->piece = $piece;
+
+        return $this;
+    }
+
+    public function getOuvrier(): ?User
+    {
+        return $this->ouvrier;
+    }
+
+    public function setOuvrier(?User $ouvrier): static
+    {
+        $this->ouvrier = $ouvrier;
+
+        return $this;
+    }
+
+    public function getOperation(): ?Operation
+    {
+        return $this->operation;
+    }
+
+    public function setOperation(?Operation $operation): static
+    {
+        $this->operation = $operation;
 
         return $this;
     }
