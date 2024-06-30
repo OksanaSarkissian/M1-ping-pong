@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="m-auto h-100">
+  <div class="m-auto h-100 w-75">
     <div class="d-flex align-items-baseline justify-content-start w-50">
       <a href="{{ path('app_piece_new') }}" class="btn bg-accent-2 text-primary mb-4 align-self-start">Ajouter une pièce</a>
       <select id="filterSelect" class="form-select d-inline-block w-auto mx-3" aria-label="Choix de la piece">
@@ -15,7 +15,7 @@
             <a>{{ piece.libellepiece }}</a>
           </option>
         {% else %}
-          <option>no records found</option>
+          <option>Aucune donnée</option>
         {% endfor %}
       </select>
     </div>
@@ -65,7 +65,7 @@
         </div>
       {% else %}
         <tr>
-          <td colspan="6">no records found</td>
+          <td colspan="6">Aucune donnée</td>
         </tr>
       {% endfor %}
     </div>

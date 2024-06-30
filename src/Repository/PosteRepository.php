@@ -44,7 +44,7 @@ class PosteRepository extends ServiceEntityRepository
         $rsm->addFieldResult('p', 'id', 'id');
         $rsm->addFieldResult('p', 'libelle', 'libelle');
         // dump($rsm);
-        $query = $this->_em->createNativeQuery('SELECT DISTINCT p.*, pu.user_id FROM poste_user pu join poste p on pu.user_id = :user AND pu.poste_id = p.id  ', $rsm);
+        $query = $this->_em->createNativeQuery('SELECT DISTINCT p.*, pu.user_id FROM user_poste pu join poste p on pu.user_id = :user AND pu.poste_id = p.id  ', $rsm);
         $query->setParameter('user', $user);
         return $query->getArrayResult();
     }
