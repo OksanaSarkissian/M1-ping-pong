@@ -112,7 +112,7 @@
           if(reponseAjax.qualifications.length) {
               $('#realisation_poste_reel').append(`<option ${reponseAjax.qualifications.filter(e => e.id == posteReel) ? '' : 'selected'}>Sélectionnez un poste</option>`);
             reponseAjax.qualifications.forEach((poste) => {
-              $('#realisation_poste_reel').append(`<option value="${poste.id}" ${posteReel == poste.id ? 'selected' : ''}>${poste.libelle}</option>`)
+              $('#realisation_poste_reel').append(`<option value=${poste.id}" ${posteReel == poste.id ? 'selected' : ''}>${poste.libelle}</option>`)
             });
           } else {
             $('#realisation_poste_reel').append(`<option>Aucun poste autorisé</option>`)

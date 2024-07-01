@@ -45,10 +45,17 @@ class Piece
     #[ORM\OneToOne(inversedBy: 'piece', cascade: ['persist', 'remove'])]
     private ?Gamme $gamme = null;
 
+    /**
+     * @var Collection<int, LigneDocument>
+     */
+    #[ORM\OneToMany(mappedBy: 'piece', targetEntity: LigneDocument::class)]
+    private Collection $ligneDocuments;
+
     public function __construct()
     {
         $this->composition = new ArrayCollection();
         $this->pieces = new ArrayCollection();
+        $this->ligneDocuments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,6 +198,36 @@ class Piece
         }
 
         $this->gamme = $gamme;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LigneDocument>
+     */
+    public function getLigneDocuments(): Collection
+    {
+        return $this->ligneDocuments;
+    }
+
+    public function addLigneDocument(LigneDocument $ligneDocument): static
+    {
+        if (!$this->ligneDocuments->contains($ligneDocument)) {
+            $this->ligneDocuments->add($ligneDocument);
+            $ligneDocument->setPiece($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneDocument(LigneDocument $ligneDocument): static
+    {
+        if ($this->ligneDocuments->removeElement($ligneDocument)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneDocument->getPiece() === $this) {
+                $ligneDocument->setPiece(null);
+            }
+        }
 
         return $this;
     }
