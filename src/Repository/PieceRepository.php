@@ -22,6 +22,26 @@ class PieceRepository extends ServiceEntityRepository
         parent::__construct($registry, Piece::class);
     }
 
+    public function findPiecesByIdNotIn($pieces){
+        $rsm = new ResultSetMapping();
+        $rsm->addEntityResult('App\Entity\Piece', 'p');
+        $rsm->addFieldResult('p', 'id', 'id');
+        $rsm->addFieldResult('p', 'ref_piece', 'ref_piece');
+        $rsm->addFieldResult('p', 'libelle_piece', 'libelle_piece');
+        $rsm->addFieldResult('p', 'type', 'type');
+        $rsm->addFieldResult('p', 'prix_unitaire', 'prix_unitaire');
+        $rsm->addFieldResult('p', 'stock', 'stock');
+
+        $qs = 'SELECT p.* FROM piece p where p.type = \'Livrable\'';
+
+        if($pieces) {
+            $qs .= 'AND p.id NOT IN (' . $pieces . ')';
+        }
+
+        $query = $this->_em->createNativeQuery($qs , $rsm);
+
+        return $query->getArrayResult();
+    }
 //    /**
 //     * @return Piece[] Returns an array of Piece objects
 //     */

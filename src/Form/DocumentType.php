@@ -44,6 +44,7 @@ class DocumentType extends AbstractType
                 'entry_type' => LigneDocumentType::class,
                 'label' => false,
                 'allow_add' => true,
+                'allow_delete' => true,
             ])
             ->add('montant_total')
         ;

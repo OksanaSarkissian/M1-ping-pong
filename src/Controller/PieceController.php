@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/atelier/piece')]
+#[Route('/piece')]
 class PieceController extends AbstractController
 {   
     #[Route('/', name: 'app_piece_index', methods: ['GET'])]
@@ -77,5 +77,13 @@ class PieceController extends AbstractController
         }
 
         return $this->redirectToRoute('app_piece_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/ajax/test', name: 'app_piece_ajax', methods: ['GET'])]
+    public function getPieceAjax(PieceRepository $pieceRepository, Request $req): Response
+    {
+        $data = $pieceRepository->findPiecesByIdNotIn($req->query->get("pieces"));
+        // dump($data);
+        return $this->json(['pieces' => $data]);
     }
 }

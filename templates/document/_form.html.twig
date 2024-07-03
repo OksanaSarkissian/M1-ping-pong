@@ -1,49 +1,90 @@
 {{ form_start(form) }}
-    {{ form_row(form.date) }}
-    {% if documentType == 'devis' %}
-    {{ form_row(form.delai) }}
-    {% endif %}
-    {{ form_row(form.client) }}
-    {# {{ form_row(form.type) }} #}
-    <label>Lignes</label>
-    <ul class="ligneDocument" data-index="{{ form.ligneDocument|length > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{% if formType != 'edit' %}{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}{% endif %}">
-        {% for tag in form.ligneDocument %}
-        {% for data in tag.vars.value %}
-            <li class="d-flex">{{ dump(tag.vars.value.piece) }}</li>
-        {% endfor %}
-        {% endfor %}
-    </ul>
+{{ form_row(form.date) }}
+
+{% if documentType == 'devis' %}
+  {{ form_row(form.delai) }}
+{% endif %}
+
+{{ form_row(form.client) }}
+{# {{ form_row(form.type) }} #}
+<label>Lignes</label>
+<ul class="ligneDocument" data-index="{{ (form.ligneDocument|length) > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{% if formType != 'edit' %}{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}{% endif %}">
+  {% for tag in form.ligneDocument %}
+    {% for data in tag.vars.value %}
+      <li class="d-flex">{{ dump(tag.vars.value.piece) }}</li>
+    {% endfor %}
+  {% endfor %}
+</ul>
 <button type="button" class="add_item_link" data-collection-holder-class="ligneDocument">Ajouter une ligne</button>
 {% if formType != 'new' %}
-    {{ form_row(form.ligneDocument) }}
-    {% endif %}
-    {# {{ form_row(form.montant_total) }} #}
+  {{ form_row(form.ligneDocument) }}
+{% endif %}
+{# {{ form_row(form.montant_total) }} #}
 
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {# {{ form_end(form) }} #}
 
-<script type="text/javascript">
-    document
-    .querySelectorAll('.add_item_link')
-    .forEach(btn => {
-        btn.addEventListener("click", addFormToCollection)
-    });
-    function addFormToCollection(e) {
-        const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-        console.log(collectionHolder)
+{% block custom_js %}
+  <script type="text/javascript">
 
-        const item = document.createElement('li');
+  jQuery(document).ready(function() {
+      
+            var $wrapper = $('.ligneDocument');
+            console.log('wrapper', $wrapper);
+            $wrapper.on('click', '.delete-employee', function(e) {
+                e.preventDefault();
+                console.log($('.delete-employee'));
+                $(this).parent().parent().remove()
+            });
+        });
+    document.querySelector('.add_item_link').addEventListener('click', (e) => {
+      let piecesListe = getPiecesAjax().then(({ pieces }) => {
+        if (!pieces.length) return
+        addFormToCollection(e.target, pieces)
+      })
+    })
+    
+    function addFormToCollection(select, pieces) {
+      // Si une pièce n'est pas encore dans le formulaire, alors on créé le champ, avec le spièces qui ne sont pas dans le formulaire
+      const collectionHolder = document.querySelector('.' + select.dataset.collectionHolderClass)
+    
+      const item = document.createElement('li')
+    
+      item.innerHTML = collectionHolder.dataset.prototype.replace(/__name__/g, collectionHolder.dataset.index)
+    
+      $(item).find("select").html("");
 
-        item.innerHTML = collectionHolder
-            .dataset
-            .prototype
-            .replace(
-            /__name__/g,
-            collectionHolder.dataset.index
-            );
+      let selectOptions = "";
 
-        collectionHolder.appendChild(item);
+      pieces.forEach(piece => {
+        selectOptions += `<option value="${piece.id}">${piece.libelle_piece}</option>`
+      })
 
-        collectionHolder.dataset.index++;
-    };
-</script>
+      $(item).find("select").html(selectOptions)
+    
+      collectionHolder.appendChild(item)
+    
+      collectionHolder.dataset.index++
+    }
+    
+    async function getPiecesAjax() {
+      // TODO - Vérifier, les pièces existantes
+      // Récupérer les pièces livrables déjà ajoutées
+      let pieces = []
+    
+      $('select[id*=document_ligneDocument_]')
+        .toArray()
+        .forEach((pieceSelect) => {
+          pieces.push($(pieceSelect).val())
+        })
+    
+      // Appel api, vers un script php qui nous retourne si les pièces livrables sont toutes présentes
+      let response = await fetch(`/piece/ajax/test${pieces.length ? '?pieces=' + pieces.join(',') : ''}`, {
+        headers: { 'X-Requested-with': 'XMLHttpRequest' },
+        method: 'GET'
+      })
+    
+      return JSON.parse(await response.text())
+    }
+  </script>
+{% endblock %}
