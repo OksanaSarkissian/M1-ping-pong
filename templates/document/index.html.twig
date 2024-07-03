@@ -1,16 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document index{% endblock %}
+{% block title %}  {{ active == 'devis' ? 'Devis' : 'Commandes' }}
+{% endblock %}
 
 {% block body %}
-<div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100">
+<div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100 w-75">
           <div class="d-flex column-gap-5 pb-3">
             <a href="{{ path('app_devis_index') }}" class="btn {{ active == 'devis' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Devis</a>
             <a href="{{ path('app_commande_index') }}" class="btn {{ active == 'commandes' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Commandes</a>
             <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'achats' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Achats</a>
           </div>
-    <h1>Document index</h1>
-
+    <div class="d-flex justify-content-between align-items-center w-100 mb-5 ">
+    <a class="btn text-bg-accent-2 text-primary" href="{{ path('app_document_new',{variable: active}) }}">Créer {{ active == 'devis' ? 'un devis' : 'une commande' }}</a>
+    <h1>  {{ active == 'devis' ? 'Devis' : 'Commandes' }}
+</h1>
+    <div class=""></div>
+            </div>
     <table class="table">
         <thead>
             <tr>
@@ -43,5 +48,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_document_new',{variable: active}) }}">Create new</a>
 {% endblock %}
