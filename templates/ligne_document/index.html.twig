@@ -21,7 +21,7 @@
                 <td>{{ ligne_document.quantite }}</td>
                 <td>{{ ligne_document.prixVente }}</td>
                 <td>
-                    <a href="{{ path('app_ligne_document_show', {'id': ligne_document.id}) }}">show</a>
+                    <a href="{{ path('app_ligne_document_show', {'id': ligne_document.id}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
                     <a href="{{ path('app_ligne_document_edit', {'id': ligne_document.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
                 </td>
             </tr>

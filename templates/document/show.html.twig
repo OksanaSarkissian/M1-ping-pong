@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Document
+  {{ documentType == 'devis' ? 'Devis' : 'Commandes' }}
 {% endblock %}
 
 {% block body %}
-  <h1>Document</h1>
+  <div class="d-flex justify-content-between align-items-center w-50">
+    <a class="btn text-bg-accent-2 text-primary" href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
+    <h1>{{ documentType == 'devis' ? 'Devis' : 'Commandes' }}</h1>
+    <div class="d-flex">
+    <a href="{{ path('app_document_edit', { id: document.id, variable: documentType }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+    {% if documentType == 'devis' %}
+      {{ include('document/_delete_form.html.twig') }}
+    {% endif %}
+    </div>
+  </div>
 
-  <table class="table">
+  <table class="table w-50">
     <tbody>
       <tr>
         <th>Id</th>
@@ -31,11 +40,4 @@
       </tr>
     </tbody>
   </table>
-
-  <a href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
-
-  <a href="{{ path('app_document_edit', { id: document.id,variable: documentType }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
-  {% if documentType == 'devis' %}
-    {{ include('document/_delete_form.html.twig') }}
-  {% endif %}
 {% endblock %}

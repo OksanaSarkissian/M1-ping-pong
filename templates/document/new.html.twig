@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block body %}
+  <a href="{{ documentType == "devis" ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
   <h1>Création Document</h1>
   <div class="form-container">{{ include('document/_form.html.twig') }}</div>
 
-  <a href="{{ documentType == "devis" ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
 {% endblock %}
