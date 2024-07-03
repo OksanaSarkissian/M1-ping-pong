@@ -46,10 +46,16 @@ class DocumentController extends AbstractController
             }
             $entityManager->persist($document);
             $entityManager->flush();
-
+            // $type peut être : success, warning, danger, etc.
+            // $message : Contient le contenu de la notification 
+            $type = 'success';
+            $message = "c'est réussi";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_devis_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        $type = 'danger';
+        $message = "c'est zero";
+        $this->addFlash($type, $message);
         return $this->render('document/new.html.twig', [
             'document' => $document,
             'form' => $form,

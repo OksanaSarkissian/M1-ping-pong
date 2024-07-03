@@ -23,7 +23,12 @@
 
 <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {# {{ form_end(form) }} #}
-
+{% for flash in app.flashes('review_success') %}
+    {{ include('_toast.html.twig', {
+        title: 'Success!',
+        body: flash
+    }) }}
+{% endfor %}
 {% block custom_js %}
   <script type="text/javascript">
 

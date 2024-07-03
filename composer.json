@@ -30,6 +30,7 @@
         "symfony/twig-bundle": "6.4.*",
         "symfony/ux-autocomplete": "^2.18",
         "symfony/ux-icons": "^2.18",
+        "symfony/ux-notify": "^2.18",
         "symfony/validator": "6.4.*",
         "symfony/webpack-encore-bundle": "^1.17",
         "symfony/yaml": "6.4.*",

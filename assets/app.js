@@ -8,6 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.scss";
 import "./styles/custom.scss";
+import './toast';
 
 require("bootstrap");
 // start the Stimulus application

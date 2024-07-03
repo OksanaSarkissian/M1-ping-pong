@@ -36,8 +36,10 @@
                 <td>{{ document.montantTotal }}</td>
                 <td>{{ document.delai ? document.delai|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_document_show', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
-                    <a href="{{ path('app_document_edit', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+                    <div class="d-flex">  
+                        <a href="{{ path('app_document_show', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
+                        <a href="{{ path('app_document_edit', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
