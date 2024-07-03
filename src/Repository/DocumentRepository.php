@@ -16,6 +16,18 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
+    public function findAllByType($type)
+    {
+        $queryBuilder = $this->createQueryBuilder('s');
+
+        $queryBuilder->select('d')
+            ->from(Document::class, 'd')
+            ->where("d.type = :type")
+            ->setParameter('type', $type);
+            
+        $query = $queryBuilder;
+        return $query->getQuery()->getResult();
+    }
     //    /**
     //     * @return Document[] Returns an array of Document objects
     //     */

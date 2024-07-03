@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  New LigneDocument
+{% endblock %}
+
+{% block body %}
+  <h1>Create new LigneDocument</h1>
+  <div class="form-container">
+    {{ include('ligne_document/_form.html.twig') }}
+  </div>
+
+  <a href="{{ path('app_ligne_document_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneDocument index{% endblock %}
+
+{% block body %}
+    <h1>LigneDocument index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>Prix_vente</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ligne_document in ligne_documents %}
+            <tr>
+                <td>{{ ligne_document.id }}</td>
+                <td>{{ ligne_document.quantite }}</td>
+                <td>{{ ligne_document.prixVente }}</td>
+                <td>
+                    <a href="{{ path('app_ligne_document_show', {'id': ligne_document.id}) }}">show</a>
+                    <a href="{{ path('app_ligne_document_edit', {'id': ligne_document.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ligne_document_new') }}">Create new</a>
+{% endblock %}

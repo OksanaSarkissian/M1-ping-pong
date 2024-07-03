@@ -55,7 +55,7 @@ class AppCustomAuthenticator extends AbstractLoginFormAuthenticator
         } else if (in_array("ROLE_ATELIER"|| "ROLE_ATELIER_RESPONSABLE", $user->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('app_piece_index'));
         } else {
-            return new RedirectResponse($this->urlGenerator->generate('app_facture_index'));
+            return new RedirectResponse($this->urlGenerator->generate('app_devis_index'));
         }
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

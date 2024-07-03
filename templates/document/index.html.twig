@@ -5,8 +5,8 @@
 {% block body %}
 <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100">
           <div class="d-flex column-gap-5 pb-3">
-            <a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'devis' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Devis</a>
-            <a href="{{ path('app_operation_index') }}" class="btn {{ active == 'commandes' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Commandes</a>
+            <a href="{{ path('app_devis_index') }}" class="btn {{ active == 'devis' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Devis</a>
+            <a href="{{ path('app_commande_index') }}" class="btn {{ active == 'commandes' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Commandes</a>
             <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'achats' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Achats</a>
           </div>
     <h1>Document index</h1>
@@ -31,8 +31,8 @@
                 <td>{{ document.montantTotal }}</td>
                 <td>{{ document.delai ? document.delai|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_document_show', {'id': document.id}) }}">show</a>
-                    <a href="{{ path('app_document_edit', {'id': document.id}) }}">edit</a>
+                    <a href="{{ path('app_document_show', {'id': document.id,variable: active}) }}">show</a>
+                    <a href="{{ path('app_document_edit', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
                 </td>
             </tr>
         {% else %}
@@ -43,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_document_new') }}">Create new</a>
+    <a href="{{ path('app_document_new',{variable: active}) }}">Create new</a>
 {% endblock %}

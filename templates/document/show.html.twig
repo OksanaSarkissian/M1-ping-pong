@@ -1,38 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document{% endblock %}
+{% block title %}
+  Document
+{% endblock %}
 
 {% block body %}
-    <h1>Document</h1>
+  <h1>Document</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ document.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ document.date ? document.date|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ document.type }}</td>
-            </tr>
-            <tr>
-                <th>Montant_total</th>
-                <td>{{ document.montantTotal }}</td>
-            </tr>
-            <tr>
-                <th>Delai</th>
-                <td>{{ document.delai ? document.delai|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ document.id }}</td>
+      </tr>
+      <tr>
+        <th>Date</th>
+        <td>{{ document.date ? document.date|date('Y-m-d H:i:s') : '' }}</td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>{{ document.type }}</td>
+      </tr>
+      <tr>
+        <th>Montant_total</th>
+        <td>{{ document.montantTotal }}</td>
+      </tr>
+      <tr>
+        <th>Delai</th>
+        <td>{{ document.delai ? document.delai|date('Y-m-d H:i:s') : '' }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <a href="{{ path('app_document_index') }}">back to list</a>
+  <a href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
 
-    <a href="{{ path('app_document_edit', {'id': document.id}) }}">edit</a>
-
+  <a href="{{ path('app_document_edit', { id: document.id,variable: documentType }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+  {% if documentType == 'devis' %}
     {{ include('document/_delete_form.html.twig') }}
+  {% endif %}
 {% endblock %}

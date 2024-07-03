@@ -31,7 +31,7 @@ class MachineRepository extends ServiceEntityRepository
 
         $query = $this->_em->createNativeQuery('SELECT DISTINCT m.* FROM machine m left join realisation r on r.machine_reel_id = m.id join machine_poste mp on (mp.poste_id = ? AND mp.machine_id = m.id )
 ', $rsm);
-        $query->setParameter(1, "$value");
+        $query->setParameter(1, $value);
         return $query->getArrayResult();
     }
     //    /**

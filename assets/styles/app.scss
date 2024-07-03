@@ -57,14 +57,14 @@ button.btn:focus {
   width: max-content;
   margin: 0 auto;
   /* Ombre légère */
-  
+
   &.login {
     background-color: var(--main-color);
     height: 50vh;
     width: 30vw;
   }
 
-  [type=submit] {
+  [type="submit"] {
     margin-left: auto;
     display: block;
   }
@@ -96,28 +96,46 @@ button.btn:focus {
 }
 
 /* Style pour le bouton de soumission */
-.form-container button {
-  // width: 50%;
-  padding: 10px;
-  background-color: var(--accent-color);
-  /* Couleur de fond */
-  color: var(--secondary-color);
-  /* Couleur du texte */
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  justify-self: center;
-  align-self: center;
-}
+.form-container {
+  button {
+    // width: 50%;
+    padding: 10px;
+    background-color: var(--accent-color);
+    /* Couleur de fond */
+    color: var(--secondary-color);
+    /* Couleur du texte */
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    justify-self: center;
+    align-self: center;
+  }
 
-/* Style pour le lien de mot de passe oublié */
-.form-container a {
-  color: #007bff;
-  /* Couleur du lien */
-  text-decoration: none;
-  /* Enlever le soulignement */
-  margin-top: 10px;
-  display: inline-block;
+  /* Style pour le lien de mot de passe oublié */
+  a {
+    color: #007bff;
+    /* Couleur du lien */
+    text-decoration: none;
+    /* Enlever le soulignement */
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  ul.ligneDocument {
+    list-style: none;
+    padding: 0;
+  }
+
+  #document_ligneDocument {
+    > div > label {
+      display: none;
+    }
+  }
+
+  [id*="document_ligneDocument_"] {
+    display: flex;
+    column-gap: 8px;
+  }
 }
 
 /* Style pour les messages d'erreur */
