@@ -154,3 +154,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
   right: auto !important;
   height: 100%;
 }
+table,th, td{
+  border: 2px solid var(--secondary-color)!IMPORTANT;
+  border-collapse:collapse;
+}

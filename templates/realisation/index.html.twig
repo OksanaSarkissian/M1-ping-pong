@@ -10,7 +10,7 @@
       {% for realisation in realisations %}
         <div class="d-flex flex-row w-75 mb-3 mx-auto border-bottom mb-3">
           <div class="d-flex flex-column space-between w-100 flex-grow-1">
-            <span>Date de réalisation: {{ realisation.date ? realisation.date|date('d-m-Y H:i:s') : '' }}</span>
+            <span>Date de réalisation: {{ realisation.date ? realisation.date|date('d-m-Y ') : '' }}</span>
             <span>Temps réalisé: {{ realisation.tempsReel ? realisation.tempsReel|date('H:i:s') : '' }}</span>
             <span>Operation: {{ realisation.operation.libelle }} </span>
             <span>Ouvrier: {{ realisation.ouvrier.nom }} {{ realisation.ouvrier.prenom }}</span><span>Poste: {{ realisation.posteReel.libelle }}</span><span>Machine: {{ realisation.machinereel.libelle }} </span>

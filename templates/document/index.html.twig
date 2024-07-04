@@ -33,10 +33,10 @@
         {% for document in documents %}
             <tr>
                 <td>{{ document.id }}</td>
-                <td>{{ document.date ? document.date|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ document.date ? document.date|date('d-m-Y ') : '' }}</td>
                 <td>{{ document.type }}</td>
                 <td>{{ document.montantTotal }}</td>
-                <td>{{ document.delai ? document.delai|date('d-m-Y H:i:s') : '' }}</td>
+                <td>{{ document.delai ? document.delai|date('d-m-Y ') : '' }}</td>
                 <td>
                     <div class="d-flex">  
                         <a href="{{ path('app_document_show', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>

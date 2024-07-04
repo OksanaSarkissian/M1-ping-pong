@@ -6,8 +6,8 @@
 {% endif %}
 
 {{ form_row(form.client) }}
-<label>Lignes</label>
 {% if documentType == 'devis' %}
+<label>Lignes</label>
 <ul class="ligneDocument" data-index="{{ (form.ligneDocument|length) > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{% if formType != 'edit' %}{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}{% endif %}">
   {% for tag in form.ligneDocument %}
     {% for data in tag.vars.value %}
@@ -17,8 +17,12 @@
 </ul>
 <button type="button" class="add_item_link" data-collection-holder-class="ligneDocument">Ajouter une ligne</button>
   {% endif %}
-{% if formType != 'new' %}
+{% if formType == 'devis' %}
   {{ form_row(form.ligneDocument) }}
+{% endif %}
+{% if formType != 'devis' %}
+  {{ form_row(form.ligneDocument) }}
+  {{ form_row(form.delai) }}
 {% endif %}
 
 <button class="btn">{{ button_label|default('Enregistrer') }}</button>

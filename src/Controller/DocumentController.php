@@ -29,7 +29,7 @@ class DocumentController extends AbstractController
     public function indexCommande(DocumentRepository $documentRepository): Response
     {
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->findAllByType('commande'),
+            'documents' => $documentRepository->findAllByType('commandes'),
             'active' => 'commandes',
         ]);
     }
@@ -64,7 +64,7 @@ class DocumentController extends AbstractController
             $type = 'success';
             $message = ucfirst($variable) . " créé" . ($variable == 'commande' ? 'e' : '');
             $this->addFlash($type, $message);
-            return $this->redirectToRoute('app_devis_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute($variable=='commandes'?'app_commande_index':'app_devis_index', [], Response::HTTP_SEE_OTHER);
         }
         if ($form->isSubmitted()) {
             $this->addFlash(
