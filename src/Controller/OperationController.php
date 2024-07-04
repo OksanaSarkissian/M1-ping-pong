@@ -50,10 +50,10 @@ class OperationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_operation_show', methods: ['GET', 'POST'])]
-    public function show(Request $request, Operation $operation, EntityManagerInterface $entityManager, Security $security): Response
+    public function show(Request $request, Operation $operation, EntityManagerInterface $entityManager,Security $security): Response
     {
         $realisation = new Realisation($security);
-        $form = $this->createForm(RealisationType::class, $realisation, array('operation' => $operation));
+        $form = $this->createForm(RealisationType::class, $realisation, array('operation'=>$operation));
         $form->handleRequest($request);
 
         // dump($form);
@@ -102,8 +102,8 @@ class OperationController extends AbstractController
         }
 
         $type = 'success';
-        $message = "Opération supprimée";
-        $this->addFlash($type, $message);
+            $message = "Opération supprimée";
+            $this->addFlash($type, $message);
 
         return $this->redirectToRoute('app_operation_index', [], Response::HTTP_SEE_OTHER);
     }
