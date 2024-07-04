@@ -1,4 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    <div class="w-100 d-flex justify-content-end mt-5">
+<button class="btn">{{ button_label|default('Enregistrer') }}  <i class="fa-solid fa-arrow-right"></i></button>
+</div></button>
 {{ form_end(form) }}

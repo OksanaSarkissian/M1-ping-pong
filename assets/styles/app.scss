@@ -121,18 +121,18 @@ button.btn:focus {
     display: inline-block;
   }
 
-  ul.ligneDocument {
+  ul.ligneDocument, ul.ligneAchats {
     list-style: none;
     padding: 0;
   }
 
-  #document_ligneDocument {
+  #document_ligneDocument, #achat_ligneAchats {
     > div > label {
       display: none;
     }
   }
 
-  [id*="document_ligneDocument_"] {
+  [id*="document_ligneDocument_"], [id*="achat_ligneAchats_"] {
     display: flex;
     align-items: center; 
     justify-content: center;

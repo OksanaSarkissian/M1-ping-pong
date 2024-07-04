@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  New Achat
+	New Achat
 {% endblock %}
 
 {% block body %}
-  <a href="{{ path('app_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
-  <h1>Création achat</h1>
-  <div class="form-container">{{ include('achat/_form.html.twig') }}</div>
+	<div class="d-flex align-items-center justify-content-between w-75">
+		<a href="{{ path('app_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+		<h1>Création achat</h1>
+		<div></div>
+	</div>
+	<div class="form-container w-75">{{ include('achat/_form.html.twig') }}</div>
 
 {% endblock %}
