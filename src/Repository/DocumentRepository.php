@@ -24,6 +24,10 @@ class DocumentRepository extends ServiceEntityRepository
             ->from(Document::class, 'd')
             ->where("d.type = :type")
             ->setParameter('type', $type);
+
+            if ($type == "devis") {
+                $queryBuilder->andWhere("d.delai >   CURRENT_DATE() OR d.delai IS NULL");
+            }
             
         $query = $queryBuilder;
         return $query->getQuery()->getResult();

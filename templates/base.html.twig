@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
+  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>
       {% block title %}
@@ -21,14 +22,26 @@
     {% endblock %}
   </head>
   <body>
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+      {% for message in messages %}
+        {% include '_toasts.html.twig' with {'toastMessage': message, 'toastType': label} %}
+      {% endfor %}
+    {% endfor %}
+    {% for label, messages in app.flashes(['success', 'warning']) %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
     <div class="container-fluid h-100">
       <div class="row">
         {% include './ui/sidebar.html.twig' %}
         <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center">
           {% block body %}
+          
 
           {% endblock %}
-           {% include "_toasts.html.twig" %}
         </div>
       </div>
     </div>
@@ -36,6 +49,7 @@
 
     {% endblock %}
     <script type="text/javascript">
+      
           $('#piece_gamme').parent().hide()
           $('#piece_composition').parent().hide()
       $('#piece_type').on('change', function () {
@@ -224,6 +238,8 @@
       $( "label[for='realisation_ouvrier']" ).hide();
       $('#realisation_ouvrier').hide()
       $( "label[for='realisation_operation']" ).hide();
+
+      
     </script>
   </body>
 </html>

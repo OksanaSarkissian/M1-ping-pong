@@ -10,6 +10,22 @@
                     "tom-select/dist/css/tom-select.bootstrap5.css": false
                 }
             }
+        },
+        "@symfony/ux-notify": {
+            "notify": {
+                "enabled": true,
+                "fetch": "eager"
+            }
+        },
+        "@symfony/ux-turbo": {
+            "turbo-core": {
+                "enabled": true,
+                "fetch": "eager"
+            },
+            "mercure-turbo-stream": {
+                "enabled": false,
+                "fetch": "eager"
+            }
         }
     },
     "entrypoints": []

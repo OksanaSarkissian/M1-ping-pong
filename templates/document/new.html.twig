@@ -1,14 +1,15 @@
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ documentType == 'devis' ? 'Nouveau devis' : 'Nouvelle commande' }}
-
+  {{ documentType == 'devis' ? 'Nouveau devis' : 'Nouvelle commande' }}
 {% endblock %}
 
-{% block body %}
-  <a href="{{ documentType == "devis" ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
-  <h1>Création  {{ documentType == 'devis' ? 'devis' : 'commande' }}
-</h1>
-  <div class="form-container">{{ include('document/_form.html.twig') }}</div>
 
+{% block body %}
+
+  <a href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
+  <h1 data-controller="hello">Création {{ documentType == 'devis' ? 'devis' : 'commande' }}</h1>
+  <div class="form-container">{{ include('document/_form.html.twig') }}</div>
 {% endblock %}

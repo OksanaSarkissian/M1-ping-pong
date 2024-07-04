@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}  {{ active == 'devis' ? 'Devis' : 'Commandes' }}
 {% endblock %}
 
 {% block body %}
-<div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100 w-75">
-          <div class="d-flex column-gap-5 pb-3">
+    <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100 w-75">
+        <div class="d-flex column-gap-5 pb-3">
             <a href="{{ path('app_devis_index') }}" class="btn {{ active == 'devis' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Devis</a>
-            <a href="{{ path('app_commande_index') }}" class="btn {{ active == 'commandes' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Commandes</a>
-            <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'achats' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Achats</a>
-          </div>
-    <div class="d-flex justify-content-between align-items-center w-100 mb-5 ">
-    <a class="btn text-bg-accent-2 text-primary" href="{{ path('app_document_new',{variable: active}) }}">Créer {{ active == 'devis' ? 'un devis' : 'une commande' }}</a>
-    <h1>  {{ active == 'devis' ? 'Devis' : 'Commandes' }}
-</h1>
+                <a href="{{ path('app_commande_index') }}" class="btn {{ active == 'commandes' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Commandes</a>
+                <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'achats' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Achats</a>
+            </div>
+        <div class="d-flex justify-content-between align-items-center w-100 mb-5 ">
+            <a class="btn text-bg-accent-2 text-primary" href="{{ path('app_document_new',{variable: active}) }}">Créer {{ active == 'devis' ? 'un devis' : 'une commande' }}</a>
+            
+        <h1>  {{ active == 'devis' ? 'Devis' : 'Commandes' }}
+    </h1>
     <div class=""></div>
             </div>
     <table class="table">
@@ -31,14 +33,15 @@
         {% for document in documents %}
             <tr>
                 <td>{{ document.id }}</td>
-                <td>{{ document.date ? document.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ document.date ? document.date|date('d-m-Y H:i:s') : '' }}</td>
                 <td>{{ document.type }}</td>
                 <td>{{ document.montantTotal }}</td>
-                <td>{{ document.delai ? document.delai|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ document.delai ? document.delai|date('d-m-Y H:i:s') : '' }}</td>
                 <td>
                     <div class="d-flex">  
                         <a href="{{ path('app_document_show', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
-                        <a href="{{ path('app_document_edit', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+                        {% if (document.delai == '') %}<a href="{{ path('app_document_edit', {'id': document.id,variable: active}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+                        {% endif %}
                     </div>
                 </td>
             </tr>

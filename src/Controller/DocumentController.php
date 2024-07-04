@@ -19,7 +19,7 @@ class DocumentController extends AbstractController
     public function indexDevis(DocumentRepository $documentRepository): Response
     {
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->findAllByType('Devis'),
+            'documents' => $documentRepository->findAllByType('devis'),
             'active' => 'devis',
         ]);
     }
@@ -27,7 +27,7 @@ class DocumentController extends AbstractController
     public function indexCommande(DocumentRepository $documentRepository): Response
     {
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->findAllByType('Commande'),
+            'documents' => $documentRepository->findAllByType('commande'),
             'active' => 'commandes',
         ]);
     }
@@ -39,23 +39,34 @@ class DocumentController extends AbstractController
         $ligneDocument = new LigneDocument();
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
-
+        $document->setType($variable);
+        // dump($document);
+        // dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
+            $montantTotal = 0;
             foreach ($document->getLigneDocument() as $ligneDocument) {
+                $montantTotal += $ligneDocument->getPrixVente() * $ligneDocument->getQuantite();
                 $entityManager->persist($ligneDocument);
             }
+            $document->setMontantTotal($montantTotal);
+            // dump($document);
             $entityManager->persist($document);
             $entityManager->flush();
             // $type peut être : success, warning, danger, etc.
             // $message : Contient le contenu de la notification 
             $type = 'success';
-            $message = "c'est réussi";
+            $message = ucfirst($variable) . " créé" . ($variable == 'commande' ? 'e' : '');
             $this->addFlash($type, $message);
             return $this->redirectToRoute('app_devis_index', [], Response::HTTP_SEE_OTHER);
         }
-        $type = 'danger';
-        $message = "c'est zero";
-        $this->addFlash($type, $message);
+        if ($form->isSubmitted()) {
+            $this->addFlash(
+                'danger',
+                'Il y a eu un problème, vérifiez le formulaire. Si le problème persiste contactez le support!'
+            );
+            exit;
+        }
+
         return $this->render('document/new.html.twig', [
             'document' => $document,
             'form' => $form,

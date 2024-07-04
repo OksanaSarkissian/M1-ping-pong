@@ -6,18 +6,20 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import "./styles/app.scss";
-import "./styles/custom.scss";
-import './toast';
+import "../styles/app.scss";
+import "../styles/custom.scss";
+import "./bootstrap";
+// import "./toast";
 
 require("bootstrap");
 // start the Stimulus application
-import "./bootstrap";
 require("font-awesome/css/font-awesome.css");
 
+console.log("Hello")
 document.ready(
   $("#piece_type").on("change", function () {
     console.log("Hello");
+
     if ($(this).val() == "Livrable") {
       $("#piece_gamme").show();
       $("#piece_gamme").attr("data-error", "This field is required.");

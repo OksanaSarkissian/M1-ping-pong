@@ -22,19 +22,12 @@ class DocumentType extends AbstractType
         $builder
             ->add('date', null, [
                 'widget' => 'single_text',
-                'data' => new \DateTimeImmutable()
-            ])
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    "Devis" => 'Devis',
-                    "Commande" => 'Commande'
-                ],
-                'placeholder' => 'Choisissez un type de document',
-                'required' => true,
+                'data' => new \DateTimeImmutable(),
             ])
             ->add('delai', null, [
                 'widget' => 'single_text',
-                'label'=>'Délai'
+                'label'=>'Délai',
+                'invalid_message' => 'Veuillez entrer une heure',
             ])
             ->add('client', EntityType::class, [
                 'class' => Client::class,
@@ -46,7 +39,6 @@ class DocumentType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('montant_total')
         ;
     }
 
@@ -54,6 +46,7 @@ class DocumentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Document::class,
+            'type' => null
         ]);
     }
 }
