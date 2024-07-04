@@ -1,59 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>
-      {% block title %}
-        Welcome!
-      {% endblock %}
-    </title>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-      {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="{{ asset('build/app.css') }}"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+		<title>
+			{% block title %}
+				Welcome!
+			{% endblock %}
+		</title>
+		<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"/>
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-    {% block javascripts %}
-      {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-  </head>
-  <body>
-    <div class="container-fluid h-100 w-100">
-      <div class="row">
-        {% include './ui/sidebar.html.twig' %}
-        <div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100">
-          <div class="d-flex column-gap-5 pb-3">
-            <a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'gamme' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Gammes</a>
-            <a href="{{ path('app_operation_index') }}" class="btn {{ active == 'operation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Opérations</a>
-            <a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'realisation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Réalisations</a>
-            <a href="{{ path('app_poste_index') }}" class="btn {{ active == 'poste' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Postes</a>
-            <a href="{{ path('app_machine_index') }}" class="btn {{ active == 'machine' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Machines</a>
-          </div>
-          {% block body %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<div class="container-fluid h-100 w-100">
+			<div class="row">
+				{% include './ui/sidebar.html.twig' %}
+				<div class="col-sm p-3 min-vh-100 d-flex flex-column align-items-center h-100">
+					<div class="d-flex column-gap-5 pb-3">
+						<a href="{{ path('app_gamme_index') }}" class="btn {{ active == 'gamme' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Gammes</a>
+						<a href="{{ path('app_operation_index') }}" class="btn {{ active == 'operation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Opérations</a>
+						<a href="{{ path('app_realisation_index') }}" class="btn {{ active == 'realisation' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Réalisations</a>
+						<a href="{{ path('app_poste_index') }}" class="btn {{ active == 'poste' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Postes</a>
+						<a href="{{ path('app_machine_index') }}" class="btn {{ active == 'machine' ? 'bg-accent text-secondary' : 'bg-accent-2 text-primary' }}">Machines</a>
+					</div>
+					{% for label, messages in app.flashes(['success', 'warning']) %}
+						{% for message in messages %}
+							{% include '_toasts.html.twig' with {'toastMessage': message, 'toastType': label} %}
+						{% endfor %}
+					{% endfor %}
+					{% block body %}{% endblock %}
+				</div>
+			</div>
+		</div>
+    {% block custom_js %}
 
-          {% endblock %}
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#filterSelect').on('change', function () {
-          var selectedValue = $(this).val()
-          //console.log("hehehhe",selectedValue);
-          $('.content').hide()
-          $('.content').removeClass('d-flex')
-          if (selectedValue !== '') {
-            $('#' + selectedValue).show()
-            $('#' + selectedValue).addClass('d-flex')
-          } else {
-            $('.content').show()
-            $('.content').addClass('d-flex')
-          }
-        })
-      })
-    </script>
-  </body>
+    {% endblock %}
+		<script type="text/javascript">
+			$(document).ready(function () {
+$('#filterSelect').on('change', function () {
+var selectedValue = $(this).val()
+// console.log("hehehhe",selectedValue);
+$('.content').hide()
+$('.content').removeClass('d-flex')
+if (selectedValue !== '') {
+$('#' + selectedValue).show()
+$('#' + selectedValue).addClass('d-flex')
+} else {
+$('.content').show()
+$('.content').addClass('d-flex')
+}
+})
+})
+		</script>
+	</body>
 </html>

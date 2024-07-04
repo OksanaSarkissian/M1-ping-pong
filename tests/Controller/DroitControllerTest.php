@@ -83,7 +83,7 @@ class DroitControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'droit[libelle]' => 'Something New',
         ]);
 

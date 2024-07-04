@@ -95,7 +95,7 @@ class UserControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'user[nom]' => 'Something New',
             'user[prenom]' => 'Something New',
             'user[identifiant]' => 'Something New',

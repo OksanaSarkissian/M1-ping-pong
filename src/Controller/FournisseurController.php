@@ -33,6 +33,10 @@ class FournisseurController extends AbstractController
             $entityManager->persist($fournisseur);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Fourisseur créé";
+            $this->addFlash($type, $message);
+
             return $this->redirectToRoute('app_fournisseur_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +63,9 @@ class FournisseurController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Fourisseur modifié";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_fournisseur_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,11 +78,14 @@ class FournisseurController extends AbstractController
     #[Route('/{id}', name: 'app_fournisseur_delete', methods: ['POST'])]
     public function delete(Request $request, Fournisseur $fournisseur, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$fournisseur->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $fournisseur->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($fournisseur);
             $entityManager->flush();
         }
 
+        $type = 'success';
+        $message = "Fourisseur supprimé";
+        $this->addFlash($type, $message);
         return $this->redirectToRoute('app_fournisseur_index', [], Response::HTTP_SEE_OTHER);
     }
 }

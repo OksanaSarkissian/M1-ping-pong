@@ -20,7 +20,7 @@ class UserController extends AbstractController
     {
         $this->passwordHasher = $passwordHasher;
     }
-    
+
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -42,6 +42,9 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Utilisateur créé";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,6 +71,9 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Utilisateur modifié";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -85,6 +91,9 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
+        $type = 'success';
+        $message = "Utilisateur supprimé";
+        $this->addFlash($type, $message);
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
 }

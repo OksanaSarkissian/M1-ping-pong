@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit LigneAchat{% endblock %}
+{% block title %}Modification LigneAchat{% endblock %}
 
 {% block body %}
     <a href="{{ path('app_ligne_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
-    <h1>Edit LigneAchat</h1>
+    <h1>Modification LigneAchat</h1>
 
-    {{ include('ligne_achat/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('ligne_achat/_form.html.twig', {'button_label': 'Enregistrer'}) }}
 
 
     {{ include('ligne_achat/_delete_form.html.twig') }}

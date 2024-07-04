@@ -13,6 +13,7 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($user = $this->getUser()) {
+            
             if (in_array("ROLE_ATELIER" || "ROLE_ATELIER_RESPONSABLE", $user->getRoles())) {
                 return $this->redirectToRoute('app_piece_index');
             } else if (in_array("ROLE_COMMERCIAL", $user->getRoles())) {

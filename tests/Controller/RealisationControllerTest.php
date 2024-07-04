@@ -95,7 +95,7 @@ class RealisationControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'realisation[date]' => 'Something New',
             'realisation[temps_reel]' => 'Something New',
             'realisation[poste_id_reel]' => 'Something New',

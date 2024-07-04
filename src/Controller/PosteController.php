@@ -16,7 +16,8 @@ use Symfony\Component\Security\Core\Security;
 class PosteController extends AbstractController
 {
     private $security;
-    public function __construct(Security $security) {
+    public function __construct(Security $security)
+    {
         $this->security = $security;
     }
     #[Route('/', name: 'app_poste_index', methods: ['GET'])]
@@ -40,6 +41,9 @@ class PosteController extends AbstractController
             $entityManager->persist($poste);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Poste créé";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_poste_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -66,6 +70,9 @@ class PosteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Poste modifié";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_poste_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,11 +85,14 @@ class PosteController extends AbstractController
     #[Route('/respo/{id}', name: 'app_poste_delete', methods: ['POST'])]
     public function delete(Request $request, Poste $poste, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$poste->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $poste->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($poste);
             $entityManager->flush();
         }
 
+        $type = 'success';
+        $message = "Poste supprimé";
+        $this->addFlash($type, $message);
         return $this->redirectToRoute('app_poste_index', [], Response::HTTP_SEE_OTHER);
     }
 

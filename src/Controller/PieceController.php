@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/piece')]
 class PieceController extends AbstractController
-{   
+{
     #[Route('/', name: 'app_piece_index', methods: ['GET'])]
     public function index(PieceRepository $pieceRepository): Response
     {
@@ -33,6 +33,9 @@ class PieceController extends AbstractController
             $entityManager->persist($piece);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Pièce créée";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_piece_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +62,9 @@ class PieceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Pièce modifiée";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_piece_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,11 +77,14 @@ class PieceController extends AbstractController
     #[Route('/{id}', name: 'app_piece_delete', methods: ['POST'])]
     public function delete(Request $request, Piece $piece, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$piece->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $piece->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($piece);
             $entityManager->flush();
         }
 
+        $type = 'success';
+        $message = "Pièce supprimée";
+        $this->addFlash($type, $message);
         return $this->redirectToRoute('app_piece_index', [], Response::HTTP_SEE_OTHER);
     }
 

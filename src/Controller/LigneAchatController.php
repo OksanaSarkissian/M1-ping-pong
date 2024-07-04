@@ -32,7 +32,7 @@ class LigneAchatController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($ligneAchat);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_ligne_achat_index', [], Response::HTTP_SEE_OTHER);
         }
 

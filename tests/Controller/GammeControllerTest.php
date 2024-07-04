@@ -86,7 +86,7 @@ class GammeControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'gamme[responsable]' => 'Something New',
             'gamme[piece]' => 'Something New',
         ]);

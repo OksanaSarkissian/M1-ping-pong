@@ -89,7 +89,7 @@ class PosteControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'poste[libelle]' => 'Something New',
             'poste[id_user]' => 'Something New',
             'poste[machines]' => 'Something New',

@@ -86,7 +86,7 @@ class MachineControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'machine[libelle]' => 'Something New',
             'machine[Poste]' => 'Something New',
         ]);

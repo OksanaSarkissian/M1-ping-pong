@@ -95,7 +95,7 @@ class OperationControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'operation[libelle]' => 'Something New',
             'operation[description]' => 'Something New',
             'operation[temps]' => 'Something New',

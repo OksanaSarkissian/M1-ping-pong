@@ -5,8 +5,12 @@
 {% endblock %}
 
 {% block body %}
-  <a href="{{ path('app_fournisseur_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
-  <h1>Create new Fournisseur</h1>
+
+  <div class="d-flex align-items-center">
+    <a href="{{ path('app_fournisseur_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+    <h1>Création fournisseur</h1>
+    <div></div>
+  </div>
   <div class="form-container">{{ include('fournisseur/_form.html.twig') }}</div>
 
 {% endblock %}

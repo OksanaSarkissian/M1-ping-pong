@@ -101,7 +101,7 @@ class PieceControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'piece[reference_piece]' => 'Something New',
             'piece[libelle_piece]' => 'Something New',
             'piece[prix_u]' => 'Something New',

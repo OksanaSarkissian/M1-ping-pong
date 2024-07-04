@@ -1,4 +1,23 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+{{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+
+
+{% block custom_js %}
+	<script>
+		$('#user_Roles').on("change", ({target}) => {
+            hideQualifications(target);
+        })
+
+        function hideQualifications(target) {
+            if (!$(target).val().includes('ROLE_ATELIER')) {
+                return $("#user_qualifications").parent().hide();
+            }
+
+            $("#user_qualifications").parent().show();
+        }
+        
+        hideQualifications($("#user_Roles"));
+	</script>
+{% endblock %}

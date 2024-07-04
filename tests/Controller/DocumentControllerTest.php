@@ -104,7 +104,7 @@ class DocumentControllerTest extends WebTestCase
 
         $this->client->request('GET', sprintf('%s%s/edit', $this->path, $fixture->getId()));
 
-        $this->client->submitForm('Update', [
+        $this->client->submitForm('Enregistrer', [
             'document[date]' => 'Something New',
             'document[type]' => 'Something New',
             'document[montant_total]' => 'Something New',

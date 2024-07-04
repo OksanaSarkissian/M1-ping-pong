@@ -49,8 +49,8 @@
             <td>{{ ligne.piece.refPiece }}</td>
             <td>{{ ligne.piece.libellePiece }}</td>
             <td>{{ ligne.quantite }}</td>
-            <td class="d-flex justify-content-end"><span class="d-flex justify-content-end">{{ ligne.prixVente }}</span></td>
-            <td class="d-flex justify-content-end">{{ ligne.quantite * ligne.prixVente }}</td>
+            <td class=""><span class="">{{ ligne.prixVente }}</span></td>
+            <td class="">{{ ligne.quantite * ligne.prixVente }}</td>
           </tr>
         {% endfor %}
         <tr class="mt-3">
@@ -60,7 +60,7 @@
           </td>
           <td  class="d-flex justify-content-end">
             <div class="d-flex justify-content-center align-items-baseline">
-              <p class="d-flex justify-content-end">{{ document.montantTotal }}€</p>
+              <h5 class="d-flex justify-content-end">{{ document.montantTotal }}€</h5>
             </div>
           </td>
         </tr>

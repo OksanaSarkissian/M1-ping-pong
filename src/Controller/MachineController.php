@@ -34,6 +34,9 @@ class MachineController extends AbstractController
             $entityManager->persist($machine);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Machine créée";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_machine_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -60,6 +63,9 @@ class MachineController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Machine modifiée";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_machine_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -72,15 +78,19 @@ class MachineController extends AbstractController
     #[Route('/respo/{id}', name: 'app_machine_delete', methods: ['POST'])]
     public function delete(Request $request, Machine $machine, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$machine->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $machine->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($machine);
             $entityManager->flush();
         }
 
+        $type = 'success';
+        $message = "Machine supprimée";
+        $this->addFlash($type, $message);
+
         return $this->redirectToRoute('app_machine_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    
+
 
     #[Route('/ajax/test', name: 'app_machine_ajax', methods: ['GET'])]
     public function getPosteAjax(MachineRepository $machineRepository, Request $req): Response

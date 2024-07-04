@@ -35,6 +35,9 @@ class RealisationController extends AbstractController
             $entityManager->persist($realisation);
             $entityManager->flush();
 
+            $type = 'success';
+            $message = "Réalisation créée";
+            $this->addFlash($type, $message);
             return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -50,34 +53,5 @@ class RealisationController extends AbstractController
         return $this->render('realisation/show.html.twig', [
             'realisation' => $realisation,
         ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_realisation_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Realisation $realisation, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(RealisationType::class, $realisation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('realisation/edit.html.twig', [
-            'realisation' => $realisation,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_realisation_delete', methods: ['POST'])]
-    public function delete(Request $request, Realisation $realisation, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $realisation->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($realisation);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_realisation_index', [], Response::HTTP_SEE_OTHER);
     }
 }

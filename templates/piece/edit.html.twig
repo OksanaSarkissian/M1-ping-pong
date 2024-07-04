@@ -4,15 +4,16 @@
 {% endblock %}
 
 {% block body %}
-<div class="d-flex justify-content-between">
-<a href="{{ path('app_piece_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a> {{ include('piece/_delete_form.html.twig') }}
-</div>
-	
-	<div class="form-container">
+	<div class="d-flex justify-content-between align-items-center">
+		<a href="{{ path('app_piece_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
 		<h1>Modifier Piece</h1>
-
-		{{ include('piece/_form.html.twig', {'button_label': 'Update'}) }}
+		{{ include('piece/_delete_form.html.twig') }}
 	</div>
 
-	
+	<div class="form-container">
+
+		{{ include('piece/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+	</div>
+
+
 {% endblock %}
