@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Entity\LigneDocument;
 use App\Form\DocumentType;
+use App\Form\CommandeType;
 use App\Repository\DocumentRepository;
+use App\Repository\LigneDocumentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,11 +35,16 @@ class DocumentController extends AbstractController
     }
 
     #[Route('/new/{variable}', name: 'app_document_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, $variable): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, $variable, LigneDocumentRepository $ligneDocumentRepository): Response
     {
         $document = new Document();
         $ligneDocument = new LigneDocument();
-        $form = $this->createForm(DocumentType::class, $document);
+        if ($variable == 'commandes') {
+// dump($variable);
+            $form = $this->createForm(CommandeType::class, $document);
+        } else {
+            $form = $this->createForm(DocumentType::class, $document);
+        }
         $form->handleRequest($request);
         $document->setType($variable);
         // dump($document);

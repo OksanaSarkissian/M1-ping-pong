@@ -7,6 +7,7 @@
 
 {{ form_row(form.client) }}
 <label>Lignes</label>
+{% if documentType == 'devis' %}
 <ul class="ligneDocument" data-index="{{ (form.ligneDocument|length) > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{% if formType != 'edit' %}{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}{% endif %}">
   {% for tag in form.ligneDocument %}
     {% for data in tag.vars.value %}
@@ -15,6 +16,7 @@
   {% endfor %}
 </ul>
 <button type="button" class="add_item_link" data-collection-holder-class="ligneDocument">Ajouter une ligne</button>
+  {% endif %}
 {% if formType != 'new' %}
   {{ form_row(form.ligneDocument) }}
 {% endif %}
