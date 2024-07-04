@@ -7,6 +7,7 @@ use App\Entity\Piece;
 use App\config\TypeEnum;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use App\Repository\PieceRepository;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,7 +51,11 @@ class PieceType extends AbstractType
                 'choice_label' => 'libelle_piece',
                 'multiple' => true,
                 'required' => false,
-
+                'query_builder'=>function (PieceRepository $er) {
+                    return $er->createQueryBuilder('piece')
+                    ->where('piece.type NOT LIKE \'Livrable\'')
+                    ->orderBy('piece.libelle_piece', 'ASC');
+                }
             ])
             ->add('save', SubmitType::class, ['label' => "Enregistrer"])
         ;

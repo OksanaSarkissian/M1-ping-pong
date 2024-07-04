@@ -29,11 +29,14 @@
             </span>
             <span>{{ user.identifiant }}</span>
             <span>
+            {% if 'ROLE_ATELIER' in  user.roles %}
+            
               Qualifications:{% for poste in user.qualifications %}
                 <span>{{ poste.libelle }},</span>
               {% else %}
                 <span>Ajouter un poste sur lequel l'ouvrier est qualifié</span>
               {% endfor %}
+            {% endif %}
             </span>
           </div>
           <div>

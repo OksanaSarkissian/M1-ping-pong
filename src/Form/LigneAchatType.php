@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Achat;
 use App\Entity\LigneAchat;
+use App\Repository\PieceRepository;
 use App\Entity\Piece;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,6 +20,11 @@ class LigneAchatType extends AbstractType
         ->add('piece', EntityType::class, [
             'class' => Piece::class,
             'choice_label' => 'libelle_piece',
+            'query_builder'=> function (PieceRepository $er) {
+                return $er->createQueryBuilder('piece')
+                ->where('piece.type NOT LIKE \'Livrable\'')
+                ->orderBy('piece.libelle_piece', 'ASC');
+            }
         ])
             ->add('prix_catalogue')
             ->add('prix_achat')
