@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use App\Repository\LigneDocumentRepository;
 
 
 class CommandeType extends AbstractType
@@ -35,8 +36,15 @@ class CommandeType extends AbstractType
             ])
             ->add('ligneDocument', EntityType::class, [
                 'class' => LigneDocument::class,
+                'query_builder' => function (LigneDocumentRepository $er) {
+                    return $er->createQueryBuilder('q')
+                        ->select(' q')
+                        ->leftJoin('q.piece', 'p')
+                        ->groupBy('q.id, p.libelle_piece')
+                        ->orderBy('p.libelle_piece', 'ASC');
+                },
                 'choice_label' => function ($ligneDocument) {
-                    return 'Piece: '.$ligneDocument->getPiece()->getLibellePiece() . ' Quantité: ' . $ligneDocument->getQuantite(). ' Prix de vente: ' . $ligneDocument->getPrixVente();
+                    return 'Piece: ' . $ligneDocument->getPiece()->getLibellePiece() . ' Quantité: ' . $ligneDocument->getQuantite() . ' Prix de vente: ' . $ligneDocument->getPrixVente();
                 },
                 'multiple' => true
             ])

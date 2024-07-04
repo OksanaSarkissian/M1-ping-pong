@@ -19,8 +19,8 @@
                 <td>{{ fournisseur.id }}</td>
                 <td>{{ fournisseur.raisonSociale }}</td>
                 <td>
-                    <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}">show</a>
-                    <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+                    <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}"><button class="btn text-bg-accent-2 text-primary"><i class="fa-solid fa-eye"></i></button></a>
+                    <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
                 </td>
             </tr>
         {% else %}

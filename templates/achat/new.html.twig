@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Achat{% endblock %}
+{% block title %}
+  New Achat
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Achat</h1>
+  <a href="{{ path('app_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+  <h1>Création achat</h1>
+  <div class="form-container">{{ include('achat/_form.html.twig') }}</div>
 
-    {{ include('achat/_form.html.twig') }}
-
-    <a href="{{ path('app_achat_index') }}">back to list</a>
 {% endblock %}

@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: LigneAchatRepository::class)]
-#[Broadcast]
 class LigneAchat
 {
     #[ORM\Id]

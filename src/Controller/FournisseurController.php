@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/fournisseur')]
+#[Route('/commerce/fournisseur')]
 class FournisseurController extends AbstractController
 {
     #[Route('/', name: 'app_fournisseur_index', methods: ['GET'])]

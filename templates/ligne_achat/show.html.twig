@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneAchat{% endblock %}
+
+{% block body %}
+    <h1>LigneAchat</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_achat.id }}</td>
+            </tr>
+            <tr>
+                <th>Prix_catalogue</th>
+                <td>{{ ligne_achat.prixCatalogue }}</td>
+            </tr>
+            <tr>
+                <th>Prix_achat</th>
+                <td>{{ ligne_achat.prixAchat }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ ligne_achat.quantite }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_ligne_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+
+    <a href="{{ path('app_ligne_achat_edit', {'id': ligne_achat.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
+
+    {{ include('ligne_achat/_delete_form.html.twig') }}
+{% endblock %}

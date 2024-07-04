@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Achat;
+use App\Entity\LigneAchat;
 use App\Form\AchatType;
 use App\Repository\AchatRepository;
+use App\Repository\LigneAchatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +25,18 @@ class AchatController extends AbstractController
     }
 
     #[Route('/new', name: 'app_achat_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, LigneAchatRepository $ligneAchatRepository): Response
     {
         $achat = new Achat();
+        $ligneAchat = new LigneAchat();
         $form = $this->createForm(AchatType::class, $achat);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($achat->getLigneAchats() as $ligneAchat) {
+                $montantTotal += $ligneAchat->getPrixAchat() * $ligneAchat->getQuantite();
+                $entityManager->persist($ligneAchat);
+            }
             $entityManager->persist($achat);
             $entityManager->flush();
 

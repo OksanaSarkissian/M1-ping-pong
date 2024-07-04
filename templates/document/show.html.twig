@@ -6,7 +6,7 @@
 
 {% block body %}
   <div class="d-flex justify-content-between align-items-center w-50 mb-5">
-    <a class="btn text-bg-accent-2 text-primary" href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}">back to list</a>
+    <a class="btn text-bg-accent-2 text-primary" href="{{ documentType == 'devis' ? path('app_devis_index') : path('app_commande_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
     <h1>{{ documentType == 'devis' ? 'Devis' : 'Commandes' }}</h1>
     <div class="d-flex">
       {% if document.delai == '' %}
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="mb-5">
-      <table class="table" border="1">
+      <table class="table facture" border="1">
         <thead>
           <th>Référence pièce</th>
           <th>Pièce</th>

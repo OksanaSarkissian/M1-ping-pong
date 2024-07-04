@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  New LigneAchat
+{% endblock %}
+
+{% block body %}
+  <h1>Create new LigneAchat</h1>
+  <div class="form-container">{{ include('ligne_achat/_form.html.twig') }}</div>
+
+  <a href="{{ path('app_ligne_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+{% endblock %}
