@@ -29,12 +29,15 @@ class Achat
     /**
      * @var Collection<int, LigneAchat>
      */
-    #[ORM\OneToMany(mappedBy: 'achat', targetEntity: LigneAchat::class)]
+    #[ORM\ManyToMany(inversedBy: 'achat', targetEntity: LigneAchat::class)]
     private Collection $ligneAchats;
 
     #[ORM\ManyToOne(inversedBy: 'achats')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Fournisseur $fournisseur = null;
+
+    #[ORM\Column]
+    private ?float $montant_total = null;
 
     public function __construct()
     {
@@ -120,6 +123,18 @@ class Achat
     public function setFournisseur(?Fournisseur $fournisseur): static
     {
         $this->fournisseur = $fournisseur;
+
+        return $this;
+    }
+
+    public function getMontantTotal(): ?float
+    {
+        return $this->montant_total;
+    }
+
+    public function setMontantTotal(float $montant_total): static
+    {
+        $this->montant_total = $montant_total;
 
         return $this;
     }

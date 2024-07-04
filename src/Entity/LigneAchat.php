@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\LigneAchatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: LigneAchatRepository::class)]
 class LigneAchat
@@ -26,10 +27,11 @@ class LigneAchat
 
     #[ORM\Column]
     private ?int $quantite = null;
-
-    #[ORM\ManyToOne(inversedBy: 'ligneAchats')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Achat $achat = null;
+    /**
+     * @var Collection<int, Achat>
+     */
+    #[ORM\ManyToMany(targetEntity: Achat::class, mappedBy: 'ligneAchats')]
+    private ?Collection $achat = null;
 
     public function getId(): ?int
     {
@@ -83,15 +85,29 @@ class LigneAchat
 
         return $this;
     }
-
-    public function getAchat(): ?Achat
+    /**
+     * @return Collection<int, Achat>
+     */
+    public function getAchats(): Collection
     {
         return $this->achat;
     }
 
-    public function setAchat(?Achat $achat): static
+    public function addAchat(Achat $achat): static
     {
-        $this->achat = $achat;
+        if (!$this->achat->contains($achat)) {
+            $this->achat->add($achat);
+            $achat->addLigneAchat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): static
+    {
+        if ($this->achat->removeElement($achat)) {
+            $achat->removeLigneAchat($this);
+        }
 
         return $this;
     }

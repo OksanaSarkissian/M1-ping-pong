@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class LigneAchatType extends AbstractType
 {
@@ -22,6 +23,7 @@ class LigneAchatType extends AbstractType
             ->add('prix_catalogue')
             ->add('prix_achat')
             ->add('quantite')
+            ->add('delete',ButtonType::class, ['attr' => ['class' => 'delete-achat']])
         ;
     }
 

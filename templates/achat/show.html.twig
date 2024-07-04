@@ -1,34 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Achat{% endblock %}
+{% block title %}
+  Achat
+{% endblock %}
 
 {% block body %}
-        <a href="{{ path('app_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
+  <div class="d-flex justify-content-between align-items-center w-75">
+    <a href="{{ path('app_achat_index') }}" class="btn bg-accent-2 text-primary">Retour à la liste</a>
     <h1>Achat</h1>
+    <div class="d-flex">
+      <a href="{{ path('app_achat_edit', { id: achat.id }) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ achat.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ achat.date ? achat.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Livraison_prevue</th>
-                <td>{{ achat.livraisonPrevue ? achat.livraisonPrevue|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Livraison_reelle</th>
-                <td>{{ achat.livraisonReelle ? achat.livraisonReelle|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-
-    <a href="{{ path('app_achat_edit', {'id': achat.id}) }}"><button class="btn text-bg-accent-2 text-primary mx-3"><i class="fa-solid fa-pen"></i></button></a>
-
-    {{ include('achat/_delete_form.html.twig') }}
+      {{ include('achat/_delete_form.html.twig') }}
+    </div>
+  </div>
+<div class="d-flex flex-column w-50 h-100">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column align-items-center">
+        <span>
+          <h5>Date:</h5>
+          <p>{{ achat.date ? achat.date|date('Y-m-d') : ''  }}</p>
+        </span>
+        <span>
+          <h5>Livraison prévue:</h5>
+          <p>{{ achat.livraisonPrevue ? achat.livraisonPrevue|date('Y-m-d') : ''  }}</p>
+        </span>
+        <span>
+          <h5>Livraison réelle:</h5>
+          <p>{{ achat.livraisonReelle ? achat.livraisonReelle|date('Y-m-d') : ''  }}</p>
+        </span>
+      </div>
+      <div>
+        <h5>Client:</h5>
+        <p>{{ achat.fournisseur.raisonSociale }}</p>
+      </div>
+    </div>
+    <div class="mb-5">
+      <table class="table facture" border="1">
+        <thead>
+          <th>Référence pièce</th>
+          <th>Pièce</th>
+          <th>Quantité</th>
+          <th>Prix unitaire</th>
+          <th>Total</th>
+        </thead>
+        {% for ligne in achat.ligneAchats %}
+          <tr>
+            <td>{{ ligne.piece.refPiece }}</td>
+            <td>{{ ligne.piece.libellePiece }}</td>
+            <td>{{ ligne.quantite }}</td>
+            <td ><span class="d-flex justify-content-end">{{ ligne.prixAchat }}</span></td>
+            <td class="d-flex justify-content-end">{{ ligne.quantite * ligne.prixAchat }}</td>
+          </tr>
+        {% endfor %}
+        <tr class="mt-3">
+          <td colspan="3"></td>
+          <td>
+            <h5>Total:</h5>
+          </td>
+          <td  class="d-flex justify-content-end">
+            <div class="d-flex justify-content-center align-items-baseline">
+              <p>{{ achat.montantTotal }}</p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 {% endblock %}

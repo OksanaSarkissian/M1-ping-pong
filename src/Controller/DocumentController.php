@@ -98,6 +98,12 @@ class DocumentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $montantTotal = 0;
+            foreach ($document->getLigneDocument() as $ligneDocument) {
+                $montantTotal += $ligneDocument->getPrixVente() * $ligneDocument->getQuantite();
+                $entityManager->persist($ligneDocument);
+            }
+            $document->setMontantTotal($montantTotal);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_devis_index', [], Response::HTTP_SEE_OTHER);

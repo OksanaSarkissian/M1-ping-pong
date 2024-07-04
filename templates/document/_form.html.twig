@@ -1,14 +1,14 @@
 {{ form_start(form) }}
 {{ form_row(form.date) }}
 
-{% if documentType == 'devis' %}
+{# {% if documentType == 'devis' %} #}
   {{ form_row(form.delai) }}
-{% endif %}
+{# {% endif %} #}
 
 {{ form_row(form.client) }}
 {% if documentType == 'devis' %}
 <label>Lignes</label>
-<ul class="ligneDocument" data-index="{{ (form.ligneDocument|length) > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{% if formType != 'edit' %}{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}{% endif %}">
+<ul class="ligneDocument" data-index="{{ (form.ligneDocument|length) > 0 ? form.ligneDocument|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.ligneDocument.vars.prototype)|e('html_attr') }}">
   {% for tag in form.ligneDocument %}
     {% for data in tag.vars.value %}
       <li class="d-flex">{{ dump(tag.vars.value.piece) }}</li>
@@ -22,7 +22,6 @@
 {% endif %}
 {% if formType != 'devis' %}
   {{ form_row(form.ligneDocument) }}
-  {{ form_row(form.delai) }}
 {% endif %}
 
 <button class="btn">{{ button_label|default('Enregistrer') }}</button>
@@ -32,7 +31,7 @@
 
   jQuery(document).ready(function() {
       
-            var $wrapper = $('.ligneDocument');
+            var $wrapper = $('.form-container');
             console.log('wrapper', $wrapper);
             $wrapper.on('click', '.delete-employee', function(e) {
                 e.preventDefault();

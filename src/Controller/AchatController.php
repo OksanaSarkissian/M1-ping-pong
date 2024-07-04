@@ -33,10 +33,13 @@ class AchatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $montantTotal = 0;
             foreach ($achat->getLigneAchats() as $ligneAchat) {
                 $montantTotal += $ligneAchat->getPrixAchat() * $ligneAchat->getQuantite();
                 $entityManager->persist($ligneAchat);
             }
+            $achat->setMontantTotal($montantTotal);
+
             $entityManager->persist($achat);
             $entityManager->flush();
 
@@ -46,6 +49,7 @@ class AchatController extends AbstractController
         return $this->render('achat/new.html.twig', [
             'achat' => $achat,
             'form' => $form,
+            'formType' => 'new'
         ]);
     }
 
@@ -72,6 +76,7 @@ class AchatController extends AbstractController
         return $this->render('achat/edit.html.twig', [
             'achat' => $achat,
             'form' => $form,
+            'formType' => 'edit'
         ]);
     }
 
