@@ -49,8 +49,7 @@ hooks:
     deploy: |
 
         symfony-deploy
-
-        Symfony console doctrine:fixtures:load
+composer install
 
 crons:
     security-check:
