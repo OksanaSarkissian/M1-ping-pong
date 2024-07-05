@@ -6,12 +6,11 @@
 {{form_row(form.livraison_reelle)}}
 <label>Achats</label>
 <button type="button" class="add_item_link" data-collection-holder-class="ligneAchats">Ajouter une ligne</button>
-<ul
-	class="ligneAchats" data-index="{{ (form.ligneAchats|length) > 0 ? form.ligneAchats|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.ligneAchats.vars.prototype)|e('html_attr') }}">
-	{# {{dump(form.ligneAchats.vars.prototype)}} #}
+<ul class="ligneAchats" data-index="{{ (form.ligneAchats|length) > 0 ? form.ligneAchats|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.ligneAchats.vars.prototype)|e('html_attr') }}">
+
 	{% for tag in form.ligneAchats %}
 		{% for data in tag.vars.value %}
-			<li class="d-flex">{{ dump(tag.vars.value.piece) }}</li>
+			<li class="d-flex">{{ tag.vars.value.piece }}</li>
 		{% endfor %}
 	{% endfor %}
 </ul>
@@ -20,14 +19,16 @@
 	{{ form_row(form.ligneAchats) }}
 {% endif %}
 <div class="w-100 d-flex justify-content-end mt-5">
-<div class="w-100 d-flex justify-content-end mt-5">
-<button class="btn">{{ button_label|default('Enregistrer') }}  <i class="fa-solid fa-arrow-right"></i></button>
-</div>
-{{ form_end(form) }}
+	<div class="w-100 d-flex justify-content-end mt-5">
+		<button class="btn">{{ button_label|default('Enregistrer') }}
+			<i class="fa-solid fa-arrow-right"></i>
+		</button>
+	</div>
+	{{ form_end(form) }}
 
-{% block custom_js %}
-	<script type="text/javascript">
-		var $wrapper = $('.form-container');
+	{% block custom_js %}
+		<script type="text/javascript">
+			var $wrapper = $('.form-container');
 $wrapper.on('click', '.delete-achat', function (e) {
 e.preventDefault();
 console.log($('.delete-achat'));
@@ -45,5 +46,5 @@ collectionHolder.appendChild(item)
 
 collectionHolder.dataset.index ++
 })
-	</script>
-{% endblock %}
+		</script>
+	{% endblock %}
