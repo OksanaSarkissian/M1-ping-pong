@@ -33,6 +33,12 @@ class DocumentController extends AbstractController
             'active' => 'devis',
         ]);
     }
+    #[Route('/exports', name: 'app_export', methods: ['GET'])]
+    public function indexExport(DocumentRepository $documentRepository): Response
+    {
+        return $this->render('export/index.html.twig', [
+        ]);
+    }
 
     #[Route('/commandes/csv', name: 'app_commande_csv', methods: ['GET'])]
     public function devisCsv(DocumentRepository $documentRepository): Response
