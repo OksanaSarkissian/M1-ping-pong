@@ -49,7 +49,7 @@ hooks:
     deploy: |
 
         symfony-deploy
-        composer install
+        composer update --no-plugins
 
 crons:
     security-check:
